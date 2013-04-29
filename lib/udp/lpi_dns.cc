@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_dns.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_dns.cc 76 2011-04-08 04:45:36Z salcock $
  */
 
 #include <string.h>
@@ -37,6 +37,11 @@
 #include "proto_common.h"
 
 static inline bool match_dns_udp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+
+	/* As loath as I am to do this, we probably shouldn't allow any DNS
+	 * on ports other than 53 */
+	if (data->server_port != 53 && data->client_port != 53)
+		return false;
 
 	if (match_dns(data))
 		return true;

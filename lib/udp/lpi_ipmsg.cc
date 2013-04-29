@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ipmsg.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_ipmsg.cc 76 2011-04-08 04:45:36Z salcock $
  */
 
 #include <string.h>
@@ -55,7 +55,7 @@ static inline bool match_ipmsg(lpi_data_t *data, lpi_module_t *mod UNUSED) {
         if (match_chars_either(data, '1', ':', '8', '0'))
                 return true;
 
-        return true;
+        return false;
 }
 
 static lpi_module_t lpi_ipmsg = {

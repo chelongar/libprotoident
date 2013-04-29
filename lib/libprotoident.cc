@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.cc 68 2011-03-10 22:35:25Z salcock $
+ * $Id: libprotoident.cc 76 2011-04-08 04:45:36Z salcock $
  */
 
 #define __STDC_FORMAT_MACROS
@@ -561,7 +561,6 @@ lpi_category_t lpi_categorise(lpi_module_t *module) {
 		case LPI_PROTO_UDP_PANDO:
 		case LPI_PROTO_UDP_GNUTELLA2:
 		case LPI_PROTO_UDP_DC:
-		case LPI_PROTO_UDP_EMULE_MYSTERY:
 		case LPI_PROTO_UDP_KAZAA:
 			return LPI_CATEGORY_P2P_STRUCTURE;
                 

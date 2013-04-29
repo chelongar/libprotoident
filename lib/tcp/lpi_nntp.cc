@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_nntp.cc 61 2011-02-03 00:34:02Z salcock $
+ * $Id: lpi_nntp.cc 76 2011-04-08 04:45:36Z salcock $
  */
 
 #include <string.h>
@@ -59,7 +59,7 @@ static lpi_module_t lpi_nntp = {
 	LPI_PROTO_NNTP,
 	LPI_CATEGORY_NEWS,
 	"NNTP",
-	2,
+	4,
 	match_nntp
 };
 

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_gnutella.cc 64 2011-02-04 04:09:43Z salcock $
+ * $Id: lpi_gnutella.cc 76 2011-04-08 04:45:36Z salcock $
  */
 
 #include <string.h>
@@ -199,9 +199,11 @@ static inline bool match_gnutella_maint(lpi_data_t *data) {
                 return true;
 
         /* Same for 31 bytes */
-        if (data->payload_len[0] == 31 && data->payload_len[1] < 200)
+        if (data->payload_len[0] == 31 && data->payload_len[1] < 200 &&
+			data->payload_len[1] >= 40)
                 return true;
-        if (data->payload_len[1] == 31 && data->payload_len[0] < 200)
+        if (data->payload_len[1] == 31 && data->payload_len[0] < 200 &&
+			data->payload_len[0] >= 40)
                 return true;
 
         return false;

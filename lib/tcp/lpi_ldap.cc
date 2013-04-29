@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_flash.cc 75 2011-04-07 04:57:39Z salcock $
+ * $Id: lpi_ldap.cc 60 2011-02-02 04:07:52Z salcock $
  */
 
 #include <string.h>
@@ -36,34 +36,45 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_flash(lpi_data_t *data, lpi_module_t *mod UNUSED) {
-
-	/* Flash player stuff - cross-domain policy etc. */
+static inline bool match_ldap_payload(uint32_t payload, uint32_t len) {
 	
-	if (match_str_either(data, "<cro")) {
-		if (match_str_either(data, "<msg"))
-			return true;
-		if (match_str_either(data, "<pol"))
-			return true;
-	}
+	uint8_t *byte = ((uint8_t *)&payload);
 
-	if (match_str_either(data, "<?xm")) {
-		if (match_str_either(data, "<pol"))
-			return true;
-	}
+	if (len == 0)
+		return true;
 
-	return false;
+	if (len > 255)
+		return false;
+	if (!MATCH(payload, 0x30, ANY, 0x02, 0x01))
+		return false;
+	
+	byte ++;
+	if (*byte != len - 2)
+		return false;
+
+	return true;
+
 }
 
-static lpi_module_t lpi_flash = {
-	LPI_PROTO_FLASH,
-	LPI_CATEGORY_STREAMING,
-	"Flash_Player",
-	2,
-	match_flash
+static inline bool match_ldap(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+
+	if (!match_ldap_payload(data->payload[0], data->payload_len[0]))
+		return false;
+	if (!match_ldap_payload(data->payload[1], data->payload_len[1]))
+		return false;
+
+	return true;
+}
+
+static lpi_module_t lpi_ldap = {
+	LPI_PROTO_LDAP,
+	LPI_CATEGORY_SERVICES,
+	"LDAP",
+	3,
+	match_ldap
 };
 
-void register_flash(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_flash, mod_map);
+void register_ldap(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_ldap, mod_map);
 }
 

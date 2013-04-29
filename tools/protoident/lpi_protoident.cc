@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_protoident.cc 70 2011-03-10 22:38:24Z salcock $
+ * $Id: lpi_protoident.cc 77 2011-04-15 04:54:37Z salcock $
  */
 
 #define __STDC_FORMAT_MACROS
@@ -229,8 +229,8 @@ void per_packet(libtrace_packet_t *packet) {
 
         /* Ignore packets where the IP addresses are the same - something is
          * probably screwy and it's REALLY hard to determine direction */
-        if (ip->ip_src.s_addr == ip->ip_dst.s_addr)
-                return;
+        //if (ip->ip_src.s_addr == ip->ip_dst.s_addr)
+        //        return;
 
 
         /* Match the packet to a Flow - this will create a new flow if

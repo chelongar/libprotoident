@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ssh.cc 61 2011-02-03 00:34:02Z salcock $
+ * $Id: lpi_ssh.cc 77 2011-04-15 04:54:37Z salcock $
  */
 
 #include <string.h>
@@ -40,9 +40,12 @@ static inline bool match_ssh2_payload(uint32_t payload, uint32_t len) {
 
         /* SSH-2 begins with a four byte length field */
 
+
         if (len == 0)
                 return true;
-        if (ntohl(payload) == len)
+        
+	/* DON'T BYTESWAP!!! */
+	if (payload == len)
                 return true;
         return false;
 
@@ -60,16 +63,15 @@ static inline bool match_ssh(lpi_data_t *data, lpi_module_t *mod UNUSED) {
         if (match_str_either(data, "QUIT"))
                 return true;
 
-        if (match_ssh2_payload(data->payload[0], data->payload_len[0])) {
-                if (match_ssh2_payload(data->payload[1], data->payload_len[1]))
-                        return true;
-        }
-        if (match_ssh2_payload(data->payload[1], data->payload_len[1])) {
-                if (match_ssh2_payload(data->payload[0], data->payload_len[0]))
-                        return true;
-        }
 
-        return false;
+       	if (!match_ssh2_payload(data->payload[0], data->payload_len[0])) 
+		return false;
+
+        if (!match_ssh2_payload(data->payload[1], data->payload_len[1])) 
+              	return false;
+        
+
+        return true;
 
 }
 

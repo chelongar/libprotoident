@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_rtcp.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_rtcp.cc 77 2011-04-15 04:54:37Z salcock $
  */
 
 #include <string.h>
@@ -39,9 +39,13 @@
 static inline bool match_rtcp_payload(uint32_t payload, uint32_t len) {
         if (len == 0)
                 return true;
-        if (MATCH(payload, 0x81, 0xc8, 0x00, 0x0c))
+        if (MATCH(payload, 0x81, 0xc8, 0x00, ANY))
                 return true;
-        if (MATCH(payload, 0x80, 0xc9, 0x00, 0x01))
+        if (MATCH(payload, 0x81, 0xc9, 0x00, ANY))
+                return true;
+        if (MATCH(payload, 0x80, 0xc9, 0x00, ANY))
+                return true;
+        if (MATCH(payload, 0x80, 0xc8, 0x00, ANY))
                 return true;
         return false;
 }

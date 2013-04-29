@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_eso.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_eso.cc 76 2011-04-08 04:45:36Z salcock $
  */
 
 #include <string.h>
@@ -69,7 +69,7 @@ static lpi_module_t lpi_eso = {
 	LPI_PROTO_UDP_ESO,
 	LPI_CATEGORY_GAMING,
 	"EnsembleOnline",
-	5,
+	12,
 	match_eso
 };
 

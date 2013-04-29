@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_flash.cc 75 2011-04-07 04:57:39Z salcock $
+ * $Id: lpi_teamviewer.cc 60 2011-02-02 04:07:52Z salcock $
  */
 
 #include <string.h>
@@ -36,34 +36,41 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_flash(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_teamviewer_payload(uint32_t payload, uint32_t len) {
 
-	/* Flash player stuff - cross-domain policy etc. */
-	
-	if (match_str_either(data, "<cro")) {
-		if (match_str_either(data, "<msg"))
-			return true;
-		if (match_str_either(data, "<pol"))
-			return true;
-	}
-
-	if (match_str_either(data, "<?xm")) {
-		if (match_str_either(data, "<pol"))
-			return true;
-	}
-
+	if (len == 0)
+		return true;
+	if (len != 37)
+		return false;
+	if (MATCH(payload, 0x17, 0x24, 0x0a, 0x20))
+		return true;
 	return false;
+	
+
 }
 
-static lpi_module_t lpi_flash = {
-	LPI_PROTO_FLASH,
-	LPI_CATEGORY_STREAMING,
-	"Flash_Player",
-	2,
-	match_flash
+static inline bool match_teamviewer(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+
+	/* This traffic must also be on port 5938 if we need to get
+	 * stricter */
+
+	if (!match_teamviewer_payload(data->payload[0], data->payload_len[0]))
+		return false;
+	if (!match_teamviewer_payload(data->payload[1], data->payload_len[1]))
+		return false;
+
+	return true;
+}
+
+static lpi_module_t lpi_teamviewer = {
+	LPI_PROTO_TEAMVIEWER,
+	LPI_CATEGORY_REMOTE,
+	"Teamviewer",
+	4,
+	match_teamviewer
 };
 
-void register_flash(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_flash, mod_map);
+void register_teamviewer(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_teamviewer, mod_map);
 }
 

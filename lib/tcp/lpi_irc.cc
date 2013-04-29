@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_irc.cc 69 2011-03-10 22:38:10Z salcock $
+ * $Id: lpi_irc.cc 76 2011-04-08 04:45:36Z salcock $
  */
 
 #include <string.h>
@@ -43,6 +43,8 @@ static inline bool match_irc(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 	if (match_str_either(data, "NICK"))
 		return true;
 	if (match_str_both(data, ":irc", "USER"))
+		return true;
+	if (match_str_both(data, ":loc", "MODE"))
 		return true;
 
 	return false;

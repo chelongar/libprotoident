@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_telnet.cc 61 2011-02-03 00:34:02Z salcock $
+ * $Id: lpi_telnet.cc 75 2011-04-07 04:57:39Z salcock $
  */
 
 #include <string.h>
@@ -44,11 +44,11 @@ static inline bool match_telnet_pattern(uint32_t payload, uint32_t len) {
          */
 
         if (len >= 4) {
-                if ((payload & 0xff0000ff) != (0xff0000ff))
+                if ((ntohl(payload) & 0xff0000ff) != (0xff0000ff))
                         return false;
         }
         else if (len == 3) {
-                if ((payload & 0xff000000) != (0xff000000))
+                if ((ntohl(payload) & 0xff000000) != (0xff000000))
                         return false;
         }
         else

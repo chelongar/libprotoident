@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_flash.cc 75 2011-04-07 04:57:39Z salcock $
+ * $Id: lpi_rtmfp.cc 77 2011-04-15 04:54:37Z salcock $
  */
 
 #include <string.h>
@@ -36,34 +36,44 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_flash(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_rtmfp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	/* Flash player stuff - cross-domain policy etc. */
+	/* RTMFP is Adobe's proprietary P2P streaming protocol. There are two
+	 * stages - communicating with the Stratus servers and then talking
+	 * to the peers themselves */
+
+	/* Basically we're matching pairs of packet sizes here - not very
+	 * reliable at all. Could be lots of false positives! */
+
+	/* Hitting the Stratus servers */
+	if (data->payload_len[0] == 100 && data->payload_len[1] == 180)
+		return true;
+	if (data->payload_len[1] == 100 && data->payload_len[0] == 180)
+		return true;
+
+	/* P2P */
+	if (data->payload_len[0] == 228 && data->payload_len[1] == 68)
+		return true;
+	if (data->payload_len[1] == 228 && data->payload_len[0] == 68)
+		return true;
+	if (data->payload_len[0] == 68 && data->payload_len[1] == 68)
+		return true;
+	if (data->payload_len[1] == 68 && data->payload_len[0] == 68)
+		return true;
 	
-	if (match_str_either(data, "<cro")) {
-		if (match_str_either(data, "<msg"))
-			return true;
-		if (match_str_either(data, "<pol"))
-			return true;
-	}
-
-	if (match_str_either(data, "<?xm")) {
-		if (match_str_either(data, "<pol"))
-			return true;
-	}
 
 	return false;
 }
 
-static lpi_module_t lpi_flash = {
-	LPI_PROTO_FLASH,
+static lpi_module_t lpi_rtmfp = {
+	LPI_PROTO_UDP_RTMFP,
 	LPI_CATEGORY_STREAMING,
-	"Flash_Player",
-	2,
-	match_flash
+	"RTFMP",
+	12,
+	match_rtmfp
 };
 
-void register_flash(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_flash, mod_map);
+void register_rtmfp(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_rtmfp, mod_map);
 }
 

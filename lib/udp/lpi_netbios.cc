@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_netbios.cc 67 2011-02-11 04:17:55Z salcock $
+ * $Id: lpi_netbios.cc 76 2011-04-08 04:45:36Z salcock $
  */
 
 #include <string.h>
@@ -50,6 +50,12 @@ static inline bool match_netbios_name_req(uint32_t payload, uint32_t len) {
                         return true;
 
         }
+        
+	if (MATCH(payload, ANY, ANY, 0x40, 0x00)) {
+                if (len == 68)
+                        return true;
+
+        }
 
         /* Broadcast traffic */
         if (MATCH(payload, ANY, ANY, 0x01, 0x10)) {
@@ -64,6 +70,8 @@ static inline bool match_netbios_name_req(uint32_t payload, uint32_t len) {
 static inline bool match_netbios_datagram(uint32_t payload, uint32_t len) {
 
 	if (MATCH(payload, 0x11, 0x02, ANY, ANY))
+		return true;
+	if (MATCH(payload, 0x11, 0x06, ANY, ANY))
 		return true;
 
 	return false;

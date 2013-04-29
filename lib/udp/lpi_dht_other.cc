@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_dht_other.cc 66 2011-02-10 04:16:18Z salcock $
+ * $Id: lpi_dht_other.cc 77 2011-04-15 04:54:37Z salcock $
  */
 
 #include <string.h>
@@ -107,7 +107,7 @@ static inline bool match_vuze_dht_request(uint32_t payload, uint32_t len,
         }
 
 
-        if (len == 42) {
+        if (len == 42 || len == 51) {
                 return true;
         }
 
@@ -238,6 +238,12 @@ static inline bool match_vuze_dht(lpi_data_t *data) {
                         return true;
         }
 
+	/* Apparently, we can also see requests both ways, which is a bit
+	 * less than ideal....
+	 */
+	if (match_vuze_dht_request(data->payload[0], data->payload_len[0], true) && match_vuze_dht_request(data->payload[1], data->payload_len[1], true))
+		return true;
+	
 
         if (match_vuze_dht_alt(data))
                 return true;
@@ -288,7 +294,8 @@ static lpi_module_t lpi_dht_other = {
 	LPI_PROTO_UDP_BTDHT,
 	LPI_CATEGORY_P2P_STRUCTURE,
 	"BitTorrent_UDP",
-	6,
+	12,	/* Need to be lower priority than DNS, at least in cases 
+		 * where traffic is one-way only */
 	match_dht_other
 };
 

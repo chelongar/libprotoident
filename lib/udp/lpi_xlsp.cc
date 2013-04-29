@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_xlsp.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_xlsp.cc 77 2011-04-15 04:54:37Z salcock $
  */
 
 #include <string.h>
@@ -37,7 +37,7 @@
 #include "proto_common.h"
 
 static inline bool match_xlsp_payload(uint32_t payload, uint32_t len,
-                uint32_t other_len) {
+                uint32_t other_len, lpi_data_t *data) {
 
         /* This is almost all based on observing traffic on port 3074. Not
          * very scientific, but seems more or less right */
@@ -69,14 +69,18 @@ static inline bool match_xlsp_payload(uint32_t payload, uint32_t len,
                         return true;
                 if (len == 0 && other_len != 0)
                         return true;
-                if (len == 90 && other_len == 138)
+                if ((len == 90 || len == 172) && other_len == 138)
                         return true;
-                if (len == 138 && other_len == 90)
+                if (len == 138 && (other_len == 90 || other_len == 172))
                         return true;
 
         }
 
         if (len == 24) {
+		/* Employ port number restriction because these rules are weak
+		 */
+		if (data->server_port != 3074 && data->client_port != 3074)
+			return false;
                 if (MATCH(payload, 0x0d, ANY, ANY, ANY))
                         return true;
                 if (MATCH(payload, 0x80, ANY, ANY, ANY))
@@ -84,10 +88,44 @@ static inline bool match_xlsp_payload(uint32_t payload, uint32_t len,
 
         }
 
+	if (len == 16) {
+		if (MATCH(payload, 0x01, 0x02, 0x00, 0x00))
+			return true;
+	}
+	
+	if (len == 32) {
+		/* Employ port number restriction because these rules are weak
+		 */
+		if (data->server_port != 3074 && data->client_port != 3074)
+			return false;
+		if (MATCH(payload, 0x06, 0x02, ANY, ANY))
+			return true;
+		if (MATCH(payload, 0xcd, ANY, ANY, ANY))
+			return true;
+	}
+
+	if (len == 17) {
+		/* Employ port number restriction because these rules are weak
+		 */
+		if (data->server_port != 3074 && data->client_port != 3074)
+			return false;
+		if (MATCH(payload, 0x28, ANY, ANY, ANY))
+			return true;
+	}
+			
+	if (len == 26) {
+		if (MATCH(payload, 0x29, ANY, 0x00, 0x00))
+			return true;
+	}
+
         if (len == 29) {
-                if (MATCH(payload, 0x0c, 0x02, 0x00, ANY))
+                if (MATCH(payload, 0x0a, 0x02, 0x00, ANY))
                         return true;
                 if (MATCH(payload, 0x0b, 0x02, 0x00, ANY))
+                        return true;
+                if (MATCH(payload, 0x0c, 0x02, 0x00, ANY))
+                        return true;
+                if (MATCH(payload, 0x0d, 0x02, 0x00, ANY))
                         return true;
                 if (MATCH(payload, 0x0e, 0x02, 0x00, ANY))
                         return true;
@@ -101,21 +139,10 @@ static inline bool match_xlsp_payload(uint32_t payload, uint32_t len,
 
 static inline bool match_xlsp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-        /* Commonly observed request/response pattern */
-        if (match_chars_either(data, 0x0d, 0x02, 0x00, ANY)) {
-                if (data->payload_len[0] == 0 && data->payload_len[1] == 29)
-                        return true;
-                if (data->payload_len[1] == 0 && data->payload_len[0] == 29)
-                        return true;
-                if (data->payload_len[0] != 29 || data->payload_len[1] != 29)
-                        return false;
-                if (match_chars_either(data, 0x0c, 0x02, 0x00, ANY))
-                        return true;
-                if (MATCH(data->payload[0], 0x0d, 0x02, 0x00, ANY) &&
-                                MATCH(data->payload[1], 0x0d, 0x02, 0x00, ANY))
-                        return true;
-                return false;
-        }
+	/* Had a few false matches against DNS traffic in the past, so
+	 * rule out port 53 traffic */
+	if (data->server_port == 53 || data->client_port == 53)
+		return false;
 
         /* Unlike other combos, 1336 and 287 (or rarely 286) only go with
          * each other 
@@ -177,10 +204,10 @@ static inline bool match_xlsp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
          * closely to make sure it isn't overmatching */
 
         if (!match_xlsp_payload(data->payload[0], data->payload_len[0],
-                        data->payload_len[1]))
+                        data->payload_len[1], data))
                 return false;
         if (!match_xlsp_payload(data->payload[1], data->payload_len[1],
-                        data->payload_len[0]))
+                        data->payload_len[0], data))
                 return false;
 
         return true;
@@ -192,7 +219,7 @@ static lpi_module_t lpi_xlsp = {
 	LPI_PROTO_UDP_XLSP,
 	LPI_CATEGORY_GAMING,
 	"XboxLive_UDP",
-	4,
+	6,
 	match_xlsp
 };
 

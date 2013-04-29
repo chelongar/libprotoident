@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_common.cc 67 2011-02-11 04:17:55Z salcock $
+ * $Id: proto_common.cc 76 2011-04-08 04:45:36Z salcock $
  */
 
 #include <string.h>
@@ -336,6 +336,10 @@ static inline bool match_tls_handshake(uint32_t payload, uint32_t len) {
                 return true;
         if (MATCH(payload, 0x16, 0x03, 0x01, ANY))
                 return true;
+        if (MATCH(payload, 0x16, 0x03, 0x02, ANY))
+                return true;
+        if (MATCH(payload, 0x16, 0x03, 0x03, ANY))
+                return true;
         return false;
 }
 
@@ -417,10 +421,12 @@ bool match_ssl(lpi_data_t *data) {
         /* Some HTTPS servers respond with unencrypted content, presumably
          * when somebody invalid attempts a connection */
         if (match_tls_handshake(data->payload[0], data->payload_len[0]) &&
-                        MATCHSTR(data->payload[1], "<!DO"))
+                        MATCHSTR(data->payload[1], "<!DO") &&
+			data->payload_len[0] != 0)
                 return true;
         if (match_tls_handshake(data->payload[1], data->payload_len[1]) &&
-                        MATCHSTR(data->payload[0], "<!DO"))
+                        MATCHSTR(data->payload[0], "<!DO") &&
+			data->payload_len[1] != 0)
                 return true;
 
 
@@ -452,17 +458,17 @@ static bool dns_req(uint32_t payload) {
          * Remember BYTE ORDER!
          */
 
-        if ((payload & 0xffff0000) == 0x00000000)
-                return true;
-        
-	
+	payload = htonl(payload);
+
+	if ((payload & 0x0000ffff) == 0x00000000)
+		return true;
 	/* Check for CD */
-	if ((payload & 0xffff0000) == 0x10000000)
-                return true;
-        
+	if ((payload & 0x0000ffff) == 0x00000010)
+		return true;
 	/* Check for RD */
-	if ((payload & 0xffff0000) == 0x00010000)
-                return true;
+	if ((payload & 0x0000ffff) == 0x00000100)
+		return true;
+
 
         return false;
 
@@ -474,18 +480,21 @@ static bool dns_backscatter(uint32_t payload) {
 
 	/* Last byte seems to be always 0x00 - third is either 0x84 or 0x85 */
 
-	if ((payload & 0xffff0000) == 0x00850000)
+	payload = htonl(payload);
+
+	if ((payload & 0x0000ffff) == 0x00008500)
 		return true;
-	if ((payload & 0xffff0000) == 0x00840000)
+	if ((payload & 0x0000ffff) == 0x00008400)
 		return true;
-	if ((payload & 0xffff0000) == 0x80840000)
+	if ((payload & 0x0000ffff) == 0x00008480)
 		return true;
-	if ((payload & 0xffff0000) == 0x83840000)
+	if ((payload & 0x0000ffff) == 0x00008483)
 		return true;
-	if ((payload & 0xffff0000) == 0x03840000)
+	if ((payload & 0x0000ffff) == 0x00008403)
 		return true;
-	if ((payload & 0xffff0000) == 0x00800000)
+	if ((payload & 0x0000ffff) == 0x00008000)
 		return true;
+
 	return false;
 }
 
@@ -513,10 +522,12 @@ bool match_dns(lpi_data_t *data) {
                 return false;
         }
 
-        if ((data->payload[0] & 0x0078ffff) != (data->payload[1] & 0x0078ffff))
+        if (((htonl(data->payload[0])) & 0xffff7800) != 
+			((htonl(data->payload[1])) & 0xffff7800))
                 return false;
 
-        if ((data->payload[0] & 0x00800000) == (data->payload[1] & 0x00800000))
+        if ((htonl(data->payload[0]) & 0x00008000) == 
+		(htonl(data->payload[1]) & 0x00008000))
                 return false;
 
         return true;

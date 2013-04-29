@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_smtp.cc 61 2011-02-03 00:34:02Z salcock $
+ * $Id: lpi_smtp.cc 77 2011-04-15 04:54:37Z salcock $
  */
 
 #include <string.h>
@@ -51,6 +51,8 @@ static inline bool match_smtp_command(uint32_t payload, uint32_t len) {
         if (MATCHSTR(payload, "XXXX"))
                 return true;
         if (MATCHSTR(payload, "HELP"))
+                return true;
+        if (MATCHSTR(payload, "EXPN"))
                 return true;
 
         /* Turns out there are idiots who send their ehlos one byte at a 

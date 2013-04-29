@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.h 72 2011-03-14 04:37:45Z salcock $
+ * $Id: libprotoident.h 77 2011-04-15 04:54:37Z salcock $
  */
 
 
@@ -201,6 +201,9 @@ typedef enum {
 	LPI_PROTO_WEB_JUNK,	/* Clients communicating with web servers
 				   using non-HTTP */
 	LPI_PROTO_CVS,
+	LPI_PROTO_LDAP,		/* LDAP */
+	LPI_PROTO_INVALID_POP3,	/* POP commands send to an SMTP server */
+	LPI_PROTO_TEAMVIEWER,
 
         /* UDP Protocols */
         LPI_PROTO_UDP,
@@ -285,6 +288,8 @@ typedef enum {
 	LPI_PROTO_UDP_BATTLEFIELD,	/* Battlefield series of games */
 	LPI_PROTO_UDP_SOPCAST,
 	LPI_PROTO_UDP_SERIALNUMBERD,
+	LPI_PROTO_UDP_LDAP_AD,
+	LPI_PROTO_UDP_RTMFP,
 
 	/* Patterns that we can match, but do not know the protocol */
 	LPI_PROTO_REJECTION,	/* All responses are 0x02 */
@@ -295,7 +300,6 @@ typedef enum {
 	LPI_PROTO_MYSTERY_CONN,
 	LPI_PROTO_MYSTERY_443,
 	
-	LPI_PROTO_UDP_EMULE_MYSTERY,	/* Possible emule-related protocol */
 	LPI_PROTO_UDP_MYSTERY_0D,	
 	LPI_PROTO_UDP_MYSTERY_02_36,
 	LPI_PROTO_UDP_MYSTERY_FE,
@@ -304,6 +308,9 @@ typedef enum {
 	LPI_PROTO_UDP_MYSTERY_45,
 	LPI_PROTO_UDP_MYSTERY_0660,
 	LPI_PROTO_UDP_MYSTERY_E9,
+	LPI_PROTO_UDP_MYSTERY_QQ,
+	LPI_PROTO_UDP_MYSTERY_61_72,
+	LPI_PROTO_UDP_MYSTERY_05,
 
 	LPI_PROTO_ICMP,
 

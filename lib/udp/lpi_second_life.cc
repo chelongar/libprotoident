@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_second_life.cc 64 2011-02-04 04:09:43Z salcock $
+ * $Id: lpi_second_life.cc 76 2011-04-08 04:45:36Z salcock $
  */
 
 #include <string.h>
@@ -38,8 +38,20 @@
 
 static inline bool match_second_life(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	if (match_chars_either(data, 0x40, 0x00, 0x00, 0x00))
+	/* Haven't actually seen any legit 2-way SecondLife exchanges, so
+	 * only speculating based on my interpretation of the specs
+	 *
+	 * http://wiki.secondlife.com/wiki/Packet_Layout
+	 */
+
+	if (match_str_both(data, "\x40\x00\x00\x00", "\x50\x00\x00\x00"))
 		return true;
+	if (match_str_either(data, "\x40\x00\x00\x00")) {
+		if (data->payload_len[0] == 0)
+			return true;
+		if (data->payload_len[1] == 0)
+			return true;
+	}
 
 	return false;
 }
@@ -48,7 +60,7 @@ static lpi_module_t lpi_second_life = {
 	LPI_PROTO_UDP_SECONDLIFE,
 	LPI_CATEGORY_GAMING,
 	"SecondLife",
-	4,
+	6,
 	match_second_life
 };
 

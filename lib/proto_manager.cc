@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_manager.cc 73 2011-03-14 04:42:27Z salcock $
+ * $Id: proto_manager.cc 77 2011-04-15 04:54:37Z salcock $
  */
 
 #include "config.h"
@@ -68,6 +68,7 @@ void free_protocols(LPIModuleMap *mod_map) {
 		ml->clear();
 		delete(ml);
 	}
+	mod_map->clear();
 }
 
 int register_tcp_protocols(LPIModuleMap *mod_map) {
@@ -108,8 +109,10 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_invalid(mod_map);
 	register_invalid_bittorrent(mod_map);
 	register_invalid_http(mod_map);
+	register_invalid_pop(mod_map);
 	register_invalid_smtp(mod_map);
 	register_irc(mod_map);
+	register_ldap(mod_map);
 	register_message4u(mod_map);
 	register_mitglieder(mod_map);
 	register_mms(mod_map);
@@ -156,6 +159,7 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_steam(mod_map);
 	register_svn(mod_map);
 	register_tds(mod_map);
+	register_teamviewer(mod_map);
 	register_telecomkey(mod_map);
 	register_telnet(mod_map);
 	register_tip(mod_map);
@@ -206,6 +210,7 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_jedi(mod_map);
 	register_kademlia(mod_map);
 	register_kazaa(mod_map);
+	register_ldap_ad(mod_map);
 	register_linkproof(mod_map);
 	register_moh(mod_map);
 	register_mp2p_udp(mod_map);
@@ -213,14 +218,16 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_msn_video(mod_map);
 	register_mta(mod_map);
 	register_mystery_02_36(mod_map);
+	register_mystery_05(mod_map);
 	register_mystery_0660(mod_map);
 	register_mystery_0d(mod_map);
 	register_mystery_45(mod_map);
+	register_mystery_61_72(mod_map);
 	register_mystery_8000_udp(mod_map);
 	register_mystery_99(mod_map);
 	register_mystery_e9(mod_map);
-	register_mystery_emule(mod_map);
 	register_mystery_fe(mod_map);
+	register_mystery_qq(mod_map);
 	register_netbios_udp(mod_map);
 	register_newerth(mod_map);
 	register_norton(mod_map);
@@ -237,6 +244,7 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_quake(mod_map);
 	register_real(mod_map);
 	register_rtcp(mod_map);
+	register_rtmfp(mod_map);
 	register_rtp(mod_map);
 	register_second_life(mod_map);
 	register_serialnumberd(mod_map);

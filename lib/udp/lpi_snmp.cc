@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_snmp.cc 64 2011-02-04 04:09:43Z salcock $
+ * $Id: lpi_snmp.cc 75 2011-04-07 04:57:39Z salcock $
  */
 
 #include <string.h>
@@ -42,6 +42,9 @@ static inline bool match_snmp_payload(uint32_t payload, uint32_t len) {
         uint8_t snmplen = 0;
         uint8_t *byte;
         int i;
+
+	if (len == 0)
+		return true;
 
         /* Must be a SEQUENCE */
         if (!MATCH(payload, 0x30, ANY, ANY, ANY))

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_invalid_smtp.cc 67 2011-02-11 04:17:55Z salcock $
+ * $Id: lpi_invalid_smtp.cc 76 2011-04-08 04:45:36Z salcock $
  */
 
 #include <string.h>
@@ -50,6 +50,8 @@ static inline bool match_invalid_smtp(lpi_data_t *data, lpi_module_t *mod UNUSED
                 return true;
 
 	if (match_str_both(data, "\x00\x00\x00\x00", "EHLO"))
+		return true;
+	if (match_str_both(data, "\x00\x00\x00\x00", "HELO"))
 		return true;
 
 	return false;

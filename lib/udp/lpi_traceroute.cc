@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_traceroute.cc 64 2011-02-04 04:09:43Z salcock $
+ * $Id: lpi_traceroute.cc 75 2011-04-07 04:57:39Z salcock $
  */
 
 #include <string.h>
@@ -44,6 +44,28 @@ static inline bool match_traceroute(lpi_data_t *data, lpi_module_t *mod UNUSED) 
         if (match_str_either(data, "iVMG"))
                 return true;
 
+	/* This seems to be part of some traceroute-like behaviour - the
+	 * port is never incremented and the destination address is always
+	 * X.X.X.1 */
+	if (data->payload_len[0] == 0) {
+		if (!MATCH(data->payload[1], ANY, ANY, 0x00, 0x00))
+			return false;
+		if (data->payload_len[1] != 16)
+			return false;
+		if (data->server_port != 33435 && data->client_port != 33435)
+			return false;
+		return true;
+	}
+
+	if (data->payload_len[1] == 0) {
+		if (!MATCH(data->payload[0], ANY, ANY, 0x00, 0x00))
+			return false;
+		if (data->payload_len[0] != 16)
+			return false;
+		if (data->server_port != 33435 && data->client_port != 33435)
+			return false;
+		return true;
+	}
 	return false;
 }
 
