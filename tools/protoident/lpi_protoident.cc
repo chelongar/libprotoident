@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_protoident.cc 54 2011-01-24 02:51:40Z salcock $
+ * $Id: lpi_protoident.cc 70 2011-03-10 22:38:24Z salcock $
  */
 
 #define __STDC_FORMAT_MACROS
@@ -112,7 +112,7 @@ void display_ident(Flow *f, IdentFlow *ident) {
         char ip[50];
         char str[1000];
         struct in_addr in;
-	lpi_protocol_t proto;
+	lpi_module_t *proto;
 
 	if (only_dir0 && ident->init_dir == 1)
 		return;
@@ -139,7 +139,7 @@ void display_ident(Flow *f, IdentFlow *ident) {
 
         in.s_addr = f->id.get_client_ip();
         snprintf(str, 1000, "%s %s %s %u %u %u %.3f %" PRIu64 " %" PRIu64, 
-			lpi_print(proto), ip, inet_ntoa(in),
+			proto->name, ip, inet_ntoa(in),
                         f->id.get_server_port(), f->id.get_client_port(),
                         f->id.get_protocol(), ident->start_ts,
 			ident->out_bytes, ident->in_bytes);
@@ -387,7 +387,10 @@ int main(int argc, char *argv[]) {
 
         signal(SIGINT,&cleanup_signal);
         signal(SIGTERM,&cleanup_signal);
-	
+
+	if (lpi_init_library() == -1)
+		return -1;
+
         for (i = optind; i < argc; i++) {
 
                 fprintf(stderr, "%s\n", argv[i]);
@@ -440,6 +443,7 @@ int main(int argc, char *argv[]) {
 
         trace_destroy_packet(packet);
         expire_ident_flows(ts, true);
+	lpi_free_library();
 
         return 0;
 

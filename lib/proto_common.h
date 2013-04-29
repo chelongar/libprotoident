@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_common.h 51 2011-01-24 01:58:51Z salcock $
+ * $Id: proto_common.h 65 2011-02-07 04:08:00Z salcock $
  */
 
 
@@ -59,11 +59,19 @@
         (memcmp(&(x),(st),sizeof(x))==0)
 
 
-inline bool match_str_either(lpi_data_t *data, const char *string);
-inline bool match_str_both(lpi_data_t *data, const char *string1,
+bool match_str_either(lpi_data_t *data, const char *string);
+bool match_str_both(lpi_data_t *data, const char *string1,
         const char *string2);
-inline bool match_chars_either(lpi_data_t *data, char a, char b, char c,
+bool match_chars_either(lpi_data_t *data, char a, char b, char c,
         char d);
-inline bool match_payload_length(uint32_t payload, uint32_t payload_len);
-inline bool match_ip_address_both(lpi_data_t *data);
+bool match_payload_length(uint32_t payload, uint32_t payload_len);
+bool match_ip_address_both(lpi_data_t *data);
+bool match_file_header(uint32_t payload);
+bool match_http_request(uint32_t payload, uint32_t len);
+bool valid_http_port(lpi_data_t *data);
+bool match_ssl(lpi_data_t *data);
+bool match_dns(lpi_data_t *data);
+bool match_tds_request(uint32_t payload, uint32_t len);
+bool match_8000_payload(uint32_t payload, uint32_t len);
+bool match_emule(lpi_data_t *data);
 #endif

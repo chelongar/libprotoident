@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_find_unknown.cc 54 2011-01-24 02:51:40Z salcock $
+ * $Id: lpi_find_unknown.cc 70 2011-03-10 22:38:24Z salcock $
  */
 
 
@@ -162,7 +162,7 @@ void display_unknown(Flow *f, UnknownFlow *unk) {
  */
 void expire_unknown_flows(double ts, bool exp_flag) {
         Flow *expired;
-	lpi_protocol_t proto;
+	lpi_module_t *proto;
 
         /* Loop until libflowmanager has no more expired flows available */
 	while ((expired = lfm_expire_next_flow(ts, exp_flag)) != NULL) {
@@ -170,8 +170,11 @@ void expire_unknown_flows(double ts, bool exp_flag) {
                 UnknownFlow *unk = (UnknownFlow *)expired->extension;
 		
 		proto = lpi_guess_protocol(&unk->lpi);
-		if (proto == LPI_PROTO_UNKNOWN || proto == LPI_PROTO_UDP)
+		
+		if (proto->protocol == LPI_PROTO_UNKNOWN || 
+				proto->protocol == LPI_PROTO_UDP) {
 			display_unknown(expired, unk);
+		}	
 
 		/* Don't forget to free our custom data structure */
                 free(unk);
@@ -303,7 +306,6 @@ static void usage(char *prog) {
 	printf("  -f <filter>	Ignore flows that do not match the given BPF filter\n");
 	printf("  -R 		Ignore flows involving private RFC 1918 address space\n");
 	printf("  -H		Ignore flows that do not meet the criteria for an SPNAT hole\n");
-
 	exit(0);
 
 }
@@ -392,6 +394,9 @@ int main(int argc, char *argv[]) {
 	signal(SIGINT,&cleanup_signal);
 	signal(SIGTERM,&cleanup_signal);
 
+	if (lpi_init_library() == -1)
+		return -1;
+
         for (i = optind; i < argc; i++) {
 
                 fprintf(stderr, "%s\n", argv[i]);
@@ -444,6 +449,7 @@ int main(int argc, char *argv[]) {
 
         trace_destroy_packet(packet);
         expire_unknown_flows(ts, true);
+	lpi_free_library();
 
         return 0;
 

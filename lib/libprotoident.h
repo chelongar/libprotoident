@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.h 57 2011-01-24 21:43:53Z salcock $
+ * $Id: libprotoident.h 72 2011-03-14 04:37:45Z salcock $
  */
 
 
@@ -35,6 +35,21 @@
 #define LIBPROTOIDENT_H_
 
 #include <libtrace.h>
+
+#if __GNUC__ >= 3 
+#  define DEPRECATED __attribute__((deprecated))
+#  define SIMPLE_FUNCTION __attribute__((pure))
+#  define UNUSED __attribute__((unused))
+#  define PACKED __attribute__((packed))
+#  define PRINTF(formatpos,argpos) __attribute__((format(printf,formatpos,argpos)))
+#else
+#  define DEPRECATED
+#  define SIMPLE_FUNCTION
+#  define UNUSED
+#  define PACKED 
+#  define PRINTF(formatpos,argpos) 
+#endif
+
 
 #ifdef __cplusplus 
 extern "C" {
@@ -119,7 +134,6 @@ typedef enum {
         LPI_PROTO_FTP_DATA,
         LPI_PROTO_EYE,         /* Yahoo Game Server Browser */
         LPI_PROTO_ARES,        /* Ares peer-to-peer protocol */
-        LPI_PROTO_AR,          /* ar archives, usually Debian .deb files */
         LPI_PROTO_NNTP,        /* Newsfeeds */
         LPI_PROTO_NAPSTER,
         LPI_PROTO_BNCS,        /* Battle.net Chat Server */
@@ -131,7 +145,6 @@ typedef enum {
         LPI_PROTO_MS_DS,
         LPI_PROTO_SIP,         /* Session Initiation Protocol*/
         LPI_PROTO_MZINGA,
-        LPI_PROTO_TCP_XML,
         LPI_PROTO_GOKUCHAT,
         LPI_PROTO_XUNLEI,
         LPI_PROTO_DXP,
@@ -184,8 +197,10 @@ typedef enum {
 	LPI_PROTO_SOCKS4,
 	LPI_PROTO_INVALID_SMTP,
 	LPI_PROTO_MMS,		/* Microsoft Media Server */
+	LPI_PROTO_CISCO_VPN,	/* Cisco VPN protocol */
 	LPI_PROTO_WEB_JUNK,	/* Clients communicating with web servers
 				   using non-HTTP */
+	LPI_PROTO_CVS,
 
         /* UDP Protocols */
         LPI_PROTO_UDP,
@@ -278,6 +293,7 @@ typedef enum {
 	LPI_PROTO_MYSTERY_8000,
 	LPI_PROTO_MYSTERY_IG,
 	LPI_PROTO_MYSTERY_CONN,
+	LPI_PROTO_MYSTERY_443,
 	
 	LPI_PROTO_UDP_EMULE_MYSTERY,	/* Possible emule-related protocol */
 	LPI_PROTO_UDP_MYSTERY_0D,	
@@ -313,6 +329,31 @@ typedef struct lpi {
 	uint32_t ips[2];
 } lpi_data_t;
 
+typedef struct lpi_module lpi_module_t;
+
+/* This structure describes an individual LPI module - i.e. a protocol 
+ * supported by libprotoident */
+struct lpi_module {
+        lpi_protocol_t protocol;	/* The protocol ID */
+        lpi_category_t category;	/* The category for this protocol */
+        const char *name;		/* The protocol name, as a string */
+        uint8_t priority;		/* The relative priority for matching
+					   this protocol */
+
+	/* The callback function for testing whether a given set of LPI
+	 * data matches the ruleset for this protocol */
+        bool (*lpi_callback) (lpi_data_t *proto_d, lpi_module_t *module);
+
+};
+
+/* Initialises the LPI library, by registering all the protocol modules.
+ *
+ * @return 1 if initialisation succeeded, 0 otherwise 
+ */
+int lpi_init_library(void);
+
+/* Shuts down the LPI library, by de-registering all the protocol modules */
+void lpi_free_library(void);
 
 /** Initialises an LPI data structure, setting all the members to appropriate
  *  starting values.
@@ -352,7 +393,7 @@ const char *lpi_print(lpi_protocol_t proto);
  *
  * @return The category that the protocol belongs to.
  */
-lpi_category_t lpi_categorise(lpi_protocol_t proto);
+lpi_category_t lpi_categorise(lpi_module_t *proto);
 
 /** Returns a unique string describing the provided category. 
  *
@@ -370,11 +411,12 @@ const char *lpi_print_category(lpi_category_t category);
  *
  *  @param data	The LPI data to use when determining the protocol.
  *
- *  @return The application protocol that matches the profile described by the
- *  given LPI data. If no protocol matches, LPI_UNKNOWN or LPI_UNKNOWN_UDP will
- *  be returned (depending on the transport protocol).
+ *  @return The LPI module for the protocol that matches the profile described
+ *  by the given LPI data. If no protocol matches, the module for either
+ *  LPI_UNKNOWN or LPI_UNKNOWN_UDP will be returned, depending on the transport
+ *  protocol.
  */
-lpi_protocol_t lpi_guess_protocol(lpi_data_t *data);
+lpi_module_t *lpi_guess_protocol(lpi_data_t *data);
 
 
 #ifdef __cplusplus 
