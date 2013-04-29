@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.h 77 2011-04-15 04:54:37Z salcock $
+ * $Id: libprotoident.h 90 2011-07-01 04:37:47Z salcock $
  */
 
 
@@ -204,6 +204,9 @@ typedef enum {
 	LPI_PROTO_LDAP,		/* LDAP */
 	LPI_PROTO_INVALID_POP3,	/* POP commands send to an SMTP server */
 	LPI_PROTO_TEAMVIEWER,
+	LPI_PROTO_XMPP,		/* a.k.a. Jabber */
+	LPI_PROTO_SECONDLIFE,	/* SecondLife over TCP */
+	LPI_PROTO_KASEYA,
 
         /* UDP Protocols */
         LPI_PROTO_UDP,
@@ -290,6 +293,7 @@ typedef enum {
 	LPI_PROTO_UDP_SERIALNUMBERD,
 	LPI_PROTO_UDP_LDAP_AD,
 	LPI_PROTO_UDP_RTMFP,
+	LPI_PROTO_UDP_L2TP,
 
 	/* Patterns that we can match, but do not know the protocol */
 	LPI_PROTO_REJECTION,	/* All responses are 0x02 */
@@ -301,7 +305,6 @@ typedef enum {
 	LPI_PROTO_MYSTERY_443,
 	
 	LPI_PROTO_UDP_MYSTERY_0D,	
-	LPI_PROTO_UDP_MYSTERY_02_36,
 	LPI_PROTO_UDP_MYSTERY_FE,
 	LPI_PROTO_UDP_MYSTERY_99,
 	LPI_PROTO_UDP_MYSTERY_8000,
@@ -406,7 +409,7 @@ lpi_category_t lpi_categorise(lpi_module_t *proto);
  *
  * This is essentially a category-to-string conversion function.
  *
- * @param cateogry The category that a string representation is required for.
+ * @param category The category that a string representation is required for.
  *
  * @return A pointer to a statically allocated string describing the category.
  * This is allocated on the stack, so should be used or copied immediately.

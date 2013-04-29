@@ -84,6 +84,7 @@ am_libprotoident_tcp_la_OBJECTS = libprotoident_tcp_la-lpi_afp.lo \
 	libprotoident_tcp_la-lpi_invalid_pop.lo \
 	libprotoident_tcp_la-lpi_invalid_smtp.lo \
 	libprotoident_tcp_la-lpi_irc.lo \
+	libprotoident_tcp_la-lpi_kaseya.lo \
 	libprotoident_tcp_la-lpi_ldap.lo \
 	libprotoident_tcp_la-lpi_message4u.lo \
 	libprotoident_tcp_la-lpi_mitglieder.lo \
@@ -120,6 +121,7 @@ am_libprotoident_tcp_la_OBJECTS = libprotoident_tcp_la-lpi_afp.lo \
 	libprotoident_tcp_la-lpi_rsync.lo \
 	libprotoident_tcp_la-lpi_rtmp.lo \
 	libprotoident_tcp_la-lpi_rtsp.lo \
+	libprotoident_tcp_la-lpi_second_life.lo \
 	libprotoident_tcp_la-lpi_shoutcast.lo \
 	libprotoident_tcp_la-lpi_sip.lo \
 	libprotoident_tcp_la-lpi_smb.lo \
@@ -142,6 +144,7 @@ am_libprotoident_tcp_la_OBJECTS = libprotoident_tcp_la-lpi_afp.lo \
 	libprotoident_tcp_la-lpi_weblogic.lo \
 	libprotoident_tcp_la-lpi_winmx.lo \
 	libprotoident_tcp_la-lpi_wow.lo \
+	libprotoident_tcp_la-lpi_xmpp.lo \
 	libprotoident_tcp_la-lpi_xunlei.lo \
 	libprotoident_tcp_la-lpi_yahoo.lo \
 	libprotoident_tcp_la-lpi_yahoo_error.lo \
@@ -343,6 +346,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_invalid_pop.cc \
 	lpi_invalid_smtp.cc \
 	lpi_irc.cc \
+	lpi_kaseya.cc \
 	lpi_ldap.cc \
 	lpi_message4u.cc \
 	lpi_mitglieder.cc \
@@ -379,6 +383,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_rsync.cc \
 	lpi_rtmp.cc \
 	lpi_rtsp.cc \
+	lpi_second_life.cc \
 	lpi_shoutcast.cc \
 	lpi_sip.cc \
 	lpi_smb.cc \
@@ -401,6 +406,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_weblogic.cc \
 	lpi_winmx.cc \
 	lpi_wow.cc \
+	lpi_xmpp.cc \
 	lpi_xunlei.cc \
 	lpi_yahoo.cc \
 	lpi_yahoo_error.cc \
@@ -502,6 +508,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_invalid_pop.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_invalid_smtp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_irc.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_kaseya.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_ldap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_message4u.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_mitglieder.Plo@am__quote@
@@ -538,6 +545,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_rsync.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_rtmp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_rtsp.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_second_life.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_shoutcast.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_sip.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_smb.Plo@am__quote@
@@ -560,6 +568,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_weblogic.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_winmx.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_wow.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_xmpp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_xunlei.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_yahoo.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_yahoo_error.Plo@am__quote@
@@ -902,6 +911,14 @@ libprotoident_tcp_la-lpi_irc.lo: lpi_irc.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_irc.lo `test -f 'lpi_irc.cc' || echo '$(srcdir)/'`lpi_irc.cc
 
+libprotoident_tcp_la-lpi_kaseya.lo: lpi_kaseya.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_kaseya.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_kaseya.Tpo -c -o libprotoident_tcp_la-lpi_kaseya.lo `test -f 'lpi_kaseya.cc' || echo '$(srcdir)/'`lpi_kaseya.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_kaseya.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_kaseya.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_kaseya.cc' object='libprotoident_tcp_la-lpi_kaseya.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_kaseya.lo `test -f 'lpi_kaseya.cc' || echo '$(srcdir)/'`lpi_kaseya.cc
+
 libprotoident_tcp_la-lpi_ldap.lo: lpi_ldap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_ldap.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_ldap.Tpo -c -o libprotoident_tcp_la-lpi_ldap.lo `test -f 'lpi_ldap.cc' || echo '$(srcdir)/'`lpi_ldap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_ldap.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_ldap.Plo
@@ -1190,6 +1207,14 @@ libprotoident_tcp_la-lpi_rtsp.lo: lpi_rtsp.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_rtsp.lo `test -f 'lpi_rtsp.cc' || echo '$(srcdir)/'`lpi_rtsp.cc
 
+libprotoident_tcp_la-lpi_second_life.lo: lpi_second_life.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_second_life.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_second_life.Tpo -c -o libprotoident_tcp_la-lpi_second_life.lo `test -f 'lpi_second_life.cc' || echo '$(srcdir)/'`lpi_second_life.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_second_life.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_second_life.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_second_life.cc' object='libprotoident_tcp_la-lpi_second_life.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_second_life.lo `test -f 'lpi_second_life.cc' || echo '$(srcdir)/'`lpi_second_life.cc
+
 libprotoident_tcp_la-lpi_shoutcast.lo: lpi_shoutcast.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_shoutcast.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_shoutcast.Tpo -c -o libprotoident_tcp_la-lpi_shoutcast.lo `test -f 'lpi_shoutcast.cc' || echo '$(srcdir)/'`lpi_shoutcast.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_shoutcast.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_shoutcast.Plo
@@ -1365,6 +1390,14 @@ libprotoident_tcp_la-lpi_wow.lo: lpi_wow.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_wow.cc' object='libprotoident_tcp_la-lpi_wow.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_wow.lo `test -f 'lpi_wow.cc' || echo '$(srcdir)/'`lpi_wow.cc
+
+libprotoident_tcp_la-lpi_xmpp.lo: lpi_xmpp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_xmpp.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_xmpp.Tpo -c -o libprotoident_tcp_la-lpi_xmpp.lo `test -f 'lpi_xmpp.cc' || echo '$(srcdir)/'`lpi_xmpp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_xmpp.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_xmpp.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_xmpp.cc' object='libprotoident_tcp_la-lpi_xmpp.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_xmpp.lo `test -f 'lpi_xmpp.cc' || echo '$(srcdir)/'`lpi_xmpp.cc
 
 libprotoident_tcp_la-lpi_xunlei.lo: lpi_xunlei.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_xunlei.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_xunlei.Tpo -c -o libprotoident_tcp_la-lpi_xunlei.lo `test -f 'lpi_xunlei.cc' || echo '$(srcdir)/'`lpi_xunlei.cc

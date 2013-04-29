@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_shoutcast.cc 61 2011-02-03 00:34:02Z salcock $
+ * $Id: lpi_shoutcast.cc 90 2011-07-01 04:37:47Z salcock $
  */
 
 #include <string.h>
@@ -42,6 +42,12 @@ static inline bool match_shoutcast(lpi_data_t *data, lpi_module_t *mod UNUSED)
 		return true;
 	if (match_chars_either(data, 'O', 'K', '2', 0x0d))
 		return true;
+	if (match_chars_either(data, 'I', 'C', 'Y', ' ')) {
+		if (data->payload_len[0] == 0)
+			return true;
+		if (data->payload_len[1] == 0)
+			return true;
+	}
 	return false;
 
 }

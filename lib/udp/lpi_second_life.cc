@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_second_life.cc 76 2011-04-08 04:45:36Z salcock $
+ * $Id: lpi_second_life.cc 90 2011-07-01 04:37:47Z salcock $
  */
 
 #include <string.h>
@@ -64,7 +64,7 @@ static lpi_module_t lpi_second_life = {
 	match_second_life
 };
 
-void register_second_life(LPIModuleMap *mod_map) {
+void register_second_life_udp(LPIModuleMap *mod_map) {
 	register_protocol(&lpi_second_life, mod_map);
 }
 

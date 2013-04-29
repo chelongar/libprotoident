@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ldap_ad.cc 89 2011-06-01 23:23:05Z salcock $
+ * $Id: lpi_l2tp.cc 88 2011-06-01 23:17:31Z salcock $
  */
 
 #include <string.h>
@@ -36,40 +36,42 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_ldap_ad_payload(uint32_t payload, uint32_t len) {
+static inline bool match_l2tp_payload(uint32_t payload, uint32_t len) {
+
+	/* Technically the 3rd and 4th bytes are a length field, but we'll
+	 * worry about that once we start seeing L2TP that is not 109
+	 * bytes in size */
+
 	if (len == 0)
 		return true;
-	if (MATCH(payload, 0x30, 0x84, 0x00, 0x00))
-		return true;
-	return false;
+
+	if (!MATCH(payload, 0xc8, 0x02, 0x00, 0x6d))
+		return false;
+
+	return true;
 
 }
 
-static inline bool match_ldap_ad(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_l2tp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	/* Rule out one-way DNS, which could look like our LDAP AD payload */
-	if (data->payload_len[0] == 0 || data->payload_len[1] == 0) {
-		if (data->server_port == 53 || data->client_port == 53)
-			return false;
-	}
+	if (!match_l2tp_payload(data->payload[0], data->payload_len[0]))
+		return false;
+	if (!match_l2tp_payload(data->payload[1], data->payload_len[1]))
+		return false;
 
-	if (!match_ldap_ad_payload(data->payload[0], data->payload_len[0]))
-		return false;	
-	if (!match_ldap_ad_payload(data->payload[1], data->payload_len[1]))
-		return false;	
 
 	return true;
 }
 
-static lpi_module_t lpi_ldap_ad = {
-	LPI_PROTO_UDP_LDAP_AD,
-	LPI_CATEGORY_SERVICES,
-	"LDAP_AD",
-	5,
-	match_ldap_ad
+static lpi_module_t lpi_l2tp = {
+	LPI_PROTO_UDP_L2TP,
+	LPI_CATEGORY_TUNNELLING,
+	"L2TP",
+	6,
+	match_l2tp
 };
 
-void register_ldap_ad(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_ldap_ad, mod_map);
+void register_l2tp(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_l2tp, mod_map);
 }
 

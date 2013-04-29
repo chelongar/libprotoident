@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.cc 76 2011-04-08 04:45:36Z salcock $
+ * $Id: libprotoident.cc 88 2011-06-01 23:17:31Z salcock $
  */
 
 #define __STDC_FORMAT_MACROS
@@ -70,6 +70,11 @@ static int seq_cmp (uint32_t seq_a, uint32_t seq_b) {
 
 int lpi_init_library() {
 
+	if (init_called) {
+		fprintf(stderr, "WARNING: lpi_init_library has already been called\n");
+		return 0;
+	}
+	
 	if (register_tcp_protocols(&TCP_protocols) == -1) 
 		return -1;
 	
@@ -415,6 +420,7 @@ lpi_category_t lpi_categorise(lpi_module_t *module) {
 		case LPI_PROTO_UDP_CISCO_VPN:
 		case LPI_PROTO_SOCKS5:
 		case LPI_PROTO_SOCKS4:
+		case LPI_PROTO_UDP_L2TP:
 			return LPI_CATEGORY_TUNNELLING;
 
 		case LPI_PROTO_UDP_PYZOR:
@@ -543,6 +549,7 @@ lpi_category_t lpi_categorise(lpi_module_t *module) {
                 case LPI_PROTO_MZINGA:
 		case LPI_PROTO_UDP_QQ:
 		case LPI_PROTO_UDP_IPMSG:
+		case LPI_PROTO_XMPP:
 			return LPI_CATEGORY_CHAT;
 
 		case LPI_PROTO_SSH:

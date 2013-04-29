@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ipv6.cc 64 2011-02-04 04:09:43Z salcock $
+ * $Id: lpi_ipv6.cc 84 2011-05-27 03:03:05Z salcock $
  */
 
 #include <string.h>
@@ -45,8 +45,12 @@ static inline bool match_ipv6_udp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
                 return true;
         }
 
+	/* One-way DNS check */	
+	if (data->server_port == 53 || data->client_port == 53)
+		return false;
+
         if (MATCHSTR(data->payload[0], "\x60\x00\x00\x00")) {
-                if (data->payload_len[1] == 0) {
+		if (data->payload_len[1] == 0) {
                         return true;
                 }
         }

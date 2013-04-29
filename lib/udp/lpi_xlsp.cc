@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_xlsp.cc 77 2011-04-15 04:54:37Z salcock $
+ * $Id: lpi_xlsp.cc 89 2011-06-01 23:23:05Z salcock $
  */
 
 #include <string.h>
@@ -111,6 +111,18 @@ static inline bool match_xlsp_payload(uint32_t payload, uint32_t len,
 			return false;
 		if (MATCH(payload, 0x28, ANY, ANY, ANY))
 			return true;
+	}
+	
+	if (len == 287 || len == 1336 || len == 1011)  {
+		/* Employ port number restriction because these rules are weak
+		 */
+		if (data->server_port != 3074 && data->client_port != 3074)
+			return false;
+		if (other_len != 0)
+			return false;
+		if (MATCH(payload, 0x00, 0x00, 0x00, 0x00))
+			return true;
+
 	}
 			
 	if (len == 26) {

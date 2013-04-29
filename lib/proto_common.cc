@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_common.cc 76 2011-04-08 04:45:36Z salcock $
+ * $Id: proto_common.cc 84 2011-05-27 03:03:05Z salcock $
  */
 
 #include <string.h>
@@ -217,7 +217,7 @@ bool match_file_header(uint32_t payload) {
                 return true;
 
         /* gzip  - may need to replace last two bytes with ANY */
-        if (MATCH(payload, 0x1f, 0x8b, 0x08, 0x00))
+        if (MATCH(payload, 0x1f, 0x8b, 0x08, ANY))
                 return true;
 
         /* XML */

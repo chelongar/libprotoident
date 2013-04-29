@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_mysql.cc 63 2011-02-04 00:59:33Z salcock $
+ * $Id: lpi_mysql.cc 89 2011-06-01 23:23:05Z salcock $
  */
 
 #include <string.h>

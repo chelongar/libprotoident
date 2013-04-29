@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_netbios.cc 76 2011-04-08 04:45:36Z salcock $
+ * $Id: lpi_netbios.cc 84 2011-05-27 03:03:05Z salcock $
  */
 
 #include <string.h>
@@ -72,6 +72,8 @@ static inline bool match_netbios_datagram(uint32_t payload, uint32_t len) {
 	if (MATCH(payload, 0x11, 0x02, ANY, ANY))
 		return true;
 	if (MATCH(payload, 0x11, 0x06, ANY, ANY))
+		return true;
+	if (MATCH(payload, 0x11, 0x0e, ANY, ANY))
 		return true;
 
 	return false;

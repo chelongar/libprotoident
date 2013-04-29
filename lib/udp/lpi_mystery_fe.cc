@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_mystery_fe.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_mystery_fe.cc 84 2011-05-27 03:03:05Z salcock $
  */
 
 #include <string.h>
@@ -70,6 +70,11 @@ static inline bool match_mystery_fe(lpi_data_t *data, lpi_module_t *mod UNUSED) 
          * Every packet begins with a 3 byte header - 0xfe followed by a
          * length field
          */
+
+	if (data->payload_len[0] == 0 || data->payload_len[1] == 0) {
+		if (data->server_port == 53 || data->client_port == 53)
+			return false;
+	}
 
         if (!match_mys_fe_payload(data->payload[0], data->payload_len[0]))
                 return false;

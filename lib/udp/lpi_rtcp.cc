@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_rtcp.cc 77 2011-04-15 04:54:37Z salcock $
+ * $Id: lpi_rtcp.cc 84 2011-05-27 03:03:05Z salcock $
  */
 
 #include <string.h>
@@ -52,6 +52,12 @@ static inline bool match_rtcp_payload(uint32_t payload, uint32_t len) {
 
 
 static inline bool match_rtcp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+
+	/* Watch out for one-way DNS... */
+	if (data->payload_len[0] == 0 || data->payload_len[1] == 0) {
+		if (data->server_port == 53 || data->client_port == 53)
+			return false;
+	}
 
 	if (!match_rtcp_payload(data->payload[0], data->payload_len[0]))
                 return false;

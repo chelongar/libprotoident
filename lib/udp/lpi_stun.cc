@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_stun.cc 64 2011-02-04 04:09:43Z salcock $
+ * $Id: lpi_stun.cc 90 2011-07-01 04:37:47Z salcock $
  */
 
 #include <string.h>
@@ -51,6 +51,12 @@ static bool match_stun_payload(uint32_t payload, uint32_t len) {
                 return true;
         if (MATCH(payload, 0x01, 0x01, ANY, ANY))
                 return true;
+        if (MATCH(payload, 0x00, 0x03, ANY, ANY))
+                return true;
+        if (MATCH(payload, 0x01, 0x03, ANY, ANY))
+                return true;
+        if (MATCH(payload, 0x01, 0x13, ANY, ANY))
+                return true;
 
         return false;
 
@@ -67,12 +73,12 @@ static inline bool match_stun(lpi_data_t *data, lpi_module_t *mod UNUSED) {
         if (match_str_either(data, "RSP/"))
                 return true;
 
-        if (match_stun_payload(data->payload[0], data->payload_len[0]))
-                return true;
-        if (match_stun_payload(data->payload[1], data->payload_len[1]))
-                return true;
+        if (!match_stun_payload(data->payload[0], data->payload_len[0]))
+                return false;
+        if (!match_stun_payload(data->payload[1], data->payload_len[1]))
+                return false;
 
-	return false;
+	return true;
 }
 
 static lpi_module_t lpi_stun = {

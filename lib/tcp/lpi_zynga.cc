@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_zynga.cc 63 2011-02-04 00:59:33Z salcock $
+ * $Id: lpi_zynga.cc 90 2011-07-01 04:37:47Z salcock $
  */
 
 #include <string.h>
@@ -40,6 +40,12 @@ static inline bool match_zynga(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 	if (match_str_both(data, "pres", "3 se"))
 		return true;
+
+	/* Flash facebook games */
+	if (match_str_both(data, "<msg", "<?xm")) {
+		if (data->server_port == 9339 || data->client_port == 9339)
+			return true;
+	}
 
 	return false;
 }

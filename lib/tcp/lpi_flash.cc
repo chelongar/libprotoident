@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_flash.cc 75 2011-04-07 04:57:39Z salcock $
+ * $Id: lpi_flash.cc 90 2011-07-01 04:37:47Z salcock $
  */
 
 #include <string.h>
@@ -59,7 +59,7 @@ static lpi_module_t lpi_flash = {
 	LPI_PROTO_FLASH,
 	LPI_CATEGORY_STREAMING,
 	"Flash_Player",
-	2,
+	6,
 	match_flash
 };
 

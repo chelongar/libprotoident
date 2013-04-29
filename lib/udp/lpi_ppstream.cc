@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ppstream.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_ppstream.cc 90 2011-07-01 04:37:47Z salcock $
  */
 
 #include <string.h>
@@ -37,7 +37,7 @@
 #include "proto_common.h"
 
 static inline bool match_ppstream_payload(uint32_t payload, uint32_t len) {
-        uint16_t rep_len;
+        uint16_t rep_len = 0;
 
         if (len == 0)
                 return true;

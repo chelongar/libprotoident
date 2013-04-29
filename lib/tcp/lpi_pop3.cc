@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_pop3.cc 77 2011-04-15 04:54:37Z salcock $
+ * $Id: lpi_pop3.cc 89 2011-06-01 23:23:05Z salcock $
  */
 
 #include <string.h>
@@ -42,6 +42,20 @@ static inline bool match_pop3(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 		return true;
 	if (match_chars_either(data, '-', 'E', 'R', 'R'))
 		return true;
+
+	if (match_str_either(data, "CAPA")) {
+		if (data->payload_len[0] == 0)
+			return true;
+		if (data->payload_len[1] == 0)
+			return true;
+	}
+
+	if (match_str_either(data, "AUTH")) {
+		if (data->payload_len[0] == 0)
+			return true;
+		if (data->payload_len[1] == 0)
+			return true;
+	}
 	return false;
 
 }

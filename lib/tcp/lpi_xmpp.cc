@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ldap_ad.cc 89 2011-06-01 23:23:05Z salcock $
+ * $Id: lpi_xmpp.cc 88 2011-06-01 23:17:31Z salcock $
  */
 
 #include <string.h>
@@ -36,40 +36,37 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_ldap_ad_payload(uint32_t payload, uint32_t len) {
-	if (len == 0)
+static inline bool match_xmpp_payload(uint32_t data, uint32_t len) {
+
+	if (MATCHSTR(data, "<?xm"))
 		return true;
-	if (MATCH(payload, 0x30, 0x84, 0x00, 0x00))
+	if (MATCHSTR(data, "<str"))
 		return true;
 	return false;
-
 }
 
-static inline bool match_ldap_ad(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_xmpp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	/* Rule out one-way DNS, which could look like our LDAP AD payload */
-	if (data->payload_len[0] == 0 || data->payload_len[1] == 0) {
-		if (data->server_port == 53 || data->client_port == 53)
-			return false;
-	}
+	/* If this is overmatching, enforce TCP port 5222 */
 
-	if (!match_ldap_ad_payload(data->payload[0], data->payload_len[0]))
-		return false;	
-	if (!match_ldap_ad_payload(data->payload[1], data->payload_len[1]))
-		return false;	
+	if (!match_xmpp_payload(data->payload[0], data->payload_len[0]))
+		return false;
+	if (!match_xmpp_payload(data->payload[1], data->payload_len[1]))
+		return false;
+	
 
 	return true;
 }
 
-static lpi_module_t lpi_ldap_ad = {
-	LPI_PROTO_UDP_LDAP_AD,
-	LPI_CATEGORY_SERVICES,
-	"LDAP_AD",
-	5,
-	match_ldap_ad
+static lpi_module_t lpi_xmpp = {
+	LPI_PROTO_XMPP,
+	LPI_CATEGORY_CHAT,
+	"XMPP",
+	4,
+	match_xmpp
 };
 
-void register_ldap_ad(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_ldap_ad, mod_map);
+void register_xmpp(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_xmpp, mod_map);
 }
 

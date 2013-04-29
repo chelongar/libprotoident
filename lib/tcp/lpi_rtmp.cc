@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_rtmp.cc 63 2011-02-04 00:59:33Z salcock $
+ * $Id: lpi_rtmp.cc 90 2011-07-01 04:37:47Z salcock $
  */
 
 #include <string.h>
@@ -38,7 +38,7 @@
 
 static inline bool match_rtmp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	if (data->payload_len[0] < 4 && data->payload_len[1] < 4)
+	if (data->payload_len[0] < 4 || data->payload_len[1] < 4)
                 return false;
 
         if (MATCH(data->payload[0], 0x03, ANY, ANY, ANY) &&
@@ -47,6 +47,11 @@ static inline bool match_rtmp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
                 return true;
         }
 	
+        if (MATCH(data->payload[0], 0x06, ANY, ANY, ANY) &&
+                        MATCH(data->payload[1], 0x06, ANY, ANY, ANY)) {
+
+                return true;
+        }
 
 	return false;
 }

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_skype.cc 76 2011-04-08 04:45:36Z salcock $
+ * $Id: lpi_skype.cc 81 2011-05-20 03:04:30Z salcock $
  */
 
 #include <string.h>
@@ -113,7 +113,8 @@ static inline bool match_skype_rule2(lpi_data_t *data) {
          * The length of U1 is always between 18 and 31 bytes.
          */
 
-        if ((data->payload[0] & 0x0000ffff) != (data->payload[1] & 0x0000ffff))
+        if ((ntohl(data->payload[0]) & 0xffff0000) != 
+			(ntohl(data->payload[1]) & 0xffff0000))
                 return false;
 
         if (match_skype_U1(data->payload[0], data->payload_len[0])) {

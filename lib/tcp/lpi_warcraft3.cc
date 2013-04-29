@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_warcraft3.cc 63 2011-02-04 00:59:33Z salcock $
+ * $Id: lpi_warcraft3.cc 90 2011-07-01 04:37:47Z salcock $
  */
 
 #include <string.h>
@@ -38,16 +38,21 @@
 
 static inline bool match_warcraft3(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
+        /* Warcraft 3 packets all begin with 0xf7 */
+	if (!MATCH(data->payload[0], 0xf7, ANY, ANY, ANY) || 
+			!MATCH(data->payload[1], 0xf7, ANY, ANY, ANY))
+		return false;
+
 	if (match_chars_either(data, 0xf7, 0x37, 0x12, 0x00))
 		return true;
+        /* Another Warcraft 3 example added by Donald Neal */
+        if (match_chars_either(data, 0xf7, 0x1e, ANY, 0x00))
+		return true;
+
 
         /* XXX - I have my doubts about these rules */
 #if 0   
-        /* Warcraft 3 packets all begin with 0xf7 */
         if (match_chars_either(proto_d, 0xf7, 0xf7, ANY, ANY)) 
-                return LPI_PROTO_WARCRAFT3;
-        /* Another Warcraft 3 example added by Donald Neal */
-        if (match_chars_either(proto_d, 0xf7, 0x1e, ANY, 0x00))
                 return LPI_PROTO_WARCRAFT3;
 #endif
 	

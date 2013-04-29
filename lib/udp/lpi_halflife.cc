@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_halflife.cc 64 2011-02-04 04:09:43Z salcock $
+ * $Id: lpi_halflife.cc 89 2011-06-01 23:23:05Z salcock $
  */
 
 #include <string.h>
@@ -38,11 +38,11 @@
 
 static inline bool match_halflife(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	if (!MATCH(data->payload[0], 0xff, 0xff, 0xff, 0xff)) {
+	if (!MATCHSTR(data->payload[0], "\xff\xff\xff\xff")) {
                 if (data->payload_len[0] != 0)
                         return false;
         }
-        if (!MATCH(data->payload[1], 0xff, 0xff, 0xff, 0xff)) {
+        if (!MATCHSTR(data->payload[1], "\xff\xff\xff\xff")) {
                 if (data->payload_len[1] != 0)
                         return false;
         }

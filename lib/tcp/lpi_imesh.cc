@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_imesh.cc 63 2011-02-04 00:59:33Z salcock $
+ * $Id: lpi_imesh.cc 89 2011-06-01 23:23:05Z salcock $
  */
 
 #include <string.h>
@@ -43,6 +43,8 @@ static inline bool match_imesh_payload(uint32_t payload, uint32_t len) {
         if (len == 2 && MATCH(payload, 0x06, 0x00, 0x00, 0x00))
                 return true;
         if (len == 10 && MATCH(payload, 0x06, 0x00, 0x04, 0x00))
+                return true;
+        if (len == 6 && MATCH(payload, 0x06, 0x00, 0x04, 0x00))
                 return true;
         if (len == 12 && MATCH(payload, 0x06, 0x00, 0x06, 0x00))
                 return true;

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ldap_ad.cc 89 2011-06-01 23:23:05Z salcock $
+ * $Id: lpi_kaseya.cc 90 2011-07-01 04:37:47Z salcock $
  */
 
 #include <string.h>
@@ -36,40 +36,58 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_ldap_ad_payload(uint32_t payload, uint32_t len) {
-	if (len == 0)
+static inline bool match_kaseya_req(uint32_t payload, uint32_t len) {
+
+	if (!MATCH(payload, 0x4a, 0x5e, 0x7a, 0x04))
+		return false;
+	if (len == 48)
 		return true;
-	if (MATCH(payload, 0x30, 0x84, 0x00, 0x00))
+	if (len == 52)
 		return true;
-	return false;
+	if (len == 25)
+		return true;
+	return false;		
 
 }
 
-static inline bool match_ldap_ad(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_kaseya_resp(uint32_t payload, uint32_t len) {
 
-	/* Rule out one-way DNS, which could look like our LDAP AD payload */
-	if (data->payload_len[0] == 0 || data->payload_len[1] == 0) {
-		if (data->server_port == 53 || data->client_port == 53)
-			return false;
-	}
+	if (len == 0)
+		return true;
 
-	if (!match_ldap_ad_payload(data->payload[0], data->payload_len[0]))
-		return false;	
-	if (!match_ldap_ad_payload(data->payload[1], data->payload_len[1]))
-		return false;	
+	if (!MATCH(payload, 0x4a, 0x5e, 0x7a, 0x04))
+		return false;
 
+	if (len < 200)
+		return false;
+	
 	return true;
 }
 
-static lpi_module_t lpi_ldap_ad = {
-	LPI_PROTO_UDP_LDAP_AD,
-	LPI_CATEGORY_SERVICES,
-	"LDAP_AD",
-	5,
-	match_ldap_ad
+static inline bool match_kaseya(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+
+	if (match_kaseya_req(data->payload[0], data->payload_len[0])) {
+		if (match_kaseya_resp(data->payload[1], data->payload_len[1]))
+			return true;
+	}
+	
+	if (match_kaseya_req(data->payload[1], data->payload_len[1])) {
+		if (match_kaseya_resp(data->payload[0], data->payload_len[0]))
+			return true;
+	}
+
+	return false;
+}
+
+static lpi_module_t lpi_kaseya = {
+	LPI_PROTO_KASEYA,
+	LPI_CATEGORY_REMOTE,
+	"Kaseya",
+	3,
+	match_kaseya
 };
 
-void register_ldap_ad(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_ldap_ad, mod_map);
+void register_kaseya(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_kaseya, mod_map);
 }
 
