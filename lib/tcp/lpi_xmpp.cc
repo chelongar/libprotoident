@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_xmpp.cc 88 2011-06-01 23:17:31Z salcock $
+ * $Id: lpi_xmpp.cc 107 2011-11-25 00:36:11Z salcock $
  */
 
 #include <string.h>
@@ -41,6 +41,11 @@ static inline bool match_xmpp_payload(uint32_t data, uint32_t len) {
 	if (MATCHSTR(data, "<?xm"))
 		return true;
 	if (MATCHSTR(data, "<str"))
+		return true;
+	if (MATCHSTR(data, "<pre"))
+		return true;
+
+	if (MATCH(data, 0x20, 0x20, 0x20, 0x20) && len == 147)
 		return true;
 	return false;
 }

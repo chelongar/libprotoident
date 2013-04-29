@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.cc 92 2011-09-28 01:36:00Z salcock $
+ * $Id: libprotoident.cc 104 2011-11-02 01:58:43Z salcock $
  */
 
 #define __STDC_FORMAT_MACROS
@@ -39,6 +39,8 @@
 #include <inttypes.h>
 #include <sys/types.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <signal.h>
 
 #include "libprotoident.h"
 #include "proto_manager.h"
@@ -68,6 +70,7 @@ static int seq_cmp (uint32_t seq_a, uint32_t seq_b) {
 
 }
 
+
 int lpi_init_library() {
 
 	if (init_called) {
@@ -85,7 +88,7 @@ int lpi_init_library() {
 
 	register_names(&TCP_protocols, &lpi_names);
 	register_names(&UDP_protocols, &lpi_names);
-	
+
 	init_called = true;
 
 	if (TCP_protocols.empty() && UDP_protocols.empty()) {
@@ -219,14 +222,14 @@ int lpi_update_data(libtrace_packet_t *packet, lpi_data_t *data, uint8_t dir) {
 	if (psize <= 0)
 		return 0;
 
-	four_bytes = ntohl((*(uint32_t *)payload));
+	four_bytes = (*(uint32_t *)payload);
 	
 	if (psize < 4) {
-		four_bytes = four_bytes >> (8 * (4 - psize));		
-		four_bytes = four_bytes << (8 * (4 - psize));		
+		four_bytes = (ntohl(four_bytes)) >> (8 * (4 - psize));		
+		four_bytes = htonl(four_bytes << (8 * (4 - psize)));		
 	}
 
-	data->payload[dir] = htonl(four_bytes);
+	data->payload[dir] = four_bytes;
 	data->payload_len[dir] = psize;
 
 	if (ip != NULL && data->ips[0] == 0) {
@@ -247,12 +250,10 @@ static lpi_module_t *test_protocol_list(LPIModuleList *ml, lpi_data_t *data) {
 
 	LPIModuleList::iterator l_it;
 	
-	/*
-	 * Ultimately, I want to spawn up to MAXTHREADS threads for rule
-	 * matching so we can parallelise this process. For now, though, I'll
-	 * just naively loop through the list.
-	 */
-
+	/* Turns out naively looping through the modules is quicker
+	 * than trying to do intelligent stuff with threads. Most
+	 * callbacks complete very quickly so threading overhead is a
+	 * major problem */
 	for (l_it = ml->begin(); l_it != ml->end(); l_it ++) {
 		lpi_module_t *module = *l_it;
 
@@ -269,7 +270,6 @@ static lpi_module_t *test_protocol_list(LPIModuleList *ml, lpi_data_t *data) {
 
 	return NULL;
 }
-
 static lpi_module_t *guess_protocol(LPIModuleMap *modmap, lpi_data_t *data) {
 
 	lpi_module_t *proto = NULL;
@@ -282,8 +282,6 @@ static lpi_module_t *guess_protocol(LPIModuleMap *modmap, lpi_data_t *data) {
 	
 	for (m_it = modmap->begin(); m_it != modmap->end(); m_it ++) {
 		LPIModuleList *ml = m_it->second;
-		//fprintf(stderr, "Testing protocols at priority level %u\n",
-		//		m_it->first);
 		
 		proto = test_protocol_list(ml, data);
 
@@ -425,417 +423,3 @@ const char *lpi_print(lpi_protocol_t proto) {
 	
 }
 
-#if 0
-const char *lpi_print(lpi_module_t *module) {
-
-	if (module == NULL)
-		return "NULL";
-
-	return module->name;
-	
-	switch(module->protocol) {
-		case LPI_PROTO_INVALID:
-			return "Invalid";
-		case LPI_PROTO_UNKNOWN:
-			return "Unknown_TCP";
-		case LPI_PROTO_UDP:
-			return "Unknown_UDP";
-		case LPI_PROTO_NO_PAYLOAD:
-			return "No_Payload";
-		case LPI_PROTO_UNSUPPORTED:
-			return "Unsupported";
-		case LPI_PROTO_ICMP:
-			return "ICMP";
-
-		/* TCP Protocols */
-		case LPI_PROTO_HTTP:
-			return "HTTP";
-		case LPI_PROTO_SMTP:
-			return "SMTP";
-		case LPI_PROTO_DC:
-			return "DirectConnect";
-		case LPI_PROTO_BITTORRENT:
-			return "BitTorrent";
-		case LPI_PROTO_EMULE:
-			return "eMule";
-		case LPI_PROTO_NCSOFT:
-			return "NCSoft";
-		case LPI_PROTO_IRC:
-			return "IRC";
-		case LPI_PROTO_SSH:
-			return "SSH";
-		case LPI_PROTO_GNUTELLA:
-			return "Gnutella";
-		case LPI_PROTO_POP3:
-			return "POP3";
-		case LPI_PROTO_RAZOR:
-			return "Razor";
-		case LPI_PROTO_HTTPS:
-			return "HTTPS";
-		case LPI_PROTO_SSL:
-			return "SSL/TLS";
-		case LPI_PROTO_MSN:
-			return "MSN";
-		case LPI_PROTO_DNS:
-			return "DNS";
-		case LPI_PROTO_IMAP:
-			return "IMAP";
-                case LPI_PROTO_RTSP:
-                        return "RTSP";
-                case LPI_PROTO_ID:
-                        return "ID_Protocol";
-                case LPI_PROTO_YAHOO:
-                        return "Yahoo";
-                case LPI_PROTO_ICQ:
-                        return "ICQ";
-                case LPI_PROTO_TELNET:
-                        return "Telnet";
-                case LPI_PROTO_RTMP:
-                        return "RTMP";
-                case LPI_PROTO_RDP:
-                        return "RDP";
-                case LPI_PROTO_TDS:
-                        return "TDS";
-                 case LPI_PROTO_RPC_SCAN:
-                        return "RPC_Exploit";
-                case LPI_PROTO_SMB:
-                        return "SMB";
-                case LPI_PROTO_WARCRAFT3:
-                        return "Warcraft3";
-                case LPI_PROTO_ETRUST:
-                        return "eTrust_Update";
-                case LPI_PROTO_FTP_CONTROL:
-                        return "FTP_Control";
-                case LPI_PROTO_FTP_DATA:
-                        return "FTP_Data";
-                case LPI_PROTO_EYE:
-                        return "AllSeeingEye";
-                case LPI_PROTO_ARES:
-                        return "Ares";
-                case LPI_PROTO_NNTP:
-                        return "NNTP";
-                case LPI_PROTO_NAPSTER:
-                        return "Napster";
-                case LPI_PROTO_BNCS:
-                        return "Battle.net_Chat";
-                case LPI_PROTO_RFB:
-                        return "RFB";
-                case LPI_PROTO_YAHOO_WEBCAM:
-                        return "Yahoo_Webcam";
-                case LPI_PROTO_ICA:
-                        return "CitrixICA";
-                case LPI_PROTO_NETBIOS:
-                        return "Netbios_Session";
-                case LPI_PROTO_KMS:
-                        return "KMS";
-                case LPI_PROTO_MS_DS:
-                        return "Microsoft_DS";
-                case LPI_PROTO_SIP:
-                        return "SIP";
-                case LPI_PROTO_MZINGA:
-                        return "Mzinga";
-                case LPI_PROTO_XUNLEI:
-                        return "Xunlei";
-                case LPI_PROTO_GOKUCHAT:
-                        return "GokuChat";
-                case LPI_PROTO_DXP:
-                        return "Silverplatter_DXP";
-                case LPI_PROTO_HAMACHI:
-                        return "Hamachi";
-                case LPI_PROTO_BLIZZARD:
-                        return "Blizzard";
-                case LPI_PROTO_MSNV:
-                        return "MSN_Voice";
-                case LPI_PROTO_BITEXT:
-                        return "BitTorrent_Extension";
-                case LPI_PROTO_MITGLIEDER:
-                        return "Mitglieder_Trojan";
-                case LPI_PROTO_TOR:
-                        return "TOR";
-                case LPI_PROTO_MYSQL:
-                        return "MySQL";
-                case LPI_PROTO_HTTP_TUNNEL:
-                        return "HTTP_Tunnel";
-                case LPI_PROTO_RSYNC:
-                        return "Rsync";
-                case LPI_PROTO_NOTES_RPC:
-                        return "Lotus_Notes_RPC";
-                case LPI_PROTO_AZUREUS:
-                        return "Azureus";
-		case LPI_PROTO_PANDO:
-			return "Pando";
-		case LPI_PROTO_FLASH:
-			return "Flash_Player";
-		case LPI_PROTO_STEAM:
-			return "Steam_TCP";
-		case LPI_PROTO_TRACKMANIA:
-			return "Trackmania";
-		case LPI_PROTO_CONQUER:
-			return "ConquerOnline";
-		case LPI_PROTO_TIP:
-			return "TIP";
-		case LPI_PROTO_P2P_HTTP:
-			return "HTTP_P2P";
-		case LPI_PROTO_HARVEYS:
-			return "Harveys";
-		case LPI_PROTO_SHOUTCAST:
-			return "Shoutcast";
-		case LPI_PROTO_HTTP_BADPORT:
-			return "HTTP_443";
-		case LPI_PROTO_POSTGRESQL:
-			return "Postgresql";
-		case LPI_PROTO_WOW:
-			return "WorldOfWarcraft";
-		case LPI_PROTO_M4U:
-			return "Message4U";
-		case LPI_PROTO_RBLS:
-			return "RBL";
-		case LPI_PROTO_OPENVPN:
-			return "OpenVPN";
-		case LPI_PROTO_TELECOMKEY:
-			return "TelecomKey";
-		case LPI_PROTO_IMAPS:
-			return "IMAPS";
-		case LPI_PROTO_MSNC:
-			return "MSNC";
-		case LPI_PROTO_YAHOO_ERROR:
-			return "YahooError";
-		case LPI_PROTO_IMESH:
-			return "iMesh_TCP";
-		case LPI_PROTO_PPTP:
-			return "PPTP";
-		case LPI_PROTO_AFP:
-			return "AFP";
-		case LPI_PROTO_PDBOX:
-			return "PDBOX";
-		case LPI_PROTO_EA_GAMES:
-			return "EA_Games";
-		case LPI_PROTO_ZYNGA:
-			return "Zynga";
-		case LPI_PROTO_CLUBBOX:
-			return "Clubbox";
-		case LPI_PROTO_WINMX:
-			return "WinMX";
-		case LPI_PROTO_INVALID_BT:
-			return "Invalid_Bittorrent";
-		case LPI_PROTO_WEBLOGIC:
-			return "Weblogic";
-		case LPI_PROTO_INVALID_HTTP:
-			return "Invalid_HTTP";
-		case LPI_PROTO_COD_WAW:
-			return "Call_of_Duty";
-		case LPI_PROTO_MP2P:
-			return "MP2P_TCP";
-		case LPI_PROTO_SVN:
-			return "SVN";
-		case LPI_PROTO_SOCKS5:
-			return "SOCKS5";
-		case LPI_PROTO_SOCKS4:
-			return "SOCKS4";
-		case LPI_PROTO_INVALID_SMTP:
-			return "Invalid_SMTP";
-		case LPI_PROTO_MMS:
-			return "MMS";
-		case LPI_PROTO_WEB_JUNK:
-			return "Web_Junk";
-
-                /* UDP Protocols */
-                case LPI_PROTO_UDP_SIP:
-                        return "SIP_UDP";
-                case LPI_PROTO_UDP_BTDHT:
-                        return "BitTorrent_UDP";
-                case LPI_PROTO_UDP_GNUTELLA:
-                        return "Gnutella_UDP";
-                case LPI_PROTO_UDP_DNS:
-                        return "DNS";
-                case LPI_PROTO_UDP_DHCP:
-                        return "DHCP";
-                case LPI_PROTO_UDP_QUAKE:
-                        return "Quake";
-                case LPI_PROTO_UDP_STEAM:
-                        return "Steam_UDP";
-                case LPI_PROTO_UDP_STEAM_FRIENDS:
-                        return "Steam_Friends";
-                case LPI_PROTO_UDP_WIN_MESSAGE:
-                        return "WindowsMessenger";
-                case LPI_PROTO_UDP_GAMESPY:
-                        return "Gamespy";
-                case LPI_PROTO_UDP_EMULE:
-                        return "eMule_UDP";
-                case LPI_PROTO_UDP_EYE:
-                        return "AllSeeingEye";
-                case LPI_PROTO_UDP_RTP:
-                        return "RTP";
-                case LPI_PROTO_UDP_MSN_VIDEO:
-                        return "MSN_Video";
-                case LPI_PROTO_UDP_COD:
-                        return "Call_of_Duty";
-                case LPI_PROTO_UDP_NTP:
-                        return "NTP";
-		case LPI_PROTO_UDP_MP2P:
-			return "MP2P_UDP";
-		case LPI_PROTO_UDP_SPAMFIGHTER:
-			return "SpamFighter";
-		case LPI_PROTO_UDP_TRACEROUTE:
-			return "Traceroute_UDP";
-		case LPI_PROTO_UDP_SECONDLIFE:
-			return "SecondLife";
-		case LPI_PROTO_UDP_HL:
-			return "HalfLife";
-		case LPI_PROTO_UDP_XLSP:
-			return "XboxLive_UDP";
-		case LPI_PROTO_UDP_DEMONWARE:
-			return "Demonware";
-		case LPI_PROTO_UDP_IMESH:
-			return "iMesh_UDP";
-		case LPI_PROTO_UDP_OPASERV:
-			return "Opaserv";
-		case LPI_PROTO_UDP_STUN:
-			return "STUN";
-		case LPI_PROTO_UDP_SQLEXP:
-			return "SQLExp";
-		case LPI_PROTO_UDP_MSN_CACHE:
-			return "MSN_Cache";
-		case LPI_PROTO_UDP_DIABLO2:
-			return "Diablo2";
-		case LPI_PROTO_UDP_IPV6:
-			return "UDP_IPv6";
-		case LPI_PROTO_UDP_ORBIT:
-			return "Orbit_UDP";
-		case LPI_PROTO_UDP_TEREDO:
-			return "Teredo";
-		case LPI_PROTO_UDP_KADEMLIA:
-			return "Kademlia";
-		case LPI_PROTO_UDP_PANDO:
-			return "Pando_UDP";
-		case LPI_PROTO_UDP_ESP:
-			return "ESP_UDP";
-		case LPI_PROTO_UDP_PSN:
-			return "PSN";
-		case LPI_PROTO_UDP_REAL:
-			return "RealPlayer";
-		case LPI_PROTO_UDP_GNUTELLA2:
-			return "Gnutella2_UDP";
-		case LPI_PROTO_UDP_PYZOR:
-			return "Pyzor_UDP";
-		case LPI_PROTO_UDP_SKYPE:
-			return "Skype_UDP";
-		case LPI_PROTO_UDP_ISAKMP:
-			return "ISAKMP";
-		case LPI_PROTO_UDP_SNMP:
-			return "SNMP";
-		case LPI_PROTO_UDP_BACKWEB:
-			return "BackWeb";
-		case LPI_PROTO_UDP_STARCRAFT:
-			return "Starcraft";
-		case LPI_PROTO_UDP_XFIRE_P2P:
-			return "Xfire_P2P";
-		case LPI_PROTO_UDP_THQ:
-			return "THQ";
-		case LPI_PROTO_UDP_NEWERTH:
-			return "HeroesOfNewerth";
-		case LPI_PROTO_UDP_LINKPROOF:
-			return "Linkproof";
-		case LPI_PROTO_UDP_WORM_22105:
-			return "Worm_22105";
-		case LPI_PROTO_UDP_QQ:
-			return "QQ";
-		case LPI_PROTO_UDP_SLP:
-			return "SLP";
-		case LPI_PROTO_UDP_ESO:
-			return "Ensemble";
-		case LPI_PROTO_UDP_SSDP:
-			return "SSDP";
-		case LPI_PROTO_UDP_NETBIOS:
-			return "Netbios_UDP";
-		case LPI_PROTO_UDP_CP_RDP:
-			return "Checkpoint_RDP";
-		case LPI_PROTO_UDP_VENTRILO:
-			return "Ventrilo_UDP";
-		case LPI_PROTO_UDP_MTA:
-			return "MultiTheftAuto";
-		case LPI_PROTO_UDP_PPLIVE:
-			return "PPLive";
-		case LPI_PROTO_UDP_JEDI:
-			return "JediAcademy";
-		case LPI_PROTO_UDP_MOH:
-			return "MedalOfHonor";
-		case LPI_PROTO_UDP_TREMULOUS:
-			return "Tremulous";
-		case LPI_PROTO_UDP_VIVOX:
-			return "Vivox";
-		case LPI_PROTO_UDP_IPMSG:
-			return "IPMsg";
-		case LPI_PROTO_UDP_TEAMSPEAK:
-			return "TeamSpeak";
-		case LPI_PROTO_UDP_DC:
-			return "DirectConnect_UDP";
-		case LPI_PROTO_UDP_FREECHAL:
-			return "FreeChal_UDP";
-		case LPI_PROTO_UDP_XUNLEI:
-			return "Xunlei_UDP";
-		case LPI_PROTO_UDP_KAZAA:
-			return "Kazaa_UDP";
-		case LPI_PROTO_UDP_NORTON:
-			return "Norton_UDP";
-		case LPI_PROTO_UDP_CISCO_VPN:
-			return "Cisco_VPN_UDP";
-		case LPI_PROTO_UDP_RTCP:
-			return "RTCP";
-		case LPI_PROTO_UDP_UNREAL:
-			return "Unreal";
-		case LPI_PROTO_UDP_TFTP:
-			return "TFTP";
-		case LPI_PROTO_UDP_GARENA:
-			return "Garena_UDP";
-		case LPI_PROTO_UDP_PPSTREAM:
-			return "PPStream";
-		case LPI_PROTO_UDP_FORTINET:
-			return "Fortinet";
-		case LPI_PROTO_UDP_STORM_WORM:
-			return "StormWorm";
-		case LPI_PROTO_UDP_TVANTS:
-			return "TVants";
-		case LPI_PROTO_UDP_BATTLEFIELD:
-			return "Battlefield";
-		case LPI_PROTO_UDP_SOPCAST:
-			return "Sopcast";
-		case LPI_PROTO_UDP_SERIALNUMBERD:
-			return "Serialnumberd";
-
-		
-		case LPI_PROTO_REJECTION:
-			return "Rejection";
-		case LPI_PROTO_MYSTERY_9000:
-			return "Mystery_9000";
-		case LPI_PROTO_MYSTERY_PSPR:
-			return "Mystery_PSPR";
-		case LPI_PROTO_MYSTERY_8000:
-			return "Mystery_8000";
-		case LPI_PROTO_MYSTERY_IG:
-			return "Mystery_iG";
-		case LPI_PROTO_MYSTERY_CONN:
-			return "Mystery_conn";
-		case LPI_PROTO_UDP_EMULE_MYSTERY:
-			return "eMule_UDP_Mystery";
-		case LPI_PROTO_UDP_MYSTERY_0D:
-			return "Mystery_0D";
-		case LPI_PROTO_UDP_MYSTERY_02_36:
-			return "Mystery_02_36";
-		case LPI_PROTO_UDP_MYSTERY_FE:
-			return "Mystery_FE";
-		case LPI_PROTO_UDP_MYSTERY_99:
-			return "Mystery_99";
-		case LPI_PROTO_UDP_MYSTERY_8000:
-			return "Mystery_8000";
-		case LPI_PROTO_UDP_MYSTERY_45:
-			return "Mystery_45";
-		case LPI_PROTO_UDP_MYSTERY_0660:
-			return "Mystery_0660";
-		case LPI_PROTO_UDP_MYSTERY_E9:
-			return "Mystery_E9";
-        }
-
-	return "Invalid_Protocol";
-}
-#endif

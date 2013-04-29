@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_teredo.cc 64 2011-02-04 04:09:43Z salcock $
+ * $Id: lpi_teredo.cc 105 2011-11-16 21:28:42Z salcock $
  */
 
 #include <string.h>
@@ -46,7 +46,7 @@ static bool match_teredo_payload(uint32_t payload, uint32_t len) {
         }
 
         /* Matching v6 traffic */
-        if (MATCH(payload, 0x60, 0x00, 0x00, 0x00)) {
+        if (MATCH(payload, 0x60, 0x00, 0x00, 0x00) && len >= 4) {
                 return true;
         }
 
@@ -64,8 +64,12 @@ static bool match_teredo_payload(uint32_t payload, uint32_t len) {
 
 static inline bool match_teredo(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	if (data->server_port != 3544 && data->client_port != 3544)
-                return false;
+	if (data->server_port == 53 || data->client_port == 53) {
+		if (data->payload_len[0] == 0)
+	                return false;
+		if (data->payload_len[1] == 0)
+	                return false;
+	}
 
         if (!match_teredo_payload(data->payload[0], data->payload_len[0]))
                 return false;

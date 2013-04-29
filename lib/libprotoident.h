@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.h 92 2011-09-28 01:36:00Z salcock $
+ * $Id: libprotoident.h 108 2011-12-13 22:21:10Z salcock $
  */
 
 
@@ -35,6 +35,8 @@
 #define LIBPROTOIDENT_H_
 
 #include <libtrace.h>
+#include <pthread.h>
+#include <list>
 
 #if __GNUC__ >= 3 
 #  define DEPRECATED __attribute__((deprecated))
@@ -50,6 +52,7 @@
 #  define PRINTF(formatpos,argpos) 
 #endif
 
+#define DEFAULT_MAXTHREADS 10
 
 #ifdef __cplusplus 
 extern "C" {
@@ -217,6 +220,8 @@ typedef enum {
 	LPI_PROTO_STUN,
 	LPI_PROTO_XYMON,
 	LPI_PROTO_MUNIN,
+	LPI_PROTO_TROJAN_WIN32_GENERIC_SB,
+	LPI_PROTO_PALTALK,
 
         /* UDP Protocols */
         LPI_PROTO_UDP,
@@ -314,6 +319,13 @@ typedef enum {
 	LPI_PROTO_UDP_JEDI,	/* Citrix Jedi */
 	LPI_PROTO_UDP_YOUKU,
 	LPI_PROTO_UDP_YOUDAO_DICT,
+	LPI_PROTO_UDP_DRIVESHARE,
+	LPI_PROTO_UDP_CIRN,	/* Carpathia Intelligent Routing Network */
+	LPI_PROTO_UDP_NEVERWINTER,
+	LPI_PROTO_UDP_QQLIVE,
+	LPI_PROTO_UDP_TEAMVIEWER,
+	LPI_PROTO_UDP_ARES,
+	LPI_PROTO_UDP_EPSON,
 
 	/* Patterns that we can match, but do not know the protocol */
 	LPI_PROTO_REJECTION,	/* All responses are 0x02 */
@@ -327,7 +339,6 @@ typedef enum {
 	LPI_PROTO_MYSTERY_RXXF,
 	
 	LPI_PROTO_UDP_MYSTERY_0D,	
-	LPI_PROTO_UDP_MYSTERY_FE,
 	LPI_PROTO_UDP_MYSTERY_99,
 	LPI_PROTO_UDP_MYSTERY_8000,
 	LPI_PROTO_UDP_MYSTERY_45,
@@ -378,9 +389,20 @@ struct lpi_module {
 
 };
 
+typedef std::list<lpi_module_t *> ProtoMatchList;
+
+typedef struct lpi_thread {
+	int index;
+	lpi_module_t *module;
+	lpi_data_t *data;
+	bool result;
+} lpi_thread_t;
+
+typedef std::list<pthread_t> ThreadList;
+
 /* Initialises the LPI library, by registering all the protocol modules.
  *
- * @return 1 if initialisation succeeded, 0 otherwise 
+ * @return 0 if initialisation succeeded, -1 otherwise 
  */
 int lpi_init_library(void);
 

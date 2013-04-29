@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_dht_dict.cc 92 2011-09-28 01:36:00Z salcock $
+ * $Id: lpi_dht_dict.cc 105 2011-11-16 21:28:42Z salcock $
  */
 
 #include <string.h>
@@ -126,6 +126,24 @@ static inline bool match_dict_reply(uint32_t payload, uint32_t len) {
 
 }
 
+static inline bool num_seq_match(uint32_t query, uint32_t resp) {
+
+	uint32_t query_seq = (ntohl(query)) & 0x0000ffff;
+	uint32_t resp_seq = (ntohl(resp)) & 0x0000ffff;
+
+	if (query_seq == resp_seq)
+		return true;
+
+	/* Allowed to be seq +/- 1 as well, apparently */
+	if (query_seq == resp_seq + 1)
+		return true;
+	if (query_seq == resp_seq - 1)
+		return true;
+
+	return false;
+
+}
+
 static inline bool match_dht_dict(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 	if (match_dict_query(data->payload[0], data->payload_len[0])) {
@@ -145,10 +163,9 @@ static inline bool match_dht_dict(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 	if (match_number_query(data->payload[0], data->payload_len[0])) {
 		
 		if (MATCH(data->payload[0], 0x01, 0x00, ANY, ANY)) {
-		
-			if ((data->payload[0] & 0xffff0000) != 
-					(data->payload[1] & 0xffff0000))
+			if (!num_seq_match(data->payload[0], data->payload[1]))
 				return false;
+			
 		}
 
 		if (match_number_reply(data->payload[1], data->payload_len[1]))
@@ -157,9 +174,7 @@ static inline bool match_dht_dict(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 	if (match_number_query(data->payload[1], data->payload_len[1])) {
 		if (MATCH(data->payload[1], 0x01, 0x00, ANY, ANY)) {
-		
-			if ((data->payload[0] & 0xffff0000) != 
-					(data->payload[1] & 0xffff0000))
+			if (!num_seq_match(data->payload[1], data->payload[0]))
 				return false;
 		}
 		if (match_number_reply(data->payload[0], data->payload_len[0]))
@@ -168,6 +183,7 @@ static inline bool match_dht_dict(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 	return false;
 }
+
 
 static lpi_module_t lpi_dht_dict = {
 	LPI_PROTO_UDP_BTDHT,

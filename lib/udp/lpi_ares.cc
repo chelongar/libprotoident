@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_steam.cc 107 2011-11-25 00:36:11Z salcock $
+ * $Id: lpi_ares.cc 107 2011-11-25 00:36:11Z salcock $
  */
 
 #include <string.h>
@@ -36,42 +36,47 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_steam(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_ares_client(uint32_t payload, uint32_t len) {
 
-	/* Steam TCP Download */
+	if (len != 3)
+		return false;
+	if (!MATCH(payload, 0x00, ANY, ANY, 0x00))
+		return false;
+	return true;
+}
 
-	if (!match_str_either(data, "\x01\x00\x00\x00"))
-                return false;
-        if (!match_chars_either(data, 0x00, 0x00, 0x00, ANY))
-                return false;
+static inline bool match_ares_peer(uint32_t payload, uint32_t len) {
 
-        if (data->payload_len[0] == 4 && data->payload_len[1] == 1) {
-                return true;
-        }
-        if (data->payload_len[0] == 4 && data->payload_len[1] == 5) {
-                return true;
-        }
+	if (len != 3)
+		return false;
+	if (!MATCH(payload, 0x01, ANY, ANY, 0x00))
+		return false;
+	return true;
+}
 
-        if (data->payload_len[1] == 4 && data->payload_len[0] == 1) {
-                return true;
-        }
-        if (data->payload_len[1] == 4 && data->payload_len[0] == 5) {
-                return true;
-        }
-	
+static inline bool match_ares_udp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
+	if (match_ares_client(data->payload[0], data->payload_len[0])) {
+		if (match_ares_peer(data->payload[1], data->payload_len[1]))
+			return true;
+	}
+
+	if (match_ares_client(data->payload[1], data->payload_len[1])) {
+		if (match_ares_peer(data->payload[0], data->payload_len[0]))
+			return true;
+	}
 	return false;
 }
 
-static lpi_module_t lpi_steam = {
-	LPI_PROTO_STEAM,
-	LPI_CATEGORY_GAMING,
-	"Steam_TCP",
-	4, /* Might not be as reliable as some other rules (?) */
-	match_steam
+static lpi_module_t lpi_ares_udp = {
+	LPI_PROTO_UDP_ARES,
+	LPI_CATEGORY_P2P_STRUCTURE,
+	"Ares_UDP",
+	9,
+	match_ares_udp
 };
 
-void register_steam(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_steam, mod_map);
+void register_ares_udp(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_ares_udp, mod_map);
 }
 

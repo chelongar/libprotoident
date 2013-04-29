@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_http_p2p.cc 61 2011-02-03 00:34:02Z salcock $
+ * $Id: lpi_http_p2p.cc 107 2011-11-25 00:36:11Z salcock $
  */
 
 #include <string.h>
@@ -62,7 +62,7 @@ static lpi_module_t lpi_http_p2p = {
 	LPI_PROTO_P2P_HTTP,
 	LPI_CATEGORY_P2P,
 	"HTTP_P2P",
-	2,
+	100,
 	match_p2p_http
 };
 

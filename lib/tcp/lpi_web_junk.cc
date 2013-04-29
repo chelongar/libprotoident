@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_web_junk.cc 62 2011-02-03 04:37:32Z salcock $
+ * $Id: lpi_web_junk.cc 102 2011-10-18 00:43:04Z salcock $
  */
 
 #include <string.h>
@@ -65,7 +65,7 @@ static lpi_module_t lpi_web_junk = {
 	LPI_PROTO_WEB_JUNK,
 	LPI_CATEGORY_MIXED,
 	"Web_Junk",
-	200,
+	210,
 	match_web_junk
 };
 

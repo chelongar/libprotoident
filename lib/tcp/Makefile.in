@@ -113,6 +113,7 @@ am_libprotoident_tcp_la_OBJECTS = libprotoident_tcp_la-lpi_afp.lo \
 	libprotoident_tcp_la-lpi_nopayload.lo \
 	libprotoident_tcp_la-lpi_notes_rpc.lo \
 	libprotoident_tcp_la-lpi_openvpn.lo \
+	libprotoident_tcp_la-lpi_paltalk.lo \
 	libprotoident_tcp_la-lpi_pando.lo \
 	libprotoident_tcp_la-lpi_pdbox.lo \
 	libprotoident_tcp_la-lpi_pop3.lo \
@@ -146,6 +147,7 @@ am_libprotoident_tcp_la_OBJECTS = libprotoident_tcp_la-lpi_afp.lo \
 	libprotoident_tcp_la-lpi_tip.lo \
 	libprotoident_tcp_la-lpi_tor.lo \
 	libprotoident_tcp_la-lpi_trackmania.lo \
+	libprotoident_tcp_la-lpi_trojan_win32_generic_sb.lo \
 	libprotoident_tcp_la-lpi_warcraft3.lo \
 	libprotoident_tcp_la-lpi_web_junk.lo \
 	libprotoident_tcp_la-lpi_weblogic.lo \
@@ -384,6 +386,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_nopayload.cc \
 	lpi_notes_rpc.cc \
 	lpi_openvpn.cc \
+	lpi_paltalk.cc \
 	lpi_pando.cc \
 	lpi_pdbox.cc \
 	lpi_pop3.cc \
@@ -417,6 +420,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_tip.cc \
 	lpi_tor.cc \
 	lpi_trackmania.cc \
+	lpi_trojan_win32_generic_sb.cc \
 	lpi_warcraft3.cc \
 	lpi_web_junk.cc \
 	lpi_weblogic.cc \
@@ -555,6 +559,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_nopayload.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_notes_rpc.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_openvpn.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_paltalk.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_pando.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_pdbox.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_pop3.Plo@am__quote@
@@ -588,6 +593,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_tip.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_tor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_trackmania.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_trojan_win32_generic_sb.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_warcraft3.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_web_junk.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_weblogic.Plo@am__quote@
@@ -1170,6 +1176,14 @@ libprotoident_tcp_la-lpi_openvpn.lo: lpi_openvpn.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_openvpn.lo `test -f 'lpi_openvpn.cc' || echo '$(srcdir)/'`lpi_openvpn.cc
 
+libprotoident_tcp_la-lpi_paltalk.lo: lpi_paltalk.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_paltalk.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_paltalk.Tpo -c -o libprotoident_tcp_la-lpi_paltalk.lo `test -f 'lpi_paltalk.cc' || echo '$(srcdir)/'`lpi_paltalk.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_paltalk.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_paltalk.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_paltalk.cc' object='libprotoident_tcp_la-lpi_paltalk.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_paltalk.lo `test -f 'lpi_paltalk.cc' || echo '$(srcdir)/'`lpi_paltalk.cc
+
 libprotoident_tcp_la-lpi_pando.lo: lpi_pando.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_pando.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_pando.Tpo -c -o libprotoident_tcp_la-lpi_pando.lo `test -f 'lpi_pando.cc' || echo '$(srcdir)/'`lpi_pando.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_pando.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_pando.Plo
@@ -1433,6 +1447,14 @@ libprotoident_tcp_la-lpi_trackmania.lo: lpi_trackmania.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_trackmania.cc' object='libprotoident_tcp_la-lpi_trackmania.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_trackmania.lo `test -f 'lpi_trackmania.cc' || echo '$(srcdir)/'`lpi_trackmania.cc
+
+libprotoident_tcp_la-lpi_trojan_win32_generic_sb.lo: lpi_trojan_win32_generic_sb.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_trojan_win32_generic_sb.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_trojan_win32_generic_sb.Tpo -c -o libprotoident_tcp_la-lpi_trojan_win32_generic_sb.lo `test -f 'lpi_trojan_win32_generic_sb.cc' || echo '$(srcdir)/'`lpi_trojan_win32_generic_sb.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_trojan_win32_generic_sb.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_trojan_win32_generic_sb.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_trojan_win32_generic_sb.cc' object='libprotoident_tcp_la-lpi_trojan_win32_generic_sb.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_trojan_win32_generic_sb.lo `test -f 'lpi_trojan_win32_generic_sb.cc' || echo '$(srcdir)/'`lpi_trojan_win32_generic_sb.cc
 
 libprotoident_tcp_la-lpi_warcraft3.lo: lpi_warcraft3.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_warcraft3.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_warcraft3.Tpo -c -o libprotoident_tcp_la-lpi_warcraft3.lo `test -f 'lpi_warcraft3.cc' || echo '$(srcdir)/'`lpi_warcraft3.cc

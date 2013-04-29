@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ntp.cc 79 2011-05-18 21:40:32Z salcock $
+ * $Id: lpi_ntp.cc 104 2011-11-02 01:58:43Z salcock $
  */
 
 #include <string.h>
@@ -103,6 +103,19 @@ static inline bool match_ntp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
                 if (match_ntp_response(data->payload[0], data->payload_len[0]))
                         return true;
         }
+
+	/* OK, turns out we can have NTP servers that keep sending responses
+	 * without a specific request from the client */
+	if (match_ntp_response(data->payload[0], data->payload_len[0]) &&
+			data->payload_len[0] == 48 &&
+			data->payload_len[1] == 0) {
+		return true;
+	}
+	if (match_ntp_response(data->payload[1], data->payload_len[1]) &&
+			data->payload_len[1] == 48 &&
+			data->payload_len[0] == 0) {
+		return true;
+	}
 
 	return false;
 }

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_skype.cc 81 2011-05-20 03:04:30Z salcock $
+ * $Id: lpi_skype.cc 102 2011-10-18 00:43:04Z salcock $
  */
 
 #include <string.h>
@@ -146,7 +146,7 @@ static lpi_module_t lpi_skype = {
 	LPI_PROTO_UDP_SKYPE,
 	LPI_CATEGORY_VOIP,
 	"Skype",
-	10,	/* The Skype rules aren't strong, so have a low priority */
+	15,	/* The Skype rules aren't strong, so have a low priority */
 	match_skype
 };
 

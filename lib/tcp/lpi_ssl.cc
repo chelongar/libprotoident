@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ssl.cc 67 2011-02-11 04:17:55Z salcock $
+ * $Id: lpi_ssl.cc 107 2011-11-25 00:36:11Z salcock $
  */
 
 #include <string.h>
@@ -54,7 +54,7 @@ static lpi_module_t lpi_ssl = {
 	LPI_PROTO_SSL,
 	LPI_CATEGORY_ENCRYPT,
 	"SSL/TLS",
-	4, /* Make this lower priority than IMAPS and HTTPS, just in case */
+	100, /* Make this lower priority than IMAPS and HTTPS, just in case */
 	match_other_ssl
 };
 

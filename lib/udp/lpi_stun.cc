@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_stun.cc 90 2011-07-01 04:37:47Z salcock $
+ * $Id: lpi_stun.cc 108 2011-12-13 22:21:10Z salcock $
  */
 
 #include <string.h>
@@ -39,7 +39,7 @@
 static bool match_stun_payload(uint32_t payload, uint32_t len) {
 
         if (len == 0)
-                return false;
+                return true;
 
         /* Bytes 3 and 4 are the Message Length - the STUN header 
          *
@@ -50,6 +50,8 @@ static bool match_stun_payload(uint32_t payload, uint32_t len) {
         if (MATCH(payload, 0x00, 0x01, ANY, ANY))
                 return true;
         if (MATCH(payload, 0x01, 0x01, ANY, ANY))
+                return true;
+        if (MATCH(payload, 0x01, 0x11, ANY, ANY))
                 return true;
         if (MATCH(payload, 0x00, 0x03, ANY, ANY))
                 return true;

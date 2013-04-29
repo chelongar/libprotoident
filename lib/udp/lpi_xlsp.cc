@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_xlsp.cc 89 2011-06-01 23:23:05Z salcock $
+ * $Id: lpi_xlsp.cc 107 2011-11-25 00:36:11Z salcock $
  */
 
 #include <string.h>
@@ -172,6 +172,10 @@ static inline bool match_xlsp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
                                 return true;
                         if (data->payload_len[1] == 1003)
                                 return true;
+                        if (data->payload_len[1] == 1026)
+                                return true;
+                        if (data->payload_len[1] == 1027)
+                                return true;
                 }
                 if (data->payload_len[1] == 1336) {
                         if (data->payload_len[0] == 287)
@@ -183,6 +187,10 @@ static inline bool match_xlsp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
                         if (data->payload_len[0] == 1010)
                                 return true;
                         if (data->payload_len[0] == 1003)
+                                return true;
+                        if (data->payload_len[0] == 1026)
+                                return true;
+                        if (data->payload_len[0] == 1027)
                                 return true;
                 }
 

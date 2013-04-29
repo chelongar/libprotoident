@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_steam.cc 107 2011-11-25 00:36:11Z salcock $
+ * $Id: lpi_gnutella_weak.cc 105 2011-11-16 21:28:42Z salcock $
  */
 
 #include <string.h>
@@ -36,42 +36,30 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_steam(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_gnutella_weak(lpi_data_t *data, 
+		lpi_module_t *mod UNUSED) {
 
-	/* Steam TCP Download */
+	/* Not confident in this rule at all in terms of not creating
+	 * false positives. Need to *regularly* check up on this one
+	 * and make sure we're not over-matching */
 
-	if (!match_str_either(data, "\x01\x00\x00\x00"))
-                return false;
-        if (!match_chars_either(data, 0x00, 0x00, 0x00, ANY))
-                return false;
-
-        if (data->payload_len[0] == 4 && data->payload_len[1] == 1) {
-                return true;
-        }
-        if (data->payload_len[0] == 4 && data->payload_len[1] == 5) {
-                return true;
-        }
-
-        if (data->payload_len[1] == 4 && data->payload_len[0] == 1) {
-                return true;
-        }
-        if (data->payload_len[1] == 4 && data->payload_len[0] == 5) {
-                return true;
-        }
-	
+	if (data->payload_len[0] == 31 && data->payload_len[1] == 0)
+		return true;
+	if (data->payload_len[1] == 31 && data->payload_len[0] == 1)
+		return true;
 
 	return false;
 }
 
-static lpi_module_t lpi_steam = {
-	LPI_PROTO_STEAM,
-	LPI_CATEGORY_GAMING,
-	"Steam_TCP",
-	4, /* Might not be as reliable as some other rules (?) */
-	match_steam
+static lpi_module_t lpi_gnutella_weak = {
+	LPI_PROTO_UDP_GNUTELLA,
+	LPI_CATEGORY_P2P_STRUCTURE,
+	"Gnutella_UDP",
+	220,
+	match_gnutella_weak
 };
 
-void register_steam(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_steam, mod_map);
+void register_gnutella_weak(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_gnutella_weak, mod_map);
 }
 

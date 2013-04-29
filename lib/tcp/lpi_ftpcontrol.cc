@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ftpcontrol.cc 61 2011-02-03 00:34:02Z salcock $
+ * $Id: lpi_ftpcontrol.cc 102 2011-10-18 00:43:04Z salcock $
  */
 
 #include <string.h>
@@ -100,7 +100,7 @@ static lpi_module_t lpi_ftpcontrol = {
 	LPI_PROTO_FTP_CONTROL,
 	LPI_CATEGORY_FILES,
 	"FTP_Control",
-	2,
+	3,
 	match_ftp_control
 };
 

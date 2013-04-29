@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_socks4.cc 63 2011-02-04 00:59:33Z salcock $
+ * $Id: lpi_socks4.cc 105 2011-11-16 21:28:42Z salcock $
  */
 
 #include <string.h>
@@ -43,6 +43,9 @@ static inline bool match_socks4_req(uint32_t payload, uint32_t len) {
          *
          * Octets 3 and 4 contain the port number */
         if (!(MATCH(payload, 0x04, 0x01, 0x00, 0x50)))
+                return false;
+	/* Port 25 */
+        if (!(MATCH(payload, 0x04, 0x01, 0x00, 0x19)))
                 return false;
 
         if (len != 9)

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_fortinet.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_fortinet.cc 104 2011-11-02 01:58:43Z salcock $
  */
 
 #include <string.h>
@@ -49,6 +49,12 @@ static inline bool match_fortinet(lpi_data_t *data, lpi_module_t *mod UNUSED) {
                         return true;
         }
 
+	if (match_str_either(data, "Comm")) {
+		if (data->payload_len[0] == 0)
+			return true;
+		if (data->payload_len[1] == 0)
+			return true;
+	}
 
 	return false;
 }

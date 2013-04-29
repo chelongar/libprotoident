@@ -68,6 +68,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_nopayload.cc \
 	lpi_notes_rpc.cc \
 	lpi_openvpn.cc \
+	lpi_paltalk.cc \
 	lpi_pando.cc \
 	lpi_pdbox.cc \
 	lpi_pop3.cc \
@@ -101,6 +102,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_tip.cc \
 	lpi_tor.cc \
 	lpi_trackmania.cc \
+	lpi_trojan_win32_generic_sb.cc \
 	lpi_warcraft3.cc \
 	lpi_web_junk.cc \
 	lpi_weblogic.cc \

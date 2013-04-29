@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_manager.cc 92 2011-09-28 01:36:00Z salcock $
+ * $Id: proto_manager.cc 108 2011-12-13 22:21:10Z salcock $
  */
 
 #include "config.h"
@@ -118,7 +118,7 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_kaspersky(mod_map);
 	register_ldap(mod_map);
 	register_message4u(mod_map);
-	register_mitglieder(mod_map);
+	//register_mitglieder(mod_map);
 	register_mms(mod_map);
 	register_mp2p(mod_map);
 	register_msn(mod_map);
@@ -141,6 +141,7 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_notes_rpc(mod_map);
 	register_tcp_no_payload(mod_map);
 	register_openvpn(mod_map);
+	register_paltalk(mod_map);
 	register_pando(mod_map);
 	register_pdbox(mod_map);
 	register_pop3(mod_map);
@@ -174,6 +175,7 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_tip(mod_map);
 	register_tor(mod_map);
 	register_trackmania(mod_map);
+	register_trojan_win32_generic_sb(mod_map);
 	register_warcraft3(mod_map);
 	register_web_junk(mod_map);
 	register_weblogic(mod_map);
@@ -193,11 +195,13 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 int register_udp_protocols(LPIModuleMap *mod_map) {
 
 	register_akamai(mod_map);
+	register_ares_udp(mod_map);
 	register_backweb(mod_map);
 	register_battlefield(mod_map);
 	register_bjnp(mod_map);
 	register_callofduty(mod_map);
 	register_checkpoint_rdp(mod_map);
+	register_cirn(mod_map);
 	register_cisco_ipsec(mod_map);
 	register_demonware(mod_map);
 	register_dhcp(mod_map);
@@ -206,8 +210,11 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_diablo2(mod_map);
 	register_directconnect_udp(mod_map);
 	register_dns_udp(mod_map);
+	register_driveshare(mod_map);
 	register_emule_udp(mod_map);
-	register_eso(mod_map);
+	register_emule_weak_udp(mod_map);
+	register_epson(mod_map);
+	//register_eso(mod_map);
 	register_esp_encap(mod_map);
 	register_eye_udp(mod_map);
 	register_fortinet(mod_map);
@@ -216,12 +223,13 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_garena(mod_map);
 	register_gnutella_udp(mod_map);
 	register_gnutella2_udp(mod_map);
+	register_gnutella_weak(mod_map);
 	register_gsm(mod_map);
 	register_halflife(mod_map);
 	register_hamachi_udp(mod_map);
 	register_imesh_udp(mod_map);
 	register_ipmsg(mod_map);
-	register_ipv6_udp(mod_map);
+	//register_ipv6_udp(mod_map);
 	register_isakmp(mod_map);
 	register_jedi_academy(mod_map);
 	register_jedi_udp(mod_map);
@@ -244,12 +252,12 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_mystery_8000_udp(mod_map);
 	register_mystery_99(mod_map);
 	register_mystery_e9(mod_map);
-	register_mystery_fe(mod_map);
 	register_mystery_qq(mod_map);
 	register_netbios_udp(mod_map);
 	register_newerth(mod_map);
 	register_norton(mod_map);
 	register_ntp(mod_map);
+	register_nwn(mod_map);
 	register_opaserv(mod_map);
 	register_orbit_udp(mod_map);
 	register_pando_udp(mod_map);
@@ -259,6 +267,7 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_psn(mod_map);
 	register_pyzor(mod_map);
 	register_qq(mod_map);
+	register_qqlive(mod_map);
 	register_quake(mod_map);
 	register_radius(mod_map);
 	register_real(mod_map);
@@ -282,6 +291,7 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_stun(mod_map);
 	register_syslog(mod_map);
 	register_teamspeak(mod_map);
+	register_teamviewer_udp(mod_map);
 	register_teredo(mod_map);
 	register_tftp(mod_map);
 	register_thq(mod_map);
