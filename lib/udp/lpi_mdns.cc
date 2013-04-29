@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_probable_gnutella.cc 128 2012-10-25 22:00:02Z salcock $
+ * $Id: lpi_mdns.cc 60 2011-02-02 04:07:52Z salcock $
  */
 
 #include <string.h>
@@ -36,29 +36,48 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_probable_gnutella(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+/* Multicast DNS */
 
-	/* XXX This could well be prone to false positives, so definitely
-         * check this one LAST */
+static inline bool match_mdns(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-        if (data->payload_len[0] == 35 && data->payload_len[1] == 0)
-                return true;
-        if (data->payload_len[1] == 35 && data->payload_len[0] == 0)
-                return true;
+	if (data->server_port != 5353)
+		return false;
+	if (data->client_port != 5353)
+		return false;
 
+	/* Flags are set */
+	if (MATCH(data->payload[0], 0x00, 0x00, 0x84, 0x00)) {
+		if (data->payload_len[1] == 0)
+			return true;
+	}
+	if (MATCH(data->payload[1], 0x00, 0x00, 0x84, 0x00)) {
+		if (data->payload_len[0] == 0)
+			return true;
+	}
 
+	/* Flags are not set - this is tricky because the payload is zero */
+	if (data->payload_len[0] != 0 && data->payload[0] == 0) {
+		if (data->payload_len[1] == 0)
+			return true;
+	}
+	if (data->payload_len[1] != 0 && data->payload[1] == 0) {
+		if (data->payload_len[0] == 0)
+			return true;
+	}
+		
+	
 	return false;
 }
 
-static lpi_module_t lpi_probable_gnutella = {
-	LPI_PROTO_UDP_GNUTELLA,
-	LPI_CATEGORY_P2P,
-	"Gnutella_UDP",
-	255,	/* This is a really bad rule - make it extremely low priority */
-	match_probable_gnutella
+static lpi_module_t lpi_mdns = {
+	LPI_PROTO_UDP_MDNS,
+	LPI_CATEGORY_SERVICES,
+	"mDNS",
+	20,
+	match_mdns
 };
 
-void register_probable_gnutella(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_probable_gnutella, mod_map);
+void register_mdns(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_mdns, mod_map);
 }
 

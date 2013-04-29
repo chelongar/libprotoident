@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ares.cc 107 2011-11-25 00:36:11Z salcock $
+ * $Id: lpi_ares.cc 128 2012-10-25 22:00:02Z salcock $
  */
 
 #include <string.h>
@@ -70,7 +70,7 @@ static inline bool match_ares_udp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 static lpi_module_t lpi_ares_udp = {
 	LPI_PROTO_UDP_ARES,
-	LPI_CATEGORY_P2P_STRUCTURE,
+	LPI_CATEGORY_P2P,
 	"Ares_UDP",
 	9,
 	match_ares_udp

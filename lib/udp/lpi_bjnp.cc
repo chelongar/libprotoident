@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_bjnp.cc 91 2011-09-26 04:18:43Z salcock $
+ * $Id: lpi_bjnp.cc 127 2012-10-18 03:41:36Z salcock $
  */
 
 #include <string.h>
@@ -42,6 +42,13 @@ static inline bool match_bjnp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 	if (match_str_either(data, "BJNP"))
 		return true;
+
+	/* Apparently, there are a few other combinations that we can see */
+	if (match_str_either(data, "BNJB"))
+		return true;
+	if (match_str_either(data, "PJNB"))
+		return true;
+	
 
 	return false;
 }

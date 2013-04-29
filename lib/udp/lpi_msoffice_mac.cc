@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_probable_gnutella.cc 128 2012-10-25 22:00:02Z salcock $
+ * $Id: lpi_msoffice_mac.cc 60 2011-02-02 04:07:52Z salcock $
  */
 
 #include <string.h>
@@ -36,29 +36,43 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_probable_gnutella(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	/* XXX This could well be prone to false positives, so definitely
-         * check this one LAST */
+/* Protocol used by MS Office 2008 (Mac OS X version only) for license checking 
+ * on a local network.
+ */
 
-        if (data->payload_len[0] == 35 && data->payload_len[1] == 0)
-                return true;
-        if (data->payload_len[1] == 35 && data->payload_len[0] == 0)
-                return true;
+static inline bool match_office_2008(lpi_data_t *data) {
 
+	if (!match_str_either(data, "MSOP"))
+		return false;
+	
+	if (data->payload_len[0] == 72 && data->payload_len[1] == 0)
+		return true;
+	if (data->payload_len[1] == 72 && data->payload_len[0] == 0)
+		return true;
+
+	return false;
+}
+ 
+static inline bool match_msoffice_mac(lpi_data_t *data, 
+		lpi_module_t *mod UNUSED) {
+
+	if (data->server_port == 2223 || data->client_port == 2223) {
+		return match_office_2008(data);
+	}
 
 	return false;
 }
 
-static lpi_module_t lpi_probable_gnutella = {
-	LPI_PROTO_UDP_GNUTELLA,
-	LPI_CATEGORY_P2P,
-	"Gnutella_UDP",
-	255,	/* This is a really bad rule - make it extremely low priority */
-	match_probable_gnutella
+static lpi_module_t lpi_msoffice_mac = {
+	LPI_PROTO_UDP_MSOFFICE_MAC,
+	LPI_CATEGORY_BROADCAST,
+	"MSOffice_Mac",
+	10,
+	match_msoffice_mac
 };
 
-void register_probable_gnutella(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_probable_gnutella, mod_map);
+void register_msoffice_mac(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_msoffice_mac, mod_map);
 }
 

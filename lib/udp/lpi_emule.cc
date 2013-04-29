@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_emule.cc 102 2011-10-18 00:43:04Z salcock $
+ * $Id: lpi_emule.cc 128 2012-10-25 22:00:02Z salcock $
  */
 
 #include <string.h>
@@ -209,7 +209,7 @@ static inline bool match_emule_udp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 static lpi_module_t lpi_emule_udp = {
 	LPI_PROTO_UDP_EMULE,
-	LPI_CATEGORY_P2P_STRUCTURE,
+	LPI_CATEGORY_P2P,
 	"eMule_UDP",
 	11,
 	match_emule_udp

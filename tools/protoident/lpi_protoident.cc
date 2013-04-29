@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_protoident.cc 102 2011-10-18 00:43:04Z salcock $
+ * $Id: lpi_protoident.cc 127 2012-10-18 03:41:36Z salcock $
  */
 
 
@@ -279,6 +279,7 @@ void per_packet(libtrace_packet_t *packet) {
                 lfm_check_tcp_flags(f, tcp, dir, ts);
         }
 
+	assert(f);
         /* Tell libflowmanager to update the expiry time for this flow */
         lfm_update_flow_expiry_timeout(f, ts);
 

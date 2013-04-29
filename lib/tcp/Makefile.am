@@ -13,6 +13,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_clubbox.cc \
 	lpi_cod_waw.cc \
 	lpi_conquer.cc \
+	lpi_cryptic.cc \
 	lpi_cvs.cc \
 	lpi_directconnect.cc \
 	lpi_dns.cc \
@@ -22,6 +23,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_emule.cc \
 	lpi_eye.cc \
 	lpi_flash.cc \
+	lpi_fring.cc \
 	lpi_ftpcontrol.cc \
 	lpi_ftpdata.cc \
 	lpi_gamespy.cc \
@@ -60,6 +62,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_msnv.cc \
 	lpi_munin.cc \
 	lpi_mysql.cc \
+	lpi_mystery_100_star.cc \
 	lpi_mystery_443.cc \
 	lpi_mystery_8000.cc \
 	lpi_mystery_9000.cc \
@@ -77,6 +80,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_notes_rpc.cc \
 	lpi_omegle.cc \
 	lpi_openvpn.cc \
+	lpi_palringo.cc \
 	lpi_paltalk.cc \
 	lpi_pando.cc \
 	lpi_pdbox.cc \
@@ -94,6 +98,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_rsync.cc \
 	lpi_rtmp.cc \
 	lpi_rtsp.cc \
+	lpi_runescape.cc \
 	lpi_second_life.cc \
 	lpi_shoutcast.cc \
 	lpi_sip.cc \
@@ -103,10 +108,12 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_smtps.cc \
 	lpi_socks4.cc \
 	lpi_socks5.cc \
+	lpi_spotify.cc \
 	lpi_ssh.cc \
 	lpi_ssl.cc \
 	lpi_steam.cc \
 	lpi_stun.cc \
+	lpi_supl.cc \
 	lpi_svn.cc \
 	lpi_tds.cc \
 	lpi_teamviewer.cc \
@@ -118,9 +125,11 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_trackmania.cc \
 	lpi_trojan_win32_generic_sb.cc \
 	lpi_trojan_zeroaccess.cc \
+	lpi_viber.cc \
 	lpi_warcraft3.cc \
 	lpi_web_junk.cc \
 	lpi_weblogic.cc \
+	lpi_whois.cc \
 	lpi_winmx.cc \
 	lpi_wow.cc \
 	lpi_wuala.cc \

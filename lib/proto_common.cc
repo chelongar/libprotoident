@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_common.cc 123 2012-03-05 04:22:35Z salcock $
+ * $Id: proto_common.cc 133 2012-11-04 21:03:53Z salcock $
  */
 
 #include <string.h>
@@ -276,6 +276,10 @@ bool match_file_header(uint32_t payload) {
 
 	/* ABIF - Applied Biosystems */
 	if (MATCHSTR(payload, "ABIF"))
+		return true;
+
+	/* bzip2 - other digits are also possible instead of 9 */
+	if (MATCH(payload, 'B', 'Z', 'h', '9'))
 		return true;
 
         /* I'm pretty sure the following are files of some type or another.

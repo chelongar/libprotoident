@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_probable_gnutella.cc 128 2012-10-25 22:00:02Z salcock $
+ * $Id: lpi_spotify_bcast.cc 60 2011-02-02 04:07:52Z salcock $
  */
 
 #include <string.h>
@@ -36,29 +36,29 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_probable_gnutella(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+/* Protocol used by Spotify to find other clients on the local network */
 
-	/* XXX This could well be prone to false positives, so definitely
-         * check this one LAST */
+static inline bool match_spotify_bcast(lpi_data_t *data, 
+		lpi_module_t *mod UNUSED) {
 
-        if (data->payload_len[0] == 35 && data->payload_len[1] == 0)
-                return true;
-        if (data->payload_len[1] == 35 && data->payload_len[0] == 0)
-                return true;
+	if (!match_str_either(data, "Spot"))
+		return false;
+	
+	if (data->server_port != 57621 || data->client_port != 57621)
+		return false;
 
-
-	return false;
+	return true;
 }
 
-static lpi_module_t lpi_probable_gnutella = {
-	LPI_PROTO_UDP_GNUTELLA,
-	LPI_CATEGORY_P2P,
-	"Gnutella_UDP",
-	255,	/* This is a really bad rule - make it extremely low priority */
-	match_probable_gnutella
+static lpi_module_t lpi_spotify_bcast = {
+	LPI_PROTO_UDP_SPOTIFY_BROADCAST,
+	LPI_CATEGORY_BROADCAST,
+	"SpotifyBroadcast",
+	14,
+	match_spotify_bcast
 };
 
-void register_probable_gnutella(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_probable_gnutella, mod_map);
+void register_spotify_bcast(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_spotify_bcast, mod_map);
 }
 

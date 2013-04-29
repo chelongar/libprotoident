@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_probable_gnutella.cc 128 2012-10-25 22:00:02Z salcock $
+ * $Id: lpi_roblox.cc 60 2011-02-02 04:07:52Z salcock $
  */
 
 #include <string.h>
@@ -36,29 +36,47 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_probable_gnutella(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_roblox_out(uint32_t payload, uint32_t len) {
 
-	/* XXX This could well be prone to false positives, so definitely
-         * check this one LAST */
+	if (MATCHSTR(payload, "\x05\x00\xff\xff"))
+		return true;
+	return false;
 
-        if (data->payload_len[0] == 35 && data->payload_len[1] == 0)
-                return true;
-        if (data->payload_len[1] == 35 && data->payload_len[0] == 0)
-                return true;
+}
 
+static inline bool match_roblox_in(uint32_t payload, uint32_t len) {
+
+	if (len != 28)
+		return false;
+	if (MATCHSTR(payload, "\x06\x00\xff\xff"))
+		return true;
+	return false;
+
+}
+
+static inline bool match_roblox(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+
+	if (match_roblox_out(data->payload[0], data->payload_len[0])) {
+		if (match_roblox_in(data->payload[1], data->payload_len[1]))
+			return true;
+	}
+	if (match_roblox_out(data->payload[1], data->payload_len[1])) {
+		if (match_roblox_in(data->payload[0], data->payload_len[0]))
+			return true;
+	}
 
 	return false;
 }
 
-static lpi_module_t lpi_probable_gnutella = {
-	LPI_PROTO_UDP_GNUTELLA,
-	LPI_CATEGORY_P2P,
-	"Gnutella_UDP",
-	255,	/* This is a really bad rule - make it extremely low priority */
-	match_probable_gnutella
+static lpi_module_t lpi_roblox = {
+	LPI_PROTO_UDP_ROBLOX,
+	LPI_CATEGORY_GAMING,
+	"Roblox",
+	7,
+	match_roblox
 };
 
-void register_probable_gnutella(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_probable_gnutella, mod_map);
+void register_roblox(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_roblox, mod_map);
 }
 

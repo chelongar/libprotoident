@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_chatango.cc 112 2012-02-03 03:41:03Z salcock $
+ * $Id: lpi_chatango.cc 127 2012-10-18 03:41:36Z salcock $
  */
 
 #include <string.h>
@@ -51,10 +51,12 @@ static inline bool match_chatango_out(uint32_t payload, uint32_t len) {
 
 	if (len != 10)
 		return false;
-	if (!MATCH(payload, 'v', ':', '1', '0'))
-		return false;
+	if (MATCH(payload, 'v', ':', '1', '0'))
+		return true;
+	if (MATCH(payload, 'v', ':', '1', '4'))
+		return true;
 
-	return true;
+	return false;
 
 }
 

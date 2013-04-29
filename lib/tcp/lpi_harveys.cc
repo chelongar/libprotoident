@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_harveys.cc 91 2011-09-26 04:18:43Z salcock $
+ * $Id: lpi_harveys.cc 127 2012-10-18 03:41:36Z salcock $
  */
 
 #include <string.h>
@@ -43,6 +43,19 @@ static inline bool match_harveys(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 	if (match_str_both(data, "77;T", "47;T"))
 		return true;
+
+	if (match_str_either(data, "47;T")) {
+		if (data->payload_len[0] == 0)
+			return true;
+		if (data->payload_len[1] == 0)
+			return true;
+	}
+	if (match_str_either(data, "77;T")) {
+		if (data->payload_len[0] == 0)
+			return true;
+		if (data->payload_len[1] == 0)
+			return true;
+	}
 	return false;
 }
 
@@ -50,7 +63,7 @@ static lpi_module_t lpi_harveys = {
 	LPI_PROTO_HARVEYS,
 	LPI_CATEGORY_FILES,
 	"Harveys",
-	3,
+	10,
 	match_harveys
 };
 

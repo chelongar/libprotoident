@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_gnutella.cc 93 2011-10-03 04:07:55Z salcock $
+ * $Id: lpi_gnutella.cc 128 2012-10-25 22:00:02Z salcock $
  */
 
 #include <string.h>
@@ -243,7 +243,7 @@ static inline bool match_gnutella_udp(lpi_data_t *data, lpi_module_t *mod UNUSED
 
 static lpi_module_t lpi_gnutella_udp = {
 	LPI_PROTO_UDP_GNUTELLA,
-	LPI_CATEGORY_P2P_STRUCTURE,
+	LPI_CATEGORY_P2P,
 	"Gnutella_UDP",
 	10,	/* Rules are pretty dodgy so make this low priority */
 	match_gnutella_udp

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.cc 122 2012-03-02 03:49:27Z salcock $
+ * $Id: libprotoident.cc 133 2012-11-04 21:03:53Z salcock $
  */
 
 #define __STDC_FORMAT_MACROS
@@ -134,7 +134,7 @@ static int update_tcp_flow(lpi_data_t *data, libtrace_tcp_t *tcp, uint8_t dir,
 	if (rem < sizeof(libtrace_tcp_t))
 		return 0;
 	if (tcp->rst)
-		return 0;
+		return 1;
 	
 	if (data->server_port == 0) {
 		data->server_port = ntohs(tcp->dest);
@@ -279,7 +279,7 @@ static lpi_module_t *guess_protocol(LPIModuleMap *modmap, lpi_data_t *data) {
 	/* Deal with each priority in turn - want to match higher priority
 	 * rules first. 
 	 */
-	
+
 	for (m_it = modmap->begin(); m_it != modmap->end(); m_it ++) {
 		LPIModuleList *ml = m_it->second;
 		
@@ -400,6 +400,10 @@ const char *lpi_print_category(lpi_category_t category) {
 			return "Notification";
 		case LPI_CATEGORY_SERIALISATION:
 			return "Serialisation";
+		case LPI_CATEGORY_BROADCAST:
+			return "Broadcast";
+		case LPI_CATEGORY_LOCATION:
+			return "Location";
 		case LPI_CATEGORY_ICMP:
 			return "ICMP";
 		case LPI_CATEGORY_MIXED:

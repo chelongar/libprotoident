@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_pando.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_pando.cc 128 2012-10-25 22:00:02Z salcock $
  */
 
 #include <string.h>
@@ -69,7 +69,7 @@ static inline bool match_pando_udp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 static lpi_module_t lpi_pando_udp = {
 	LPI_PROTO_UDP_PANDO,
-	LPI_CATEGORY_P2P_STRUCTURE,
+	LPI_CATEGORY_P2P,
 	"Pando_UDP",
 	10,
 	match_pando_udp

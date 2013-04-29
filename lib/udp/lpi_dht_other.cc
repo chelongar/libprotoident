@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_dht_other.cc 77 2011-04-15 04:54:37Z salcock $
+ * $Id: lpi_dht_other.cc 128 2012-10-25 22:00:02Z salcock $
  */
 
 #include <string.h>
@@ -292,7 +292,7 @@ static inline bool match_dht_other(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 static lpi_module_t lpi_dht_other = {
 	LPI_PROTO_UDP_BTDHT,
-	LPI_CATEGORY_P2P_STRUCTURE,
+	LPI_CATEGORY_P2P,
 	"BitTorrent_UDP",
 	12,	/* Need to be lower priority than DNS, at least in cases 
 		 * where traffic is one-way only */

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_omegle.cc 127 2012-10-18 03:41:36Z salcock $
+ * $Id: lpi_mystery_100_star.cc 60 2011-02-02 04:07:52Z salcock $
  */
 
 #include <string.h>
@@ -36,53 +36,60 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-/* http://pastebin.com/bGxqigRN */
+/* What I do know about this protocol:
+ * 	all remote hosts appear to be Korean
+ * 	download volumes can be very large, so must be some form of media
+ *	due to variety of remote hosts, probably P2P
+ * 	does not appear to be Afreeca, Fileguri, Gorealra
+ * 	no common port number
+ */
 
-static inline bool match_omegle_client(uint32_t payload, uint32_t len) {
-	if (len < 12)
-		return false;
-	if (!MATCH(payload, 0x0b, 'o', 'm', 'e'))
-		return false;
-	return true;
+static inline bool match_100(uint32_t payload, uint32_t len) {
 
+	if (len != 15)
+		return false;
+	if (MATCHSTR(payload, "100 "))
+		return true;
+	return false;
 }
 
-static inline bool match_omegle_server(uint32_t payload, uint32_t len) {
+static inline bool match_command(uint32_t payload, uint32_t len) {
 
-	if (len == 4 && MATCH(payload, 0x01, 'w', 0x00, 0x00))
+	/* Probably short for START */
+	if (len == 20 && MATCHSTR(payload, "STAR"))
 		return true;
-	if (len == 68 && MATCH(payload, 0x01, 0x63, 0x00, 0x40))
+
+	/* DOWNLOAD ? */
+	if (len == 39 && MATCHSTR(payload, "DOWN"))
 		return true;
-	if (MATCH(payload, 0x09, 'c', 'l', 'i'))
-		return true;
+
 	return false;
 
 }
 
-static inline bool match_omegle(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_mystery_100_star(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	if (match_omegle_client(data->payload[0], data->payload_len[0])) {
-		if (match_omegle_server(data->payload[1], data->payload_len[1]))
+	if (match_100(data->payload[0], data->payload_len[0])) {
+		if (match_command(data->payload[1], data->payload_len[1]))
 			return true;
 	}
-
-	if (match_omegle_client(data->payload[1], data->payload_len[1])) {
-		if (match_omegle_server(data->payload[0], data->payload_len[0]))
+	if (match_100(data->payload[1], data->payload_len[1])) {
+		if (match_command(data->payload[0], data->payload_len[0]))
 			return true;
 	}
 
 	return false;
 }
 
-static lpi_module_t lpi_omegle = {
-	LPI_PROTO_OMEGLE,
-	LPI_CATEGORY_CHAT,
-	"Omegle",
-	3,
-	match_omegle
+static lpi_module_t lpi_mystery_100_star = {
+	LPI_PROTO_MYSTERY_100_STAR,
+	LPI_CATEGORY_NO_CATEGORY,
+	"Mystery_100_STAR",
+	250,
+	match_mystery_100_star
 };
 
-void register_omegle(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_omegle, mod_map);
+void register_mystery_100_star(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_mystery_100_star, mod_map);
 }
 

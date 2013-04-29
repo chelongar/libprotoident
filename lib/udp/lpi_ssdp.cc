@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ssdp.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_ssdp.cc 127 2012-10-18 03:41:36Z salcock $
  */
 
 #include <string.h>
@@ -40,6 +40,14 @@ static inline bool match_ssdp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 	if (match_str_either(data, "M-SE"))
                 return true;
+
+	if (match_str_either(data, "NOTI")) {
+		if (data->server_port != 1900)
+			return false;
+		if (data->client_port != 1900)
+			return false;
+		return true;
+	}
 
 	return false;
 }
