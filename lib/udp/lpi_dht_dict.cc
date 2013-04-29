@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_dht_dict.cc 77 2011-04-15 04:54:37Z salcock $
+ * $Id: lpi_dht_dict.cc 92 2011-09-28 01:36:00Z salcock $
  */
 
 #include <string.h>
@@ -88,6 +88,8 @@ static inline bool match_dict_query(uint32_t payload, uint32_t len) {
 	if (MATCH(payload, 'd', '1', ':', 'r'))
 		return true;
 	if (MATCH(payload, 'd', '1', ':', 'e'))
+		return true;
+	if (MATCH(payload, 'd', '1', ':', 'q'))
 		return true;
 	if (MATCH(payload, 'd', '1', ':', 't'))
 		return true;

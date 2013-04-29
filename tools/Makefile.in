@@ -213,6 +213,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 SUBDIRS = find_unknown protoident live
+EXTRA_DIST = tools_common.h
 all: all-recursive
 
 .SUFFIXES:

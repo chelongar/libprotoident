@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_live.cc 87 2011-06-01 23:13:46Z salcock $
+ * $Id: lpi_live.cc 95 2011-10-03 22:32:57Z salcock $
  */
 
 #define __STDC_FORMAT_MACROS
@@ -46,6 +46,19 @@
 #include <libtrace.h>
 #include <libflowmanager.h>
 #include <libprotoident.h>
+
+#include "../tools_common.h"
+
+enum {
+        DIR_METHOD_TRACE,
+        DIR_METHOD_MAC,
+        DIR_METHOD_PORT
+};
+
+int dir_method = DIR_METHOD_PORT;
+
+char *local_mac = NULL;
+uint8_t mac_bytes[6];
 
 static volatile int done = 0;
 
@@ -267,56 +280,37 @@ void per_packet(libtrace_packet_t *packet) {
         bool is_new = false;
 
         libtrace_tcp_t *tcp = NULL;
-        libtrace_ip_t *ip = NULL;
-        double ts;
+        void *l3;
+	double ts;
 
         uint16_t l3_type;
 
-	uint16_t src_port;
-	uint16_t dst_port;
-
-        /* Libflowmanager only deals with IP traffic, so ignore anything
-	 * that does not have an IP header */
-        ip = (libtrace_ip_t *)trace_get_layer3(packet, &l3_type, NULL);
-        if (l3_type != 0x0800) return;
-        if (ip == NULL) return;
+        l3 = trace_get_layer3(packet, &l3_type, NULL);
+        if (l3_type != TRACE_ETHERTYPE_IP && l3_type != TRACE_ETHERTYPE_IPV6) 
+		return;
+        if (l3 == NULL) return;
 
 	/* Expire all suitably idle flows */
         ts = trace_get_seconds(packet);
         expire_live_flows(ts, false);
 
-	/* Many trace formats do not support direction tagging (e.g. PCAP), so
-	 * using trace_get_direction() is not an ideal approach. The one we
-	 * use here is not the nicest, but it is pretty consistent and 
-	 * reliable. Feel free to replace this with something more suitable
-	 * for your own needs!.
-	 */
-	
-	src_port = trace_get_source_port(packet);
-	dst_port = trace_get_destination_port(packet);
-
-	dir = trace_get_direction(packet);
-
-	/*
-	if (src_port == dst_port) {
-		if (ip->ip_src.s_addr < ip->ip_dst.s_addr)
-			dir = 0;
-		else
-			dir = 1;
-	} else {
-		if (trace_get_server_port(ip->ip_p, src_port, dst_port) == USE_SOURCE)
-			dir = 0;
-		else
-			dir = 1;
-	}
-	*/
-        /* Ignore packets where the IP addresses are the same - something is
-         * probably screwy and it's REALLY hard to determine direction */
-        //if (ip->ip_src.s_addr == ip->ip_dst.s_addr)
-        //        return;
+	/* Determine packet direction */
+	if (dir_method == DIR_METHOD_TRACE) {
+                dir = trace_get_direction(packet);
+        }
+        if (dir_method == DIR_METHOD_MAC) {
+                dir = mac_get_direction(packet, mac_bytes);
+        }
+        if (dir_method == DIR_METHOD_PORT) {
+                dir = port_get_direction(packet);
+        }
 
 
-        /* Match the packet to a Flow - this will create a new flow if
+        if (dir != 0 && dir != 1)
+                return;
+
+        
+	/* Match the packet to a Flow - this will create a new flow if
 	 * there is no matching flow already in the Flow map and set the
 	 * is_new flag to true. */
         f = lfm_match_packet_to_flow(packet, dir, &is_new);
@@ -379,8 +373,10 @@ static void cleanup_signal(int sig) {
 static void usage(char *prog) {
 
         printf("Usage details for %s\n\n", prog);
-        printf("%s [-f <filter>] [-R] [-H] inputURI [inputURI ...]\n\n", prog);
+        printf("%s [-l <mac] [-T] [-f <filter>] [-R] [-H] inputURI [inputURI ...]\n\n", prog);
         printf("Options:\n");
+	printf("  -l <mac>      Determine direction based on <mac> representing the 'inside' \n                 portion of the network\n");
+	printf("  -T            Use trace direction tags to determine direction\n");
         printf("  -f <filter>   Ignore flows that do not match the given BPF filter\n");
         printf("  -R            Ignore flows involving private RFC 1918 address space\n");
         exit(0);
@@ -415,8 +411,15 @@ int main(int argc, char *argv[]) {
                 return -1;
         }
 
-	while ((opt = getopt(argc, argv, "i:f:Rh")) != EOF) {
+	while ((opt = getopt(argc, argv, "i:f:Rhl:T")) != EOF) {
                 switch (opt) {
+			case 'l':
+                                local_mac = optarg;
+                                dir_method = DIR_METHOD_MAC;
+                                break;
+			case 'T':
+                                dir_method = DIR_METHOD_TRACE;
+                                break;
 			case 'f':
                                 filterstring = optarg;
                                 break;
@@ -436,6 +439,12 @@ int main(int argc, char *argv[]) {
                 filter = trace_create_filter(filterstring);
         }
 
+	if (local_mac != NULL) {
+                if (convert_mac_string(local_mac, mac_bytes) < 0) {
+                        fprintf(stderr, "Invalid MAC: %s\n", local_mac);
+                        return 1;
+                }
+        }
 
 	/* This tells libflowmanager to ignore any flows where an RFC1918
 	 * private IP address is involved */

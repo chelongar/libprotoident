@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_sip.cc 92 2011-09-28 01:36:00Z salcock $
+ * $Id: lpi_hamachi.cc 91 2011-09-26 04:18:43Z salcock $
  */
 
 #include <string.h>
@@ -36,33 +36,32 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_sip(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_hamachi(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	if (match_str_both(data, "SIP/", "REGI"))
-		return true;
-	/* Non-RFC SIP added by Donald Neal, June 2008 */
-	if (match_str_either(data, "SIP-")) {
-		if (match_chars_either(data, 'R', ' ', ANY, ANY))
-			return true;
-	}
+	/* Based on traffic observed on port 17771 where one endpoint is in
+	 * an IP range owned by LogMeIn */
 
-	if (match_str_either(data, "REGI") && 
-			(data->payload_len[0] == 0 || 
-			data->payload_len[1] == 0))
-		return true;
+	if (!MATCH(data->payload[0], 0x00, 0x00, 0x00, 0x00))
+		return false;
+	if (!MATCH(data->payload[1], 0x00, 0x00, 0x00, 0x00))
+		return false;
+	if (data->payload_len[0] != 76)
+		return false;
+	if (data->payload_len[1] != 76)
+		return false;
 
-	return false;
+	return true;
 }
 
-static lpi_module_t lpi_sip = {
-	LPI_PROTO_SIP,
-	LPI_CATEGORY_VOIP,
-	"SIP",
-	2,
-	match_sip
+static lpi_module_t lpi_hamachi = {
+	LPI_PROTO_UDP_HAMACHI,
+	LPI_CATEGORY_TUNNELLING,
+	"Hamachi",
+	8,
+	match_hamachi
 };
 
-void register_sip(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_sip, mod_map);
+void register_hamachi_udp(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_hamachi, mod_map);
 }
 

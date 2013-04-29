@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_sip.cc 92 2011-09-28 01:36:00Z salcock $
+ * $Id: lpi_youdao_dict.cc 92 2011-09-28 01:36:00Z salcock $
  */
 
 #include <string.h>
@@ -36,33 +36,28 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_sip(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_youdao_dict(lpi_data_t *data, 
+		lpi_module_t *mod UNUSED) {
 
-	if (match_str_both(data, "SIP/", "REGI"))
-		return true;
-	/* Non-RFC SIP added by Donald Neal, June 2008 */
-	if (match_str_either(data, "SIP-")) {
-		if (match_chars_either(data, 'R', ' ', ANY, ANY))
-			return true;
-	}
-
-	if (match_str_either(data, "REGI") && 
-			(data->payload_len[0] == 0 || 
-			data->payload_len[1] == 0))
+	/* All signs point to this being the protocol used by Youdao 
+	 * Dictionary software
+	 *
+	 * Can force a check for port 2000 if need be */
+	if (match_str_both(data, "type", "\x1f\x8b\x08\x00"))
 		return true;
 
 	return false;
 }
 
-static lpi_module_t lpi_sip = {
-	LPI_PROTO_SIP,
-	LPI_CATEGORY_VOIP,
-	"SIP",
-	2,
-	match_sip
+static lpi_module_t lpi_youdao_dict = {
+	LPI_PROTO_UDP_YOUDAO_DICT,
+	LPI_CATEGORY_TRANSLATION,
+	"YoudaoDict",
+	10,
+	match_youdao_dict
 };
 
-void register_sip(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_sip, mod_map);
+void register_youdao_dict(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_youdao_dict, mod_map);
 }
 

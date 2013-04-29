@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_jedi.cc 92 2011-09-28 01:36:00Z salcock $
+ * $Id: lpi_jedi_academy.cc 92 2011-09-28 01:36:00Z salcock $
  */
 
 #include <string.h>
@@ -36,26 +36,41 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_jedi_udp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_jedi_academy(lpi_data_t *data, 
+		lpi_module_t *mod UNUSED) {
 
-	/* Citrix have a protocol called JEDI which is used for streaming
-	 * in products like GoToMyPC */
+	/* Pretty rare, but we can write a rule for it */
+        if (match_str_both(data, "\xff\xff\xff\xff", "\xff\xff\xff\xff")) {
+                /* Server browsing */
+                if (data->payload_len[0] == 65 && data->payload_len[1] == 181)
+                        return true;
+                if (data->payload_len[0] == 66 && data->payload_len[1] == 182)
+                        return true;
+                if (data->payload_len[1] == 65 && data->payload_len[0] == 181)
+                        return true;
+                if (data->payload_len[1] == 66 && data->payload_len[0] == 182)
+                        return true;
 
-	if (match_str_both(data, "JEDI", "JEDI"))
-		return true;
+                /* Actual gameplay */
+                if (data->payload_len[0] == 16 && data->payload_len[1] == 32)
+                        return true;
+                if (data->payload_len[1] == 16 && data->payload_len[0] == 32)
+                        return true;
+        }
+
 
 	return false;
 }
 
 static lpi_module_t lpi_jedi = {
-	LPI_PROTO_UDP_JEDI,
-	LPI_CATEGORY_REMOTE,
-	"Citrix_Jedi",
-	3,
-	match_jedi_udp
+	LPI_PROTO_UDP_JEDI_ACADEMY,
+	LPI_CATEGORY_GAMING,
+	"JediAcademy",
+	5,
+	match_jedi_academy
 };
 
-void register_jedi_udp(LPIModuleMap *mod_map) {
+void register_jedi_academy(LPIModuleMap *mod_map) {
 	register_protocol(&lpi_jedi, mod_map);
 }
 

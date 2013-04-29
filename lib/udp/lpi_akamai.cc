@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_sip.cc 92 2011-09-28 01:36:00Z salcock $
+ * $Id: lpi_akamai.cc 91 2011-09-26 04:18:43Z salcock $
  */
 
 #include <string.h>
@@ -36,33 +36,46 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_sip(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_akamai(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	if (match_str_both(data, "SIP/", "REGI"))
+	/* This appears to be some sort of protocol used by Akamai nodes
+	 * to talk to one another - probably the monitoring for the Akamai
+	 * network */
+
+	/* All messages begin with 8 bytes of zeroes */
+	if (data->payload[0] != 0 || data->payload[1] != 0)
+		return false;
+
+	if (data->payload_len[0] == 1080 && data->payload_len[1] == 0)
 		return true;
-	/* Non-RFC SIP added by Donald Neal, June 2008 */
-	if (match_str_either(data, "SIP-")) {
-		if (match_chars_either(data, 'R', ' ', ANY, ANY))
+	if (data->payload_len[1] == 1080 && data->payload_len[0] == 0)
+		return true;
+
+	if (data->payload_len[0] == 1032) {
+		if (data->payload_len[1] == 0)
+			return true;
+		if (data->payload_len[1] == 1032)
 			return true;
 	}
 
-	if (match_str_either(data, "REGI") && 
-			(data->payload_len[0] == 0 || 
-			data->payload_len[1] == 0))
-		return true;
+	if (data->payload_len[1] == 1032) {
+		if (data->payload_len[0] == 0)
+			return true;
+	}
+
 
 	return false;
 }
 
-static lpi_module_t lpi_sip = {
-	LPI_PROTO_SIP,
-	LPI_CATEGORY_VOIP,
-	"SIP",
-	2,
-	match_sip
+static lpi_module_t lpi_akamai = {
+	LPI_PROTO_UDP_AKAMAI,
+	LPI_CATEGORY_MONITORING,
+	"Akamai",
+	5,
+	match_akamai
 };
 
-void register_sip(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_sip, mod_map);
+void register_akamai(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_akamai, mod_map);
 }
 

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_common.cc 84 2011-05-27 03:03:05Z salcock $
+ * $Id: proto_common.cc 92 2011-09-28 01:36:00Z salcock $
  */
 
 #include <string.h>
@@ -617,3 +617,32 @@ bool match_emule(lpi_data_t *data) {
         return false;
 }
 
+bool match_kaspersky(lpi_data_t *data) {
+
+	/* Traffic is either on TCP port 443 or UDP port 2001.
+	 *
+	 * One of the endpoints is always in either a Kaspersky range or
+	 * an old PSInet range */
+
+	if (match_str_both(data, "KS\x00\x00", "KS\x00\x00"))
+		return true;
+	if (match_str_both(data, "PI\x00\x00", "PI\x00\x00")) {
+		if (data->payload_len[0] == 2 && data->payload_len[1] == 2)
+			return true;
+	}
+	return false;
+}
+
+bool match_youku_payload(uint32_t pload, uint32_t len) {
+
+	if (len == 0)
+                return true;
+        if (MATCH(pload, 0x4b, 0x55, 0x00, 0x01) && len == 16)
+                return true;
+        if (MATCH(pload, 0x4b, 0x55, 0x00, 0x03))
+                return true;
+        if (MATCH(pload, 0x4b, 0x55, 0x00, 0x04))
+                return true;
+        return false;
+
+}

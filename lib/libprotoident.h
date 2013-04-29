@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.h 90 2011-07-01 04:37:47Z salcock $
+ * $Id: libprotoident.h 92 2011-09-28 01:36:00Z salcock $
  */
 
 
@@ -90,6 +90,9 @@ typedef enum {
 					   SMS protocols */
 	LPI_CATEGORY_P2PTV,		/* P2P TV, e.g. PPLive */
 	LPI_CATEGORY_RCS,		/* Revision Control */
+	LPI_CATEGORY_LOGGING,		/* Logging */
+	LPI_CATEGORY_PRINTING,		/* Network printing */
+	LPI_CATEGORY_TRANSLATION,	/* Language translation */
 	LPI_CATEGORY_ICMP,		/* ICMP */
 	LPI_CATEGORY_MIXED,		/* Different protos in each direction */
 	LPI_CATEGORY_NOPAYLOAD,		/* No payload observed */
@@ -207,6 +210,13 @@ typedef enum {
 	LPI_PROTO_XMPP,		/* a.k.a. Jabber */
 	LPI_PROTO_SECONDLIFE,	/* SecondLife over TCP */
 	LPI_PROTO_KASEYA,
+	LPI_PROTO_KASPERSKY,
+	LPI_PROTO_JEDI,		/* Citrix Jedi */
+	LPI_PROTO_CGP,		/* Citrix CGP */
+	LPI_PROTO_YOUKU,
+	LPI_PROTO_STUN,
+	LPI_PROTO_XYMON,
+	LPI_PROTO_MUNIN,
 
         /* UDP Protocols */
         LPI_PROTO_UDP,
@@ -268,7 +278,7 @@ typedef enum {
 	LPI_PROTO_UDP_VENTRILO,	/* Ventrilo VoiceChat */
 	LPI_PROTO_UDP_MTA,	/* Multitheftauto */
 	LPI_PROTO_UDP_PPLIVE,
-	LPI_PROTO_UDP_JEDI,	/* Jedi Academy game */
+	LPI_PROTO_UDP_JEDI_ACADEMY,	/* Jedi Academy game */
 	LPI_PROTO_UDP_MOH,	/* Medal of Honor game */
 	LPI_PROTO_UDP_TREMULOUS, /* Tremulous - free OSS FPS */
 	LPI_PROTO_UDP_VIVOX,	/* Vivox voice chat */
@@ -294,6 +304,16 @@ typedef enum {
 	LPI_PROTO_UDP_LDAP_AD,
 	LPI_PROTO_UDP_RTMFP,
 	LPI_PROTO_UDP_L2TP,
+	LPI_PROTO_UDP_SYSLOG,
+	LPI_PROTO_UDP_AKAMAI,
+	LPI_PROTO_UDP_RADIUS,
+	LPI_PROTO_UDP_HAMACHI,
+	LPI_PROTO_UDP_BJNP,	/* Canon BJNP printing protocol */
+	LPI_PROTO_UDP_KASPERSKY,
+	LPI_PROTO_UDP_GSM,
+	LPI_PROTO_UDP_JEDI,	/* Citrix Jedi */
+	LPI_PROTO_UDP_YOUKU,
+	LPI_PROTO_UDP_YOUDAO_DICT,
 
 	/* Patterns that we can match, but do not know the protocol */
 	LPI_PROTO_REJECTION,	/* All responses are 0x02 */
@@ -303,6 +323,8 @@ typedef enum {
 	LPI_PROTO_MYSTERY_IG,
 	LPI_PROTO_MYSTERY_CONN,
 	LPI_PROTO_MYSTERY_443,
+	LPI_PROTO_MYSTERY_SYMANTEC,
+	LPI_PROTO_MYSTERY_RXXF,
 	
 	LPI_PROTO_UDP_MYSTERY_0D,	
 	LPI_PROTO_UDP_MYSTERY_FE,

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_sip.cc 92 2011-09-28 01:36:00Z salcock $
+ * $Id: lpi_gsm.cc 92 2011-09-28 01:36:00Z salcock $
  */
 
 #include <string.h>
@@ -36,33 +36,28 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_sip(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_gsm(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	if (match_str_both(data, "SIP/", "REGI"))
+	/* There are other commands but these are the only ones I've seen in
+	 * the wild so far */
+
+	if (match_str_either(data, "+CSQ"))
 		return true;
-	/* Non-RFC SIP added by Donald Neal, June 2008 */
-	if (match_str_either(data, "SIP-")) {
-		if (match_chars_either(data, 'R', ' ', ANY, ANY))
-			return true;
-	}
-
-	if (match_str_either(data, "REGI") && 
-			(data->payload_len[0] == 0 || 
-			data->payload_len[1] == 0))
+	if (match_str_either(data, "+CIM"))
 		return true;
 
 	return false;
 }
 
-static lpi_module_t lpi_sip = {
-	LPI_PROTO_SIP,
-	LPI_CATEGORY_VOIP,
-	"SIP",
-	2,
-	match_sip
+static lpi_module_t lpi_gsm = {
+	LPI_PROTO_UDP_GSM,
+	LPI_CATEGORY_MONITORING,
+	"GSM",
+	3,
+	match_gsm
 };
 
-void register_sip(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_sip, mod_map);
+void register_gsm(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_gsm, mod_map);
 }
 

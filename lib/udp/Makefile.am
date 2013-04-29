@@ -1,7 +1,9 @@
 noinst_LTLIBRARIES = libprotoident_udp.la
 libprotoident_udp_la_SOURCES = \
+	lpi_akamai.cc \
 	lpi_backweb.cc \
 	lpi_battlefield.cc \
+	lpi_bjnp.cc \
 	lpi_checkpoint_rdp.cc \
 	lpi_cisco_ipsec.cc \
 	lpi_cod.cc \
@@ -22,13 +24,17 @@ libprotoident_udp_la_SOURCES = \
 	lpi_garena.cc \
 	lpi_gnutella.cc \
 	lpi_gnutella2.cc \
+	lpi_gsm.cc \
 	lpi_halflife.cc \
+	lpi_hamachi.cc \
 	lpi_imesh.cc \
 	lpi_ipmsg.cc \
 	lpi_ipv6.cc \
 	lpi_isakmp.cc \
 	lpi_jedi.cc \
+	lpi_jedi_academy.cc \
 	lpi_kademlia.cc \
+	lpi_kaspersky.cc \
 	lpi_kazaa.cc \
 	lpi_l2tp.cc \
 	lpi_ldap_ad.cc \
@@ -63,6 +69,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_pyzor.cc \
 	lpi_qq.cc \
 	lpi_quake.cc \
+	lpi_radius.cc \
 	lpi_real.cc \
 	lpi_rtcp.cc \
 	lpi_rtmfp.cc \
@@ -82,6 +89,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_steamfriends.cc \
 	lpi_storm_worm.cc \
 	lpi_stun.cc \
+	lpi_syslog.cc \
 	lpi_teamspeak.cc \
 	lpi_teredo.cc \
 	lpi_tftp.cc \
@@ -96,7 +104,9 @@ libprotoident_udp_la_SOURCES = \
 	lpi_worm_22105.cc \
 	lpi_xfire_p2p.cc \
 	lpi_xlsp.cc \
-	lpi_xunlei.cc
+	lpi_xunlei.cc \
+	lpi_youdao_dict.cc \
+	lpi_youku.cc
 
 EXTRA_DIST=udp_protocols.h
 

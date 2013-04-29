@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ppstream.cc 90 2011-07-01 04:37:47Z salcock $
+ * $Id: lpi_ppstream.cc 92 2011-09-28 01:36:00Z salcock $
  */
 
 #include <string.h>
@@ -35,9 +35,11 @@
 #include "libprotoident.h"
 #include "proto_manager.h"
 #include "proto_common.h"
+#include <stdio.h>
 
 static inline bool match_ppstream_payload(uint32_t payload, uint32_t len) {
         uint16_t rep_len = 0;
+	uint32_t swap = ntohl(payload);
 
         if (len == 0)
                 return true;
@@ -47,8 +49,8 @@ static inline bool match_ppstream_payload(uint32_t payload, uint32_t len) {
 
         /* First two bytes are either len or len - 4 */
 
-        rep_len = * ((uint16_t *)&payload);
-
+	rep_len = ntohs((uint16_t)(swap >> 16));
+	
         if (rep_len == len)
                 return true;
         if (rep_len == len - 4)

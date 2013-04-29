@@ -48,7 +48,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_lpi_protoident_OBJECTS = lpi_protoident.$(OBJEXT)
+am_lpi_protoident_OBJECTS = lpi_protoident.$(OBJEXT) \
+	tools_common.$(OBJEXT)
 lpi_protoident_OBJECTS = $(am_lpi_protoident_OBJECTS)
 lpi_protoident_DEPENDENCIES =
 AM_V_lt = $(am__v_lt_$(V))
@@ -208,7 +209,7 @@ top_srcdir = @top_srcdir@
 AM_CFLAGS = -I"$(top_srcdir)/lib"
 AM_CXXFLAGS = -I"$(top_srcdir)/lib"
 AM_LDFLAGS = -L"$(top_srcdir)/lib/.libs"
-lpi_protoident_SOURCES = lpi_protoident.cc
+lpi_protoident_SOURCES = lpi_protoident.cc ../tools_common.cc
 lpi_protoident_LDADD = @ADD_LIBS@ -lprotoident
 all: all-am
 
@@ -298,6 +299,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lpi_protoident.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tools_common.Po@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -322,6 +324,22 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
+
+tools_common.o: ../tools_common.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT tools_common.o -MD -MP -MF $(DEPDIR)/tools_common.Tpo -c -o tools_common.o `test -f '../tools_common.cc' || echo '$(srcdir)/'`../tools_common.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tools_common.Tpo $(DEPDIR)/tools_common.Po
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='../tools_common.cc' object='tools_common.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o tools_common.o `test -f '../tools_common.cc' || echo '$(srcdir)/'`../tools_common.cc
+
+tools_common.obj: ../tools_common.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT tools_common.obj -MD -MP -MF $(DEPDIR)/tools_common.Tpo -c -o tools_common.obj `if test -f '../tools_common.cc'; then $(CYGPATH_W) '../tools_common.cc'; else $(CYGPATH_W) '$(srcdir)/../tools_common.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/tools_common.Tpo $(DEPDIR)/tools_common.Po
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='../tools_common.cc' object='tools_common.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o tools_common.obj `if test -f '../tools_common.cc'; then $(CYGPATH_W) '../tools_common.cc'; else $(CYGPATH_W) '$(srcdir)/../tools_common.cc'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

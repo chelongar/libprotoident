@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_teamviewer.cc 89 2011-06-01 23:23:05Z salcock $
+ * $Id: lpi_teamviewer.cc 92 2011-09-28 01:36:00Z salcock $
  */
 
 #include <string.h>
@@ -40,9 +40,9 @@ static inline bool match_teamviewer_payload(uint32_t payload, uint32_t len) {
 
 	if (len == 0)
 		return true;
-	if (len != 37)
-		return false;
-	if (MATCH(payload, 0x17, 0x24, 0x0a, 0x20))
+	if (MATCH(payload, 0x17, 0x24, 0x0a, 0x20) && len == 37)
+		return true;
+	if (MATCH(payload, 0x17, 0x24, 0x36, 0x08) && len == 13)
 		return true;
 	return false;
 	

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_common.h 65 2011-02-07 04:08:00Z salcock $
+ * $Id: proto_common.h 92 2011-09-28 01:36:00Z salcock $
  */
 
 
@@ -73,5 +73,7 @@ bool match_ssl(lpi_data_t *data);
 bool match_dns(lpi_data_t *data);
 bool match_tds_request(uint32_t payload, uint32_t len);
 bool match_8000_payload(uint32_t payload, uint32_t len);
+bool match_youku_payload(uint32_t payload, uint32_t len);
 bool match_emule(lpi_data_t *data);
+bool match_kaspersky(lpi_data_t *data);
 #endif

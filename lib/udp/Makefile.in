@@ -46,8 +46,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 libprotoident_udp_la_LIBADD =
-am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_backweb.lo \
+am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_akamai.lo \
+	libprotoident_udp_la-lpi_backweb.lo \
 	libprotoident_udp_la-lpi_battlefield.lo \
+	libprotoident_udp_la-lpi_bjnp.lo \
 	libprotoident_udp_la-lpi_checkpoint_rdp.lo \
 	libprotoident_udp_la-lpi_cisco_ipsec.lo \
 	libprotoident_udp_la-lpi_cod.lo \
@@ -68,13 +70,17 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_backweb.lo \
 	libprotoident_udp_la-lpi_garena.lo \
 	libprotoident_udp_la-lpi_gnutella.lo \
 	libprotoident_udp_la-lpi_gnutella2.lo \
+	libprotoident_udp_la-lpi_gsm.lo \
 	libprotoident_udp_la-lpi_halflife.lo \
+	libprotoident_udp_la-lpi_hamachi.lo \
 	libprotoident_udp_la-lpi_imesh.lo \
 	libprotoident_udp_la-lpi_ipmsg.lo \
 	libprotoident_udp_la-lpi_ipv6.lo \
 	libprotoident_udp_la-lpi_isakmp.lo \
 	libprotoident_udp_la-lpi_jedi.lo \
+	libprotoident_udp_la-lpi_jedi_academy.lo \
 	libprotoident_udp_la-lpi_kademlia.lo \
+	libprotoident_udp_la-lpi_kaspersky.lo \
 	libprotoident_udp_la-lpi_kazaa.lo \
 	libprotoident_udp_la-lpi_l2tp.lo \
 	libprotoident_udp_la-lpi_ldap_ad.lo \
@@ -109,6 +115,7 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_backweb.lo \
 	libprotoident_udp_la-lpi_pyzor.lo \
 	libprotoident_udp_la-lpi_qq.lo \
 	libprotoident_udp_la-lpi_quake.lo \
+	libprotoident_udp_la-lpi_radius.lo \
 	libprotoident_udp_la-lpi_real.lo \
 	libprotoident_udp_la-lpi_rtcp.lo \
 	libprotoident_udp_la-lpi_rtmfp.lo \
@@ -128,6 +135,7 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_backweb.lo \
 	libprotoident_udp_la-lpi_steamfriends.lo \
 	libprotoident_udp_la-lpi_storm_worm.lo \
 	libprotoident_udp_la-lpi_stun.lo \
+	libprotoident_udp_la-lpi_syslog.lo \
 	libprotoident_udp_la-lpi_teamspeak.lo \
 	libprotoident_udp_la-lpi_teredo.lo \
 	libprotoident_udp_la-lpi_tftp.lo \
@@ -142,7 +150,9 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_backweb.lo \
 	libprotoident_udp_la-lpi_worm_22105.lo \
 	libprotoident_udp_la-lpi_xfire_p2p.lo \
 	libprotoident_udp_la-lpi_xlsp.lo \
-	libprotoident_udp_la-lpi_xunlei.lo
+	libprotoident_udp_la-lpi_xunlei.lo \
+	libprotoident_udp_la-lpi_youdao_dict.lo \
+	libprotoident_udp_la-lpi_youku.lo
 libprotoident_udp_la_OBJECTS = $(am_libprotoident_udp_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -300,8 +310,10 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 noinst_LTLIBRARIES = libprotoident_udp.la
 libprotoident_udp_la_SOURCES = \
+	lpi_akamai.cc \
 	lpi_backweb.cc \
 	lpi_battlefield.cc \
+	lpi_bjnp.cc \
 	lpi_checkpoint_rdp.cc \
 	lpi_cisco_ipsec.cc \
 	lpi_cod.cc \
@@ -322,13 +334,17 @@ libprotoident_udp_la_SOURCES = \
 	lpi_garena.cc \
 	lpi_gnutella.cc \
 	lpi_gnutella2.cc \
+	lpi_gsm.cc \
 	lpi_halflife.cc \
+	lpi_hamachi.cc \
 	lpi_imesh.cc \
 	lpi_ipmsg.cc \
 	lpi_ipv6.cc \
 	lpi_isakmp.cc \
 	lpi_jedi.cc \
+	lpi_jedi_academy.cc \
 	lpi_kademlia.cc \
+	lpi_kaspersky.cc \
 	lpi_kazaa.cc \
 	lpi_l2tp.cc \
 	lpi_ldap_ad.cc \
@@ -363,6 +379,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_pyzor.cc \
 	lpi_qq.cc \
 	lpi_quake.cc \
+	lpi_radius.cc \
 	lpi_real.cc \
 	lpi_rtcp.cc \
 	lpi_rtmfp.cc \
@@ -382,6 +399,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_steamfriends.cc \
 	lpi_storm_worm.cc \
 	lpi_stun.cc \
+	lpi_syslog.cc \
 	lpi_teamspeak.cc \
 	lpi_teredo.cc \
 	lpi_tftp.cc \
@@ -396,7 +414,9 @@ libprotoident_udp_la_SOURCES = \
 	lpi_worm_22105.cc \
 	lpi_xfire_p2p.cc \
 	lpi_xlsp.cc \
-	lpi_xunlei.cc
+	lpi_xunlei.cc \
+	lpi_youdao_dict.cc \
+	lpi_youku.cc
 
 EXTRA_DIST = udp_protocols.h
 libprotoident_udp_la_CFLAGS = -I"$(top_srcdir)/lib"
@@ -454,8 +474,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_akamai.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_backweb.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_battlefield.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_bjnp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_checkpoint_rdp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_cisco_ipsec.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_cod.Plo@am__quote@
@@ -476,13 +498,17 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_garena.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_gnutella.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_gnutella2.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_gsm.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_halflife.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_hamachi.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_imesh.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_ipmsg.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_ipv6.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_isakmp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_jedi.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_jedi_academy.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_kademlia.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_kaspersky.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_kazaa.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_l2tp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_ldap_ad.Plo@am__quote@
@@ -517,6 +543,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_pyzor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_qq.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_quake.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_radius.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_real.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_rtcp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_rtmfp.Plo@am__quote@
@@ -536,6 +563,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_steamfriends.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_storm_worm.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_stun.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_syslog.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_teamspeak.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_teredo.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_tftp.Plo@am__quote@
@@ -551,6 +579,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_xfire_p2p.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_xlsp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_xunlei.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_youdao_dict.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_youku.Plo@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -576,6 +606,14 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
 
+libprotoident_udp_la-lpi_akamai.lo: lpi_akamai.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_akamai.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_akamai.Tpo -c -o libprotoident_udp_la-lpi_akamai.lo `test -f 'lpi_akamai.cc' || echo '$(srcdir)/'`lpi_akamai.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_akamai.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_akamai.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_akamai.cc' object='libprotoident_udp_la-lpi_akamai.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_akamai.lo `test -f 'lpi_akamai.cc' || echo '$(srcdir)/'`lpi_akamai.cc
+
 libprotoident_udp_la-lpi_backweb.lo: lpi_backweb.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_backweb.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_backweb.Tpo -c -o libprotoident_udp_la-lpi_backweb.lo `test -f 'lpi_backweb.cc' || echo '$(srcdir)/'`lpi_backweb.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_backweb.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_backweb.Plo
@@ -591,6 +629,14 @@ libprotoident_udp_la-lpi_battlefield.lo: lpi_battlefield.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_battlefield.cc' object='libprotoident_udp_la-lpi_battlefield.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_battlefield.lo `test -f 'lpi_battlefield.cc' || echo '$(srcdir)/'`lpi_battlefield.cc
+
+libprotoident_udp_la-lpi_bjnp.lo: lpi_bjnp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_bjnp.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_bjnp.Tpo -c -o libprotoident_udp_la-lpi_bjnp.lo `test -f 'lpi_bjnp.cc' || echo '$(srcdir)/'`lpi_bjnp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_bjnp.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_bjnp.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_bjnp.cc' object='libprotoident_udp_la-lpi_bjnp.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_bjnp.lo `test -f 'lpi_bjnp.cc' || echo '$(srcdir)/'`lpi_bjnp.cc
 
 libprotoident_udp_la-lpi_checkpoint_rdp.lo: lpi_checkpoint_rdp.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_checkpoint_rdp.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_checkpoint_rdp.Tpo -c -o libprotoident_udp_la-lpi_checkpoint_rdp.lo `test -f 'lpi_checkpoint_rdp.cc' || echo '$(srcdir)/'`lpi_checkpoint_rdp.cc
@@ -752,6 +798,14 @@ libprotoident_udp_la-lpi_gnutella2.lo: lpi_gnutella2.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_gnutella2.lo `test -f 'lpi_gnutella2.cc' || echo '$(srcdir)/'`lpi_gnutella2.cc
 
+libprotoident_udp_la-lpi_gsm.lo: lpi_gsm.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_gsm.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_gsm.Tpo -c -o libprotoident_udp_la-lpi_gsm.lo `test -f 'lpi_gsm.cc' || echo '$(srcdir)/'`lpi_gsm.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_gsm.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_gsm.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_gsm.cc' object='libprotoident_udp_la-lpi_gsm.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_gsm.lo `test -f 'lpi_gsm.cc' || echo '$(srcdir)/'`lpi_gsm.cc
+
 libprotoident_udp_la-lpi_halflife.lo: lpi_halflife.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_halflife.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_halflife.Tpo -c -o libprotoident_udp_la-lpi_halflife.lo `test -f 'lpi_halflife.cc' || echo '$(srcdir)/'`lpi_halflife.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_halflife.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_halflife.Plo
@@ -759,6 +813,14 @@ libprotoident_udp_la-lpi_halflife.lo: lpi_halflife.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_halflife.cc' object='libprotoident_udp_la-lpi_halflife.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_halflife.lo `test -f 'lpi_halflife.cc' || echo '$(srcdir)/'`lpi_halflife.cc
+
+libprotoident_udp_la-lpi_hamachi.lo: lpi_hamachi.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_hamachi.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_hamachi.Tpo -c -o libprotoident_udp_la-lpi_hamachi.lo `test -f 'lpi_hamachi.cc' || echo '$(srcdir)/'`lpi_hamachi.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_hamachi.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_hamachi.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_hamachi.cc' object='libprotoident_udp_la-lpi_hamachi.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_hamachi.lo `test -f 'lpi_hamachi.cc' || echo '$(srcdir)/'`lpi_hamachi.cc
 
 libprotoident_udp_la-lpi_imesh.lo: lpi_imesh.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_imesh.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_imesh.Tpo -c -o libprotoident_udp_la-lpi_imesh.lo `test -f 'lpi_imesh.cc' || echo '$(srcdir)/'`lpi_imesh.cc
@@ -800,6 +862,14 @@ libprotoident_udp_la-lpi_jedi.lo: lpi_jedi.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_jedi.lo `test -f 'lpi_jedi.cc' || echo '$(srcdir)/'`lpi_jedi.cc
 
+libprotoident_udp_la-lpi_jedi_academy.lo: lpi_jedi_academy.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_jedi_academy.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_jedi_academy.Tpo -c -o libprotoident_udp_la-lpi_jedi_academy.lo `test -f 'lpi_jedi_academy.cc' || echo '$(srcdir)/'`lpi_jedi_academy.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_jedi_academy.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_jedi_academy.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_jedi_academy.cc' object='libprotoident_udp_la-lpi_jedi_academy.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_jedi_academy.lo `test -f 'lpi_jedi_academy.cc' || echo '$(srcdir)/'`lpi_jedi_academy.cc
+
 libprotoident_udp_la-lpi_kademlia.lo: lpi_kademlia.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_kademlia.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_kademlia.Tpo -c -o libprotoident_udp_la-lpi_kademlia.lo `test -f 'lpi_kademlia.cc' || echo '$(srcdir)/'`lpi_kademlia.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_kademlia.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_kademlia.Plo
@@ -807,6 +877,14 @@ libprotoident_udp_la-lpi_kademlia.lo: lpi_kademlia.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_kademlia.cc' object='libprotoident_udp_la-lpi_kademlia.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_kademlia.lo `test -f 'lpi_kademlia.cc' || echo '$(srcdir)/'`lpi_kademlia.cc
+
+libprotoident_udp_la-lpi_kaspersky.lo: lpi_kaspersky.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_kaspersky.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_kaspersky.Tpo -c -o libprotoident_udp_la-lpi_kaspersky.lo `test -f 'lpi_kaspersky.cc' || echo '$(srcdir)/'`lpi_kaspersky.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_kaspersky.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_kaspersky.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_kaspersky.cc' object='libprotoident_udp_la-lpi_kaspersky.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_kaspersky.lo `test -f 'lpi_kaspersky.cc' || echo '$(srcdir)/'`lpi_kaspersky.cc
 
 libprotoident_udp_la-lpi_kazaa.lo: lpi_kazaa.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_kazaa.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_kazaa.Tpo -c -o libprotoident_udp_la-lpi_kazaa.lo `test -f 'lpi_kazaa.cc' || echo '$(srcdir)/'`lpi_kazaa.cc
@@ -1080,6 +1158,14 @@ libprotoident_udp_la-lpi_quake.lo: lpi_quake.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_quake.lo `test -f 'lpi_quake.cc' || echo '$(srcdir)/'`lpi_quake.cc
 
+libprotoident_udp_la-lpi_radius.lo: lpi_radius.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_radius.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_radius.Tpo -c -o libprotoident_udp_la-lpi_radius.lo `test -f 'lpi_radius.cc' || echo '$(srcdir)/'`lpi_radius.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_radius.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_radius.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_radius.cc' object='libprotoident_udp_la-lpi_radius.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_radius.lo `test -f 'lpi_radius.cc' || echo '$(srcdir)/'`lpi_radius.cc
+
 libprotoident_udp_la-lpi_real.lo: lpi_real.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_real.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_real.Tpo -c -o libprotoident_udp_la-lpi_real.lo `test -f 'lpi_real.cc' || echo '$(srcdir)/'`lpi_real.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_real.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_real.Plo
@@ -1232,6 +1318,14 @@ libprotoident_udp_la-lpi_stun.lo: lpi_stun.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_stun.lo `test -f 'lpi_stun.cc' || echo '$(srcdir)/'`lpi_stun.cc
 
+libprotoident_udp_la-lpi_syslog.lo: lpi_syslog.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_syslog.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_syslog.Tpo -c -o libprotoident_udp_la-lpi_syslog.lo `test -f 'lpi_syslog.cc' || echo '$(srcdir)/'`lpi_syslog.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_syslog.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_syslog.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_syslog.cc' object='libprotoident_udp_la-lpi_syslog.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_syslog.lo `test -f 'lpi_syslog.cc' || echo '$(srcdir)/'`lpi_syslog.cc
+
 libprotoident_udp_la-lpi_teamspeak.lo: lpi_teamspeak.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_teamspeak.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_teamspeak.Tpo -c -o libprotoident_udp_la-lpi_teamspeak.lo `test -f 'lpi_teamspeak.cc' || echo '$(srcdir)/'`lpi_teamspeak.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_teamspeak.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_teamspeak.Plo
@@ -1351,6 +1445,22 @@ libprotoident_udp_la-lpi_xunlei.lo: lpi_xunlei.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_xunlei.cc' object='libprotoident_udp_la-lpi_xunlei.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_xunlei.lo `test -f 'lpi_xunlei.cc' || echo '$(srcdir)/'`lpi_xunlei.cc
+
+libprotoident_udp_la-lpi_youdao_dict.lo: lpi_youdao_dict.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_youdao_dict.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_youdao_dict.Tpo -c -o libprotoident_udp_la-lpi_youdao_dict.lo `test -f 'lpi_youdao_dict.cc' || echo '$(srcdir)/'`lpi_youdao_dict.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_youdao_dict.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_youdao_dict.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_youdao_dict.cc' object='libprotoident_udp_la-lpi_youdao_dict.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_youdao_dict.lo `test -f 'lpi_youdao_dict.cc' || echo '$(srcdir)/'`lpi_youdao_dict.cc
+
+libprotoident_udp_la-lpi_youku.lo: lpi_youku.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_youku.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_youku.Tpo -c -o libprotoident_udp_la-lpi_youku.lo `test -f 'lpi_youku.cc' || echo '$(srcdir)/'`lpi_youku.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_youku.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_youku.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_youku.cc' object='libprotoident_udp_la-lpi_youku.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_youku.lo `test -f 'lpi_youku.cc' || echo '$(srcdir)/'`lpi_youku.cc
 
 mostlyclean-libtool:
 	-rm -f *.lo

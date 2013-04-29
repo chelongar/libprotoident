@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_sip.cc 92 2011-09-28 01:36:00Z salcock $
+ * $Id: lpi_syslog.cc 91 2011-09-26 04:18:43Z salcock $
  */
 
 #include <string.h>
@@ -36,33 +36,48 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_sip(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_syslog_payload(uint32_t pload) {
 
-	if (match_str_both(data, "SIP/", "REGI"))
+	/* Syslog starts with <PRI>, where PRI is a number between 0 and 191 */
+
+	if (MATCH(pload, '<', ANY, '>', ANY))
 		return true;
-	/* Non-RFC SIP added by Donald Neal, June 2008 */
-	if (match_str_either(data, "SIP-")) {
-		if (match_chars_either(data, 'R', ' ', ANY, ANY))
-			return true;
-	}
-
-	if (match_str_either(data, "REGI") && 
-			(data->payload_len[0] == 0 || 
-			data->payload_len[1] == 0))
+	if (MATCH(pload, '<', ANY, ANY, '>'))
+		return true;
+	if (MATCH(pload, '<', '1', ANY, ANY))
 		return true;
 
 	return false;
+	
+
 }
 
-static lpi_module_t lpi_sip = {
-	LPI_PROTO_SIP,
-	LPI_CATEGORY_VOIP,
-	"SIP",
-	2,
-	match_sip
+static inline bool match_syslog(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+
+	if (data->server_port != 514 && data->client_port != 514)
+		return false;
+
+	if (data->payload_len[0] == 0) {
+		if (match_syslog_payload(data->payload[1]))
+			return true;
+	}
+
+	if (data->payload_len[1] == 0) {
+		if (match_syslog_payload(data->payload[0]))
+			return true;
+	}
+	return false;
+}
+
+static lpi_module_t lpi_syslog = {
+	LPI_PROTO_UDP_SYSLOG,
+	LPI_CATEGORY_LOGGING,
+	"Syslog",
+	6,
+	match_syslog
 };
 
-void register_sip(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_sip, mod_map);
+void register_syslog(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_syslog, mod_map);
 }
 

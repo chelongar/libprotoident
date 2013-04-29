@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_harveys.cc 61 2011-02-03 00:34:02Z salcock $
+ * $Id: lpi_harveys.cc 91 2011-09-26 04:18:43Z salcock $
  */
 
 #include <string.h>
@@ -50,7 +50,7 @@ static lpi_module_t lpi_harveys = {
 	LPI_PROTO_HARVEYS,
 	LPI_CATEGORY_FILES,
 	"Harveys",
-	2,
+	3,
 	match_harveys
 };
 
