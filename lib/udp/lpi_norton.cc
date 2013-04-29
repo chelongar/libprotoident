@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_norton.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_norton.cc 112 2012-02-03 03:41:03Z salcock $
  */
 
 #include <string.h>
@@ -35,6 +35,29 @@
 #include "libprotoident.h"
 #include "proto_manager.h"
 #include "proto_common.h"
+
+static inline bool match_norton_24_00(uint32_t payload, uint32_t len) {
+
+	if (len != 24)
+		return false;
+	if (MATCH(payload, 0x00, 0x10, 0x00, 0x14))
+		return true;
+	return false;
+
+}
+
+static inline bool match_norton_24_80(uint32_t payload, uint32_t len) {
+
+	if (len == 0)
+		return true;
+	if (len != 24)
+		return false;
+	if (MATCH(payload, 0x80, 0x10, 0x00, 0x14))
+		return true;
+	return false;
+
+}
+
 
 static inline bool match_norton(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
@@ -54,6 +77,22 @@ static inline bool match_norton(lpi_data_t *data, lpi_module_t *mod UNUSED) {
         }
 	
 
+	/* New behaviour observed in 2012 - interesting use of port 53 */
+	if (match_norton_24_00(data->payload[0], data->payload_len[0])) {
+		
+		if (data->server_port != 53 && data->client_port != 53)
+			return false;
+
+		if (match_norton_24_80(data->payload[1], data->payload_len[1]))
+			return true;
+	}
+
+	if (match_norton_24_00(data->payload[1], data->payload_len[1])) {
+		if (data->server_port != 53 && data->client_port != 53)
+			return false;
+		if (match_norton_24_80(data->payload[0], data->payload_len[0]))
+			return true;
+	}
 	return false;
 }
 

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_mystery_8000.cc 65 2011-02-07 04:08:00Z salcock $
+ * $Id: lpi_mystery_8000.cc 118 2012-03-01 02:33:48Z salcock $
  */
 
 #include <string.h>
@@ -53,7 +53,7 @@ static inline bool match_mystery_8000_udp(lpi_data_t *data, lpi_module_t *mod UN
 static lpi_module_t lpi_mystery_8000_udp = {
 	LPI_PROTO_UDP_MYSTERY_8000,
 	LPI_CATEGORY_NO_CATEGORY,
-	"Mystery_8000",
+	"Mystery_8000_UDP",
 	250,
 	match_mystery_8000_udp
 };

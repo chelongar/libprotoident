@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_rtmp.cc 107 2011-11-25 00:36:11Z salcock $
+ * $Id: lpi_rtmp.cc 122 2012-03-02 03:49:27Z salcock $
  */
 
 #include <string.h>
@@ -46,6 +46,11 @@ static inline bool match_rtmp_server_handshake(uint32_t payload, uint32_t len) {
 		return true;
 	if (MATCH(payload, 0x06, ANY, ANY, ANY))
 		return true;
+
+	/* Encrypted, but not RTMPE? */
+	if (MATCH(payload, 0x08, ANY, ANY, ANY))
+		return true;
+
 
 	/* RTMPE handshake type */
 	if (MATCH(payload, 0x09, ANY, ANY, ANY))

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_http_p2p.cc 107 2011-11-25 00:36:11Z salcock $
+ * $Id: lpi_netflow.cc 123 2012-03-05 04:22:35Z salcock $
  */
 
 #include <string.h>
@@ -36,37 +36,39 @@
 #include "proto_manager.h"
 #include "proto_common.h"
 
-static inline bool match_p2p_http(lpi_data_t *data, lpi_module_t *mod UNUSED) {
+static inline bool match_netflow(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-        /* Must not be on a known HTTP port
-         *
-         * XXX I know that people will still try to use port 80 for their
-         * warezing, but we want to at least try and get the most obvious 
-         * HTTP-based P2P
-         */
-        if (valid_http_port(data))
-                return false;
+	/* NetFlow is one-way only */
+	if (data->payload_len[0] != 0 && data->payload_len[1] != 0)
+		return false;
+	
+	/* Force port requirement for now */
+	if (data->server_port != 9996 && data->client_port != 9996)
+		return false;
 
-        if (match_str_both(data, "GET ", "HTTP"))
-                return true;
-
-        if (match_str_either(data, "GET ")) {
-                if (data->payload_len[0] == 0 || data->payload_len[1] == 0)
-                        return true;
-        }
-
-        return false;
+	/* Match NetFlow version 5 */
+	if (MATCH(data->payload[0], 0x00, 0x05, 0x00, ANY))
+		return true;
+	if (MATCH(data->payload[1], 0x00, 0x05, 0x00, ANY))
+		return true;
+	/* Match NetFlow version 9 */
+	if (MATCH(data->payload[0], 0x00, 0x09, 0x00, ANY))
+		return true;
+	if (MATCH(data->payload[1], 0x00, 0x09, 0x00, ANY))
+		return true;
+	
+	return false;
 }
 
-static lpi_module_t lpi_http_p2p = {
-	LPI_PROTO_P2P_HTTP,
-	LPI_CATEGORY_P2P,
-	"HTTP_P2P",
-	100,
-	match_p2p_http
+static lpi_module_t lpi_netflow = {
+	LPI_PROTO_UDP_NETFLOW,
+	LPI_CATEGORY_MONITORING,
+	"NetFlow",
+	14,
+	match_netflow
 };
 
-void register_http_p2p(LPIModuleMap *mod_map) {
-	register_protocol(&lpi_http_p2p, mod_map);
+void register_netflow(LPIModuleMap *mod_map) {
+	register_protocol(&lpi_netflow, mod_map);
 }
 

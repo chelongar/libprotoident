@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_live.cc 96 2011-10-05 00:37:45Z salcock $
+ * $Id: lpi_live.cc 124 2012-03-25 20:54:31Z salcock $
  */
 
 #define __STDC_FORMAT_MACROS
@@ -42,9 +42,11 @@
 #include <inttypes.h>
 #include <signal.h>
 #include <string.h>
+#include <unistd.h>
 
 #include <libtrace.h>
 #include <libflowmanager.h>
+#include <libpacketdump.h>
 #include <libprotoident.h>
 
 #include "../tools_common.h"
@@ -68,8 +70,14 @@ uint64_t in_byte_count[LPI_PROTO_LAST];
 uint64_t out_byte_count[LPI_PROTO_LAST];
 uint64_t in_flow_count[LPI_PROTO_LAST];
 uint64_t out_flow_count[LPI_PROTO_LAST];
+
+uint64_t in_current_flows[LPI_PROTO_LAST];
+uint64_t out_current_flows[LPI_PROTO_LAST];
 	
 uint32_t report_freq = 60;
+char local_id[256];
+
+bool output_rrd = false;
 
 typedef struct live {
 	uint8_t init_dir;
@@ -105,6 +113,20 @@ void init_live_flow(Flow *f, uint8_t dir, double ts) {
 	live->proto = NULL;
 }
 
+void dump_live_flow(LiveFlow *l) {
+
+	fprintf(stderr, "in_pbytes=%lu out_pbytes=%lu\n", l->in_pbytes,
+			l->out_pbytes);
+	fprintf(stderr, "proto=%u in_payload=%08x out_payload=%08x\n", 
+			l->lpi.trans_proto, l->lpi.payload[1],
+			l->lpi.payload[0]);
+	fprintf(stderr, "in_plen=%u out_plen=%u\n", l->lpi.payload_len[1],
+			l->lpi.payload_len[0]);
+	fprintf(stderr, "server_port=%u client_port=%u\n", 
+			l->lpi.server_port, l->lpi.client_port);
+
+}
+
 void reset_counters() {
 
 	memset(in_pkt_count, 0, LPI_PROTO_LAST * sizeof(uint64_t));
@@ -116,92 +138,54 @@ void reset_counters() {
 
 }
 
-static inline FILE *open_fd(const char *fname) {
-	char buf[10];
-	
-	FILE *fd = fopen(fname, "a+");
-	if (!fd) {
-		perror("fopen");
-		exit(1);
-	}
-	
-	/* The file is empty, i.e. newly created, we need to write our
-	 * header at the start of the file */ 
-	if (fread(buf, 1, 10, fd) != 10) {
-		if (ferror(fd)) {
-			perror("fread");
-			exit(1);
-		}
-		assert(feof(fd));
 
-
-		fprintf(fd, "TS ");
-
-		for (int i = 0; i < LPI_PROTO_LAST; i++) {
-			fprintf(fd, "%s ", lpi_print((lpi_protocol_t)i));
-		}
-
-		fprintf(fd, "\n");
-	}
-	
-	return fd;
-}
-
-void dump_counter_array(double ts, FILE *fd, uint64_t *counter, bool kbps) {
+void dump_counter_array(double ts, const char *id, uint32_t freq, 
+		const char *type, uint64_t *counter) {
 
 	int i;
-	double bitrate = 0.0;
-
-	fprintf(fd, "%.0f ", ts);
+	
 
 	for (i = 0; i < LPI_PROTO_LAST; i++) {
-		
-		if (kbps) {
-			bitrate = ((float)counter[i]) * 8.0 / 1024.0 / report_freq;
-			fprintf(fd, "%.3f ", bitrate);
-		} else {
-			fprintf(fd, "%" PRIu64 " ", counter[i]);
-		}
+		if (lpi_is_protocol_inactive((lpi_protocol_t)i))
+			continue;
+	
+		fprintf(stdout, "%s,%.0f,%u,%s,%s,", id, ts, freq, type,
+				lpi_print((lpi_protocol_t)i));
+		fprintf(stdout, "%" PRIu64 "\n", counter[i]);
 	}
 
-	fprintf(fd, "\n");
-	fflush(fd);
 }
 
 void dump_counters(double ts) {
 
-	static FILE *in_pkt_fd = NULL;
-	static FILE *out_pkt_fd = NULL;
-	static FILE *in_byte_fd = NULL;
-	static FILE *out_byte_fd = NULL;
-	static FILE *in_flow_fd = NULL;
-	static FILE *out_flow_fd = NULL;
+	dump_counter_array(ts, local_id, report_freq, "in_pkts", in_pkt_count);
+	dump_counter_array(ts, local_id, report_freq, "out_pkts", out_pkt_count);
+	dump_counter_array(ts, local_id, report_freq, "in_bytes", in_byte_count);
+	dump_counter_array(ts, local_id, report_freq, "out_bytes", out_byte_count);
+	dump_counter_array(ts, local_id, report_freq, "in_new_flows", in_flow_count);
+	dump_counter_array(ts, local_id, report_freq, "out_new_flows", out_flow_count);
+	dump_counter_array(ts, local_id, report_freq, "in_curr_flows", in_current_flows);
+	dump_counter_array(ts, local_id, report_freq, "out_curr_flows", out_current_flows);
 
-	if (in_pkt_fd == NULL) {
-		in_pkt_fd = open_fd("packets_in");
-	}
-	if (out_pkt_fd == NULL) {
-		out_pkt_fd = open_fd("packets_out");
-	}
-	if (in_byte_fd == NULL) {
-		in_byte_fd = open_fd("bytes_in");
-	}
-	if (out_byte_fd == NULL) {
-		out_byte_fd = open_fd("bytes_out");
-	}
-	if (in_flow_fd == NULL) {
-		in_flow_fd = open_fd("flows_in");
-	}
-	if (out_flow_fd == NULL) {
-		out_flow_fd = open_fd("flows_out");
-	}
+}
 
-	dump_counter_array(ts, in_pkt_fd, in_pkt_count, false);
-	dump_counter_array(ts, out_pkt_fd, out_pkt_count, false);
-	dump_counter_array(ts, in_byte_fd, in_byte_count, true);
-	dump_counter_array(ts, out_byte_fd, out_byte_count, true);
-	dump_counter_array(ts, in_flow_fd, in_flow_count, false);
-	dump_counter_array(ts, out_flow_fd, out_flow_count, false);
+void dump_rrd_counters(double ts) {
+	int i;
+	
+
+	for (i = 0; i < LPI_PROTO_LAST; i++) {
+		if (lpi_is_protocol_inactive((lpi_protocol_t)i))
+			continue;
+		fprintf(stdout, "%s %s %u:", local_id, lpi_print((lpi_protocol_t)i), (uint32_t)ts);
+		fprintf(stdout, "%" PRIu64 ":", in_pkt_count[i]);
+		fprintf(stdout, "%" PRIu64 ":", out_pkt_count[i]);
+		fprintf(stdout, "%" PRIu64 ":", in_byte_count[i]);
+		fprintf(stdout, "%" PRIu64 ":", out_byte_count[i]);
+		fprintf(stdout, "%" PRIu64 ":", in_flow_count[i]);
+		fprintf(stdout, "%" PRIu64 ":", out_flow_count[i]);
+		fprintf(stdout, "%" PRIu64 ":", in_current_flows[i]);
+		fprintf(stdout, "%" PRIu64 "\n", out_current_flows[i]);
+	}
 
 }
 
@@ -221,13 +205,18 @@ bool should_guess(LiveFlow *live, uint32_t plen, uint8_t dir) {
 	return false;	
 }
 
-void update_protocol_counters(LiveFlow *live, uint32_t wlen, uint32_t plen, 
+int update_protocol_counters(LiveFlow *live, uint32_t wlen, uint32_t plen, 
 		uint8_t dir) {
 
 	lpi_module_t *old_proto = live->proto;
 
 	if (should_guess(live, plen, dir)) {
 		live->proto = lpi_guess_protocol(&live->lpi);
+	}
+
+	if (live->proto == NULL) {
+		fprintf(stderr, "Warning: guessed NULL protocol\n");
+		return -1;
 	}
 
 	if (old_proto == live->proto) {
@@ -240,10 +229,14 @@ void update_protocol_counters(LiveFlow *live, uint32_t wlen, uint32_t plen,
 		}
 	} else if (old_proto == NULL) {
 		
-		if (live->init_dir == 0)
+		if (live->init_dir == 0) {
 			out_flow_count[live->proto->protocol] += 1;
-		else
+			out_current_flows[live->proto->protocol] += 1;
+		}
+		else {
 			in_flow_count[live->proto->protocol] += 1;
+			in_current_flows[live->proto->protocol] += 1;
+		}
 			
 		out_byte_count[live->proto->protocol] += live->out_wbytes;
 		out_pkt_count[live->proto->protocol] += live->out_pkts;
@@ -258,10 +251,14 @@ void update_protocol_counters(LiveFlow *live, uint32_t wlen, uint32_t plen,
 
 		if (live->init_dir == 0) {
 			out_flow_count[old_proto->protocol] --;
+			out_current_flows[old_proto->protocol] --;
 			out_flow_count[live->proto->protocol] ++;
+			out_current_flows[live->proto->protocol] ++;
 		} else {
 			in_flow_count[old_proto->protocol] --;
+			in_current_flows[old_proto->protocol] --;
 			in_flow_count[live->proto->protocol] ++;
+			in_current_flows[live->proto->protocol] ++;
 		}
 
 
@@ -285,6 +282,8 @@ void update_protocol_counters(LiveFlow *live, uint32_t wlen, uint32_t plen,
 		in_byte_count[live->proto->protocol] += live->in_wbytes;
 		in_pkt_count[live->proto->protocol] += live->in_pkts;
 	}
+	
+	return 0;
 
 }
 
@@ -302,6 +301,17 @@ void expire_live_flows(double ts, bool exp_flag) {
 
                 LiveFlow *live = (LiveFlow *)expired->extension;
 		
+		if (live->init_dir == 0) {
+			assert(out_current_flows[live->proto->protocol] != 0);
+			out_current_flows[live->proto->protocol] --;
+		} else {
+			if (in_current_flows[live->proto->protocol] == 0)
+				fprintf(stderr, "%s\n", lpi_print((lpi_protocol_t)live->proto->protocol));
+			assert(in_current_flows[live->proto->protocol] != 0);
+			in_current_flows[live->proto->protocol] --;
+
+		}
+
 		/* Don't forget to free our custom data structure */
                 free(live);
 
@@ -323,7 +333,7 @@ void per_packet(libtrace_packet_t *packet) {
         void *l3;
 	double ts;
 
-        uint16_t l3_type;
+        uint16_t l3_type = 0;
 
         l3 = trace_get_layer3(packet, &l3_type, NULL);
         if (l3_type != TRACE_ETHERTYPE_IP && l3_type != TRACE_ETHERTYPE_IPV6) 
@@ -369,8 +379,8 @@ void per_packet(libtrace_packet_t *packet) {
         	live = (LiveFlow *)f->extension;
 	} else {
         	live = (LiveFlow *)f->extension;
-		if (tcp && tcp->syn && !tcp->ack)
-			live->init_dir = dir;
+		//if (tcp && tcp->syn && !tcp->ack)
+		//	live->init_dir = dir;
 	}
 
 	if (dir == 0) {
@@ -381,14 +391,21 @@ void per_packet(libtrace_packet_t *packet) {
 		live->in_pbytes += trace_get_payload_length(packet);
 		live->in_wbytes += trace_get_wire_length(packet);
 		live->in_pkts += 1;
+
+		assert(trace_get_payload_length(packet) <= 65536);
 	}
 
 	/* Pass the packet into libprotolive so that it can extract any
 	 * info it needs from this packet */
 	lpi_update_data(packet, &live->lpi, dir);
 
-	update_protocol_counters(live, trace_get_wire_length(packet), 
-			trace_get_payload_length(packet), dir);	
+	if (update_protocol_counters(live, trace_get_wire_length(packet), 
+			trace_get_payload_length(packet), dir) == -1) {
+		
+		trace_dump_packet(packet);
+		dump_live_flow(live);
+	}
+
 
 
         /* Update TCP state for TCP flows. The TCP state determines how long
@@ -413,13 +430,16 @@ static void cleanup_signal(int sig) {
 static void usage(char *prog) {
 
         printf("Usage details for %s\n\n", prog);
-        printf("%s [-l <mac] [-T] [-f <filter>] [-R] [-H] inputURI [inputURI ...]\n\n", prog);
+        printf("%s [-i <freq>] [-m <monitor id>] [-l <mac] [-T] [-f <filter>] [-r] [-R] [-H] inputURI [inputURI ...]\n\n", prog);
         printf("Options:\n");
 	printf("  -l <mac>      Determine direction based on <mac> representing the 'inside' \n                 portion of the network\n");
+	printf("  -m <id>	Id number to use for this monitor (defaults to $HOSTNAME)\n");
 	printf("  -T            Use trace direction tags to determine direction\n");
         printf("  -f <filter>   Ignore flows that do not match the given BPF filter\n");
         printf("  -R            Ignore flows involving private RFC 1918 address space\n");
-        exit(0);
+        printf("  -i <freq>	Report statistics every <freq> seconds\n");
+	printf("  -r		Output results in a format that can be easily used to update an RRD\n");
+	exit(0);
 
 }
 
@@ -445,13 +465,17 @@ int main(int argc, char *argv[]) {
 	uint32_t max_reports = 0;
 	uint32_t reports_done = 0;
 
+	if (gethostname(local_id, 256) == -1) {
+		strncpy(local_id, "unknown", 256);
+	}
+
         packet = trace_create_packet();
         if (packet == NULL) {
                 perror("Creating libtrace packet");
                 return -1;
         }
 
-	while ((opt = getopt(argc, argv, "i:f:Rhl:T")) != EOF) {
+	while ((opt = getopt(argc, argv, "ri:f:Rhl:Tm:")) != EOF) {
                 switch (opt) {
 			case 'l':
                                 local_mac = optarg;
@@ -463,11 +487,17 @@ int main(int argc, char *argv[]) {
 			case 'f':
                                 filterstring = optarg;
                                 break;
+			case 'r':
+				output_rrd = true;
+				break;
 			case 'R':
 				ignore_rfc1918 = true;
 				break;
 			case 'i':
 				report_freq = atoi(optarg);
+				break;
+			case 'm':
+				strncpy(local_id, optarg, 256);
 				break;
 			case 'h':
 			default:
@@ -518,6 +548,13 @@ int main(int argc, char *argv[]) {
 		return -1;
 
 	reset_counters();
+	memset(out_current_flows, 0, LPI_PROTO_LAST * sizeof(uint64_t));
+	memset(in_current_flows, 0, LPI_PROTO_LAST * sizeof(uint64_t));
+
+	if (optind == argc) {
+		fprintf(stderr, "No input sources specified!\n");
+		usage(argv[0]);
+	}
 
         for (i = optind; i < argc; i++) {
 
@@ -556,7 +593,11 @@ int main(int argc, char *argv[]) {
 			}
 
 			while (ts > next_report) {
-				dump_counters(next_report);
+				if (output_rrd) {
+					dump_rrd_counters(next_report - report_freq);
+				} else {
+					dump_counters(next_report - report_freq);
+				}
 				reset_counters();
 				next_report += report_freq;
 				reports_done ++;
@@ -585,7 +626,7 @@ int main(int argc, char *argv[]) {
         }
 
         trace_destroy_packet(packet);
-        expire_live_flows(ts, true);
+	expire_live_flows(ts, true);
 	lpi_free_library();
 
         return 0;

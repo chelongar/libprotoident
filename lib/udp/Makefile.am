@@ -1,6 +1,8 @@
 noinst_LTLIBRARIES = libprotoident_udp.la
 libprotoident_udp_la_SOURCES = \
 	lpi_akamai.cc \
+	lpi_akamai_transfer.cc \
+	lpi_amanda.cc \
 	lpi_ares.cc \
 	lpi_backweb.cc \
 	lpi_battlefield.cc \
@@ -9,6 +11,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_cirn.cc \
 	lpi_cisco_ipsec.cc \
 	lpi_cod.cc \
+	lpi_dcc.cc \
 	lpi_demonware.cc \
 	lpi_dhcp.cc \
 	lpi_dht_dict.cc \
@@ -60,6 +63,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_mystery_e9.cc \
 	lpi_mystery_qq.cc \
 	lpi_netbios.cc \
+	lpi_netflow.cc \
 	lpi_newerth.cc \
 	lpi_nopayload.cc \
 	lpi_norton.cc \

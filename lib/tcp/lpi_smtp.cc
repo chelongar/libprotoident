@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_smtp.cc 77 2011-04-15 04:54:37Z salcock $
+ * $Id: lpi_smtp.cc 122 2012-03-02 03:49:27Z salcock $
  */
 
 #include <string.h>
@@ -144,6 +144,9 @@ static inline bool match_smtp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
                         data->client_port == 25))
                 return true;
         if (match_str_either(data, "quit") && (data->server_port == 25 ||
+                        data->client_port == 25))
+                return true;
+        if (match_str_either(data, "Quit") && (data->server_port == 25 ||
                         data->client_port == 25))
                 return true;
         /* Match the server banner code */

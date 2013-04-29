@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_tor.cc 63 2011-02-04 00:59:33Z salcock $
+ * $Id: lpi_tor.cc 121 2012-03-01 03:59:21Z salcock $
  */
 
 #include <string.h>
@@ -39,9 +39,22 @@
 static inline bool match_tor(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
 	/* I *think* this is TOR but have not confirmed */
+	
+	/* Don't believe in this rule anymore :) */
+	/*
 	if (match_chars_either(data, 0x3d, 0x00, 0x00, 0x00) &&
 			(data->payload_len[0] == 4 ||
 			data->payload_len[1] == 4))
+		return true;
+	*/
+
+	/* Lots of TOR is SSL over port 443, which we can't really distinguish
+	 * from HTTPS. However, we can match the stuff on port 9001 */
+
+	if (!match_ssl(data))
+		return false;
+
+	if (data->server_port == 9001 || data->client_port == 9001)
 		return true;
 
 	return false;

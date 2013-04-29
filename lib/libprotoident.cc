@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.cc 104 2011-11-02 01:58:43Z salcock $
+ * $Id: libprotoident.cc 122 2012-03-02 03:49:27Z salcock $
  */
 
 #define __STDC_FORMAT_MACROS
@@ -392,6 +392,14 @@ const char *lpi_print_category(lpi_category_t category) {
 			return "Printing";
 		case LPI_CATEGORY_TRANSLATION:
 			return "Translation";
+		case LPI_CATEGORY_CDN:
+			return "CDN";
+		case LPI_CATEGORY_CLOUD:
+			return "Cloud";
+		case LPI_CATEGORY_NOTIFICATION:
+			return "Notification";
+		case LPI_CATEGORY_SERIALISATION:
+			return "Serialisation";
 		case LPI_CATEGORY_ICMP:
 			return "ICMP";
 		case LPI_CATEGORY_MIXED:
@@ -421,5 +429,18 @@ const char *lpi_print(lpi_protocol_t proto) {
 	}	
 	return (it->second);
 	
+}
+
+bool lpi_is_protocol_inactive(lpi_protocol_t proto) {
+
+	LPINameMap::iterator it;
+
+	it = lpi_names.find(proto);
+
+	if (it == lpi_names.end()) {
+		return true;
+	}	
+	return false;
+
 }
 

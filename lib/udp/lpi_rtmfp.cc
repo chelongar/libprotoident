@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_rtmfp.cc 77 2011-04-15 04:54:37Z salcock $
+ * $Id: lpi_rtmfp.cc 112 2012-02-03 03:41:03Z salcock $
  */
 
 #include <string.h>
@@ -68,7 +68,7 @@ static inline bool match_rtmfp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 static lpi_module_t lpi_rtmfp = {
 	LPI_PROTO_UDP_RTMFP,
 	LPI_CATEGORY_STREAMING,
-	"RTFMP",
+	"RTMFP",
 	12,
 	match_rtmfp
 };

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_radius.cc 91 2011-09-26 04:18:43Z salcock $
+ * $Id: lpi_radius.cc 111 2012-01-23 01:39:02Z salcock $
  */
 
 #include <string.h>
@@ -41,7 +41,7 @@ static inline bool match_radius_request(uint32_t pload, uint32_t len) {
 	uint32_t stated_len = 0;
 
 	stated_len = ntohl(pload) & 0xffff;
-	if (stated_len != pload)
+	if (stated_len != len)
 		return false;
 	
 	/* Access-Request */
@@ -59,7 +59,7 @@ static inline bool match_radius_resp(uint32_t pload, uint32_t len) {
 	uint32_t stated_len = 0;
 
 	stated_len = ntohl(pload) & 0xffff;
-	if (stated_len != pload)
+	if (stated_len != len)
 		return false;
 
 	/* Access-Accept */	

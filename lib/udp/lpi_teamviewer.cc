@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_teamviewer.cc 107 2011-11-25 00:36:11Z salcock $
+ * $Id: lpi_teamviewer.cc 118 2012-03-01 02:33:48Z salcock $
  */
 
 #include <string.h>
@@ -61,7 +61,7 @@ static inline bool match_teamviewer_udp(lpi_data_t *data, lpi_module_t *mod UNUS
 static lpi_module_t lpi_teamviewer = {
 	LPI_PROTO_UDP_TEAMVIEWER,
 	LPI_CATEGORY_REMOTE,
-	"TeamViewer",
+	"TeamViewer_UDP",
 	10,
 	match_teamviewer_udp
 };

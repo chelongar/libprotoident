@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_jedi.cc 92 2011-09-28 01:36:00Z salcock $
+ * $Id: lpi_jedi.cc 118 2012-03-01 02:33:48Z salcock $
  */
 
 #include <string.h>
@@ -50,7 +50,7 @@ static inline bool match_jedi_udp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 static lpi_module_t lpi_jedi = {
 	LPI_PROTO_UDP_JEDI,
 	LPI_CATEGORY_REMOTE,
-	"Citrix_Jedi",
+	"Citrix_Jedi_UDP",
 	3,
 	match_jedi_udp
 };

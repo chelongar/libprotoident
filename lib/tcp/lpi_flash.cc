@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_flash.cc 90 2011-07-01 04:37:47Z salcock $
+ * $Id: lpi_flash.cc 122 2012-03-02 03:49:27Z salcock $
  */
 
 #include <string.h>
@@ -44,6 +44,10 @@ static inline bool match_flash(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 		if (match_str_either(data, "<msg"))
 			return true;
 		if (match_str_either(data, "<pol"))
+			return true;
+		if (data->payload_len[0] == 0)
+			return true;
+		if (data->payload_len[1] == 0)
 			return true;
 	}
 

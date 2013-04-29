@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_ldap.cc 89 2011-06-01 23:23:05Z salcock $
+ * $Id: lpi_ldap.cc 122 2012-03-02 03:49:27Z salcock $
  */
 
 #include <string.h>
@@ -39,18 +39,41 @@
 static inline bool match_ldap_payload(uint32_t payload, uint32_t len) {
 	
 	uint8_t *byte = ((uint8_t *)&payload);
+	uint16_t struct_len = 0;
 
 	if (len == 0)
 		return true;
 
-	if (len > 255)
-		return false;
-	if (!MATCH(payload, 0x30, ANY, 0x02, 0x01))
-		return false;
-	
 	byte ++;
-	if (*byte != len - 2)
-		return false;
+	
+	if (((*byte) & 0x80) == 0x80) {
+		uint8_t bytes_required = ((*byte) & 0x7f);
+		if (bytes_required > 2 || bytes_required == 0)
+			return false;
+
+		if (bytes_required == 1) {
+			if (len > 255)
+				return false;
+			byte ++;
+			struct_len = 3 + ((uint8_t)(*byte));
+			if (!MATCH(payload, 0x30, ANY, ANY, 0x02))
+				return false;
+		} else {
+			struct_len = 4 + ntohs(*((uint16_t *)(byte + 1)));
+			if (!MATCH(payload, 0x30, ANY, ANY, ANY))
+				return false;
+		}
+	} else {
+		if (!MATCH(payload, 0x30, ANY, 0x02, 0x01))
+			return false;
+		if (len > 255)
+			return false;
+		struct_len = (*byte) + 2;
+	}
+			
+	if (struct_len != len)
+		return false;	
+	
 
 	return true;
 

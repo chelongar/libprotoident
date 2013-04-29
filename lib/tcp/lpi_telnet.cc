@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_telnet.cc 75 2011-04-07 04:57:39Z salcock $
+ * $Id: lpi_telnet.cc 112 2012-02-03 03:41:03Z salcock $
  */
 
 #include <string.h>
@@ -66,6 +66,16 @@ static inline bool match_telnet_pattern(uint32_t payload, uint32_t len) {
         return false;
 }
 
+static inline bool match_atos_telnet(uint32_t payload) {
+
+	/* ATOS seems to be related to ADSL routers, which really shouldn't
+	 * be allowing telnet over the public internet */
+
+	if (MATCH(payload, 0x1b, 0x5b, 0x32, 0x4a))
+		return true;
+	return false;
+
+}
 
 static inline bool match_telnet(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
@@ -73,6 +83,11 @@ static inline bool match_telnet(lpi_data_t *data, lpi_module_t *mod UNUSED) {
                 return true;
         if (match_telnet_pattern(data->payload[1], data->payload_len[1]))
                 return true;
+
+	if (match_atos_telnet(data->payload[0]) && data->payload_len[1] == 0)
+		return true;
+	if (match_atos_telnet(data->payload[1]) && data->payload_len[0] == 0)
+		return true;
 
 	return false;
 }

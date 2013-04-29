@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_hamachi.cc 91 2011-09-26 04:18:43Z salcock $
+ * $Id: lpi_hamachi.cc 118 2012-03-01 02:33:48Z salcock $
  */
 
 #include <string.h>
@@ -56,7 +56,7 @@ static inline bool match_hamachi(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 static lpi_module_t lpi_hamachi = {
 	LPI_PROTO_UDP_HAMACHI,
 	LPI_CATEGORY_TUNNELLING,
-	"Hamachi",
+	"Hamachi_UDP",
 	8,
 	match_hamachi
 };

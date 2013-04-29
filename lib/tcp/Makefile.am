@@ -1,11 +1,14 @@
 noinst_LTLIBRARIES = libprotoident_tcp.la
 libprotoident_tcp_la_SOURCES = \
 	lpi_afp.cc \
+	lpi_akamai.cc \
+	lpi_apple_push.cc \
 	lpi_ares.cc \
 	lpi_bitextend.cc \
 	lpi_bittorrent.cc \
 	lpi_blizzard.cc \
 	lpi_cgp.cc \
+	lpi_chatango.cc \
 	lpi_cisco_vpn.cc \
 	lpi_clubbox.cc \
 	lpi_cod_waw.cc \
@@ -13,6 +16,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_cvs.cc \
 	lpi_directconnect.cc \
 	lpi_dns.cc \
+	lpi_dvrns.cc \
 	lpi_dxp.cc \
 	lpi_ea_games.cc \
 	lpi_emule.cc \
@@ -20,13 +24,14 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_flash.cc \
 	lpi_ftpcontrol.cc \
 	lpi_ftpdata.cc \
+	lpi_gamespy.cc \
 	lpi_gnutella.cc \
 	lpi_goku.cc \
 	lpi_hamachi.cc \
 	lpi_harveys.cc \
 	lpi_http_badport.cc \
 	lpi_http.cc \
-	lpi_http_p2p.cc \
+	lpi_http_nonstandard.cc \
 	lpi_https.cc \
 	lpi_http_tunnel.cc \
 	lpi_ica.cc \
@@ -39,7 +44,9 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_invalid_http.cc \
 	lpi_invalid_pop.cc \
 	lpi_invalid_smtp.cc \
+	lpi_ipop.cc \
 	lpi_irc.cc \
+	lpi_java.cc \
 	lpi_jedi.cc \
 	lpi_kaseya.cc \
 	lpi_kaspersky.cc \
@@ -65,15 +72,19 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_ncsoft.cc \
 	lpi_netbios.cc \
 	lpi_nntp.cc \
+	lpi_nntps.cc \
 	lpi_nopayload.cc \
 	lpi_notes_rpc.cc \
+	lpi_omegle.cc \
 	lpi_openvpn.cc \
 	lpi_paltalk.cc \
 	lpi_pando.cc \
 	lpi_pdbox.cc \
 	lpi_pop3.cc \
+	lpi_pop3s.cc \
 	lpi_postgresql.cc \
 	lpi_pptp.cc \
+	lpi_psn_store.cc \
 	lpi_razor.cc \
 	lpi_rbls.cc \
 	lpi_rdp.cc \
@@ -86,8 +97,10 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_second_life.cc \
 	lpi_shoutcast.cc \
 	lpi_sip.cc \
+	lpi_skype_tcp.cc \
 	lpi_smb.cc \
 	lpi_smtp.cc \
+	lpi_smtps.cc \
 	lpi_socks4.cc \
 	lpi_socks5.cc \
 	lpi_ssh.cc \
@@ -99,22 +112,27 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_teamviewer.cc \
 	lpi_telecomkey.cc \
 	lpi_telnet.cc \
+	lpi_telnet_exploit.cc \
 	lpi_tip.cc \
 	lpi_tor.cc \
 	lpi_trackmania.cc \
 	lpi_trojan_win32_generic_sb.cc \
+	lpi_trojan_zeroaccess.cc \
 	lpi_warcraft3.cc \
 	lpi_web_junk.cc \
 	lpi_weblogic.cc \
 	lpi_winmx.cc \
 	lpi_wow.cc \
+	lpi_wuala.cc \
 	lpi_xmpp.cc \
+	lpi_xmpps.cc \
 	lpi_xunlei.cc \
 	lpi_xymon.cc \
 	lpi_yahoo.cc \
 	lpi_yahoo_error.cc \
 	lpi_yahoo_webcam.cc \
 	lpi_youku.cc \
+	lpi_zabbix.cc \
 	lpi_zynga.cc 
 
 EXTRA_DIST=tcp_protocols.h

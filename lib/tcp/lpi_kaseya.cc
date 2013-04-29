@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_kaseya.cc 90 2011-07-01 04:37:47Z salcock $
+ * $Id: lpi_kaseya.cc 111 2012-01-23 01:39:02Z salcock $
  */
 
 #include <string.h>
@@ -37,6 +37,10 @@
 #include "proto_common.h"
 
 static inline bool match_kaseya_req(uint32_t payload, uint32_t len) {
+
+	/* Seen quite a few flows where only the response is present */
+	if (len == 0)
+		return true;
 
 	if (!MATCH(payload, 0x4a, 0x5e, 0x7a, 0x04))
 		return false;
@@ -58,8 +62,10 @@ static inline bool match_kaseya_resp(uint32_t payload, uint32_t len) {
 	if (!MATCH(payload, 0x4a, 0x5e, 0x7a, 0x04))
 		return false;
 
+	/*
 	if (len < 200)
 		return false;
+	*/
 	
 	return true;
 }
@@ -83,7 +89,7 @@ static lpi_module_t lpi_kaseya = {
 	LPI_PROTO_KASEYA,
 	LPI_CATEGORY_REMOTE,
 	"Kaseya",
-	3,
+	7,
 	match_kaseya
 };
 

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.h 108 2011-12-13 22:21:10Z salcock $
+ * $Id: libprotoident.h 123 2012-03-05 04:22:35Z salcock $
  */
 
 
@@ -96,6 +96,10 @@ typedef enum {
 	LPI_CATEGORY_LOGGING,		/* Logging */
 	LPI_CATEGORY_PRINTING,		/* Network printing */
 	LPI_CATEGORY_TRANSLATION,	/* Language translation */
+	LPI_CATEGORY_CDN,		/* CDN protocols, e.g. Akamai */
+	LPI_CATEGORY_CLOUD,		/* Cloud computing/storage protocols */
+	LPI_CATEGORY_NOTIFICATION,	/* Notification / messaging protocols */
+	LPI_CATEGORY_SERIALISATION,	/* Transfer of programming "objects" */
 	LPI_CATEGORY_ICMP,		/* ICMP */
 	LPI_CATEGORY_MIXED,		/* Different protos in each direction */
 	LPI_CATEGORY_NOPAYLOAD,		/* No payload observed */
@@ -172,7 +176,7 @@ typedef enum {
 	LPI_PROTO_CONQUER,	/* Conquer Online game */
 	LPI_PROTO_RTMP,		/* Adobe RTMP */
 	LPI_PROTO_TIP,		/* Transaction Internet Protocol */
-	LPI_PROTO_P2P_HTTP,	/* P2P over HTTP, a la KaZaA and Gnutella */
+	LPI_PROTO_NONSTANDARD_HTTP, /* HTTP on unconventional port numbers */
 	LPI_PROTO_HARVEYS,	/* Photo transfers for Harveys Real Estate */
 	LPI_PROTO_SHOUTCAST,
 	LPI_PROTO_HTTP_BADPORT,	/* HTTP over port 443, leading to failure */
@@ -222,6 +226,24 @@ typedef enum {
 	LPI_PROTO_MUNIN,
 	LPI_PROTO_TROJAN_WIN32_GENERIC_SB,
 	LPI_PROTO_PALTALK,
+	LPI_PROTO_ZABBIX,
+	LPI_PROTO_AKAMAI, 
+	LPI_PROTO_GAMESPY, 
+	LPI_PROTO_WUALA,
+	LPI_PROTO_TROJAN_ZEROACCESS, 
+	LPI_PROTO_DVRNS,
+	LPI_PROTO_CHATANGO, 
+	LPI_PROTO_OMEGLE,
+	LPI_PROTO_TELNET_EXPLOIT, 
+	LPI_PROTO_POP3S,		/* POP3 over TLS/SSL */ 
+	LPI_PROTO_PSN_STORE,		
+	LPI_PROTO_SKYPE_TCP,		/* Skype TCP sessions */		
+	LPI_PROTO_APPLE_PUSH,		/* Apple push notifications */ 
+	LPI_PROTO_XMPPS,		/* XMPP over TLS/SSL */
+	LPI_PROTO_SMTPS,		/* Legacy Secure SMTP */ 
+	LPI_PROTO_NNTPS,		/* NNTP over TLS/SSL */		
+	LPI_PROTO_JAVA,			/* Serialised Java Objects */
+	LPI_PROTO_IPOP,			/* IP over P2P */
 
         /* UDP Protocols */
         LPI_PROTO_UDP,
@@ -326,6 +348,10 @@ typedef enum {
 	LPI_PROTO_UDP_TEAMVIEWER,
 	LPI_PROTO_UDP_ARES,
 	LPI_PROTO_UDP_EPSON,
+	LPI_PROTO_UDP_AKAMAI_TRANSFER,
+	LPI_PROTO_UDP_DCC,
+	LPI_PROTO_UDP_AMANDA,
+	LPI_PROTO_UDP_NETFLOW,
 
 	/* Patterns that we can match, but do not know the protocol */
 	LPI_PROTO_REJECTION,	/* All responses are 0x02 */
@@ -472,7 +498,26 @@ const char *lpi_print_category(lpi_category_t category);
  */
 lpi_module_t *lpi_guess_protocol(lpi_data_t *data);
 
-
+/** Determines whether the protocol matching a given protocol number is no
+ *  longer supported by libprotoident.
+ *
+ *  @param proto The protocol to check
+ *
+ *  @return true if the protocol is no longer supported, false otherwise.
+ *
+ *  Some protocols are no longer supported by libprotoident, either because
+ *  the rules were found to be producing too many false positives or the 
+ *  protocol has been merged with another existing protocol (especially in the
+ *  case of mystery protocols). When these cases occur, we don't necessarily
+ *  remove the protocol from the enumerated type list, just disable the module
+ *  and set the name string for the protocol to "NULL".
+ *
+ *  This function allows the caller to check if a given protocol value has 
+ *  been disabled. This is often handy when reporting stats for all the 
+ *  protocol values (see lpi_live for an example), as ideally you would want
+ *  to avoid reporting anything for the NULL protocols.
+ */
+bool lpi_is_protocol_inactive(lpi_protocol_t proto);
 #ifdef __cplusplus 
 }
 #endif

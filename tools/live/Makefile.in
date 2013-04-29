@@ -209,7 +209,7 @@ AM_CFLAGS = -I"$(top_srcdir)/lib"
 AM_CXXFLAGS = -I"$(top_srcdir)/lib"
 AM_LDFLAGS = -L"$(top_srcdir)/lib/.libs"
 lpi_live_SOURCES = lpi_live.cc ../tools_common.cc
-lpi_live_LDADD = @ADD_LIBS@ -lprotoident
+lpi_live_LDADD = @ADD_LIBS@ -lprotoident -lpacketdump
 all: all-am
 
 .SUFFIXES:

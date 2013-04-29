@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_cod_waw.cc 62 2011-02-03 04:37:32Z salcock $
+ * $Id: lpi_cod_waw.cc 118 2012-03-01 02:33:48Z salcock $
  */
 
 #include <string.h>
@@ -58,7 +58,7 @@ static inline bool match_cod_waw(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 static lpi_module_t lpi_cod_waw = {
 	LPI_PROTO_COD_WAW,
 	LPI_CATEGORY_GAMING,
-	"Call_of_Duty",
+	"Call_of_Duty_TCP",
 	10,	/* Weak rule */
 	match_cod_waw
 };

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_dns.cc 63 2011-02-04 00:59:33Z salcock $
+ * $Id: lpi_dns.cc 118 2012-03-01 02:33:48Z salcock $
  */
 
 #include <string.h>
@@ -77,7 +77,7 @@ static bool match_tcp_dns(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 static lpi_module_t lpi_dns = {
 	LPI_PROTO_DNS,
 	LPI_CATEGORY_SERVICES,
-	"DNS",
+	"DNS_TCP",
 	6, 	/* Not a high certainty */
 	match_tcp_dns
 };

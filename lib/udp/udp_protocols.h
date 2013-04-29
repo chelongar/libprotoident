@@ -4,6 +4,8 @@
 #include "proto_manager.h"
 
 void register_akamai(LPIModuleMap *mod_map);
+void register_akamai_transfer(LPIModuleMap *mod_map);
+void register_amanda(LPIModuleMap *mod_map);
 void register_ares_udp(LPIModuleMap *mod_map);
 void register_backweb(LPIModuleMap *mod_map);
 void register_battlefield(LPIModuleMap *mod_map);
@@ -12,6 +14,7 @@ void register_callofduty(LPIModuleMap *mod_map);
 void register_checkpoint_rdp(LPIModuleMap *mod_map);
 void register_cirn(LPIModuleMap *mod_map);
 void register_cisco_ipsec(LPIModuleMap *mod_map);
+void register_dcc_udp(LPIModuleMap *mod_map);
 void register_demonware(LPIModuleMap *mod_map);
 void register_dhcp(LPIModuleMap *mod_map);
 void register_dht_dict(LPIModuleMap *mod_map);
@@ -63,6 +66,7 @@ void register_mystery_99(LPIModuleMap *mod_map);
 void register_mystery_e9(LPIModuleMap *mod_map);
 void register_mystery_qq(LPIModuleMap *mod_map);
 void register_netbios_udp(LPIModuleMap *mod_map);
+void register_netflow(LPIModuleMap *mod_map);
 void register_newerth(LPIModuleMap *mod_map);
 void register_norton(LPIModuleMap *mod_map);
 void register_ntp(LPIModuleMap *mod_map);

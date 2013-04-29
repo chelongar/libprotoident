@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_second_life.cc 107 2011-11-25 00:36:11Z salcock $
+ * $Id: lpi_second_life.cc 118 2012-03-01 02:33:48Z salcock $
  */
 
 #include <string.h>
@@ -81,7 +81,7 @@ static inline bool match_second_life(lpi_data_t *data, lpi_module_t *mod UNUSED)
 static lpi_module_t lpi_second_life = {
 	LPI_PROTO_UDP_SECONDLIFE,
 	LPI_CATEGORY_GAMING,
-	"SecondLife",
+	"SecondLife_UDP",
 	6,
 	match_second_life
 };

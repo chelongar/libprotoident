@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_manager.cc 108 2011-12-13 22:21:10Z salcock $
+ * $Id: proto_manager.cc 123 2012-03-05 04:22:35Z salcock $
  */
 
 #include "config.h"
@@ -74,11 +74,14 @@ void free_protocols(LPIModuleMap *mod_map) {
 int register_tcp_protocols(LPIModuleMap *mod_map) {
 
 	register_afp(mod_map);
+	register_akamai_tcp(mod_map);
+	register_apple_push(mod_map);
 	register_ares(mod_map);
 	register_bitextend(mod_map);
 	register_bittorrent(mod_map);
 	register_blizzard(mod_map);
 	register_cgp(mod_map);
+	register_chatango(mod_map);
 	register_cisco_vpn(mod_map);
 	register_clubbox(mod_map);
 	register_cod_waw(mod_map);
@@ -86,6 +89,7 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_cvs(mod_map);
 	register_directconnect(mod_map);
 	register_dns_tcp(mod_map);
+	register_dvrns(mod_map);
 	register_dxp(mod_map);
 	register_ea_games(mod_map);
 	register_emule(mod_map);
@@ -93,13 +97,14 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_flash(mod_map);
 	register_ftpcontrol(mod_map);
 	register_ftpdata(mod_map);
+	register_gamespy_tcp(mod_map);
 	register_gnutella(mod_map);
 	register_goku(mod_map);
 	register_hamachi(mod_map);
 	register_harveys(mod_map);
 	register_http_badport(mod_map);
 	register_http(mod_map);
-	register_http_p2p(mod_map);
+	register_http_nonstandard(mod_map);
 	register_https(mod_map);
 	register_http_tunnel(mod_map);
 	register_ica(mod_map);
@@ -112,7 +117,9 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_invalid_http(mod_map);
 	register_invalid_pop(mod_map);
 	register_invalid_smtp(mod_map);
+	register_ipop(mod_map);
 	register_irc(mod_map);
+	register_java(mod_map);
 	register_jedi(mod_map);
 	register_kaseya(mod_map);
 	register_kaspersky(mod_map);
@@ -138,15 +145,19 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_ncsoft(mod_map);
 	register_netbios(mod_map);
 	register_nntp(mod_map);
+	register_nntps(mod_map);
 	register_notes_rpc(mod_map);
 	register_tcp_no_payload(mod_map);
+	register_omegle(mod_map);
 	register_openvpn(mod_map);
 	register_paltalk(mod_map);
 	register_pando(mod_map);
 	register_pdbox(mod_map);
 	register_pop3(mod_map);
+	register_pop3s(mod_map);
 	register_postgresql(mod_map);
 	register_pptp(mod_map);
+	register_psn_store(mod_map);
 	register_razor(mod_map);
 	register_rbls(mod_map);
 	register_rdp(mod_map);
@@ -159,8 +170,10 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_second_life(mod_map);
 	register_shoutcast(mod_map);
 	register_sip(mod_map);
+	register_skype_tcp(mod_map);
 	register_smb(mod_map);
 	register_smtp(mod_map);
+	register_smtps(mod_map);
 	register_socks4(mod_map);
 	register_socks5(mod_map);
 	register_ssh(mod_map);
@@ -172,22 +185,27 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_teamviewer(mod_map);
 	register_telecomkey(mod_map);
 	register_telnet(mod_map);
+	register_telnet_exploit(mod_map);
 	register_tip(mod_map);
 	register_tor(mod_map);
 	register_trackmania(mod_map);
 	register_trojan_win32_generic_sb(mod_map);
+	register_trojan_zeroaccess(mod_map);
 	register_warcraft3(mod_map);
 	register_web_junk(mod_map);
 	register_weblogic(mod_map);
 	register_winmx(mod_map);
 	register_wow(mod_map);
+	register_wuala(mod_map);
 	register_xmpp(mod_map);
+	register_xmpps(mod_map);
 	register_xunlei(mod_map);
 	register_xymon(mod_map);
 	register_yahoo(mod_map);
 	register_yahoo_error(mod_map);
 	register_yahoo_webcam(mod_map);
 	register_youku_tcp(mod_map);
+	register_zabbix(mod_map);
 	register_zynga(mod_map);
 	return 0;
 }
@@ -195,6 +213,8 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 int register_udp_protocols(LPIModuleMap *mod_map) {
 
 	register_akamai(mod_map);
+	register_akamai_transfer(mod_map);
+	register_amanda(mod_map);
 	register_ares_udp(mod_map);
 	register_backweb(mod_map);
 	register_battlefield(mod_map);
@@ -203,6 +223,7 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_checkpoint_rdp(mod_map);
 	register_cirn(mod_map);
 	register_cisco_ipsec(mod_map);
+	register_dcc_udp(mod_map);
 	register_demonware(mod_map);
 	register_dhcp(mod_map);
 	register_dht_dict(mod_map);
@@ -254,6 +275,7 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_mystery_e9(mod_map);
 	register_mystery_qq(mod_map);
 	register_netbios_udp(mod_map);
+	register_netflow(mod_map);
 	register_newerth(mod_map);
 	register_norton(mod_map);
 	register_ntp(mod_map);

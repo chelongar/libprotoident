@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_common.cc 92 2011-09-28 01:36:00Z salcock $
+ * $Id: proto_common.cc 123 2012-03-05 04:22:35Z salcock $
  */
 
 #include <string.h>
@@ -270,6 +270,14 @@ bool match_file_header(uint32_t payload) {
 	if (MATCHSTR(payload, "<iq "))
 		return true;
 
+	/* SPF */
+	if (MATCHSTR(payload, "SPFI"))
+		return true;
+
+	/* ABIF - Applied Biosystems */
+	if (MATCHSTR(payload, "ABIF"))
+		return true;
+
         /* I'm pretty sure the following are files of some type or another.
          * They crop up pretty often in our test data sets, so I'm going to
          * put them in here.
@@ -358,6 +366,10 @@ static inline bool match_ssl2_handshake(uint32_t payload, uint32_t len) {
 
 static inline bool match_tls_alert(uint32_t payload, uint32_t len) {
         if (MATCH(payload, 0x15, 0x03, 0x01, ANY))
+                return true;
+
+	/* Alerts are also possible under SSL 3.0 */
+        if (MATCH(payload, 0x15, 0x03, 0x00, ANY))
                 return true;
         return false;
 }
