@@ -54,6 +54,7 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_akamai.lo \
 	libprotoident_udp_la-lpi_backweb.lo \
 	libprotoident_udp_la-lpi_battlefield.lo \
 	libprotoident_udp_la-lpi_bjnp.lo \
+	libprotoident_udp_la-lpi_canon_mfnp.lo \
 	libprotoident_udp_la-lpi_checkpoint_rdp.lo \
 	libprotoident_udp_la-lpi_cirn.lo \
 	libprotoident_udp_la-lpi_cisco_ipsec.lo \
@@ -67,6 +68,7 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_akamai.lo \
 	libprotoident_udp_la-lpi_directconnect.lo \
 	libprotoident_udp_la-lpi_dns.lo \
 	libprotoident_udp_la-lpi_driveshare.lo \
+	libprotoident_udp_la-lpi_dtls.lo \
 	libprotoident_udp_la-lpi_emule.lo \
 	libprotoident_udp_la-lpi_emule_weak.lo \
 	libprotoident_udp_la-lpi_epson.lo \
@@ -76,6 +78,7 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_akamai.lo \
 	libprotoident_udp_la-lpi_fasp.lo \
 	libprotoident_udp_la-lpi_fortinet.lo \
 	libprotoident_udp_la-lpi_freechal.lo \
+	libprotoident_udp_la-lpi_funshion.lo \
 	libprotoident_udp_la-lpi_gamespy.lo \
 	libprotoident_udp_la-lpi_garena.lo \
 	libprotoident_udp_la-lpi_gnutella.lo \
@@ -84,6 +87,7 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_akamai.lo \
 	libprotoident_udp_la-lpi_gsm.lo \
 	libprotoident_udp_la-lpi_halflife.lo \
 	libprotoident_udp_la-lpi_hamachi.lo \
+	libprotoident_udp_la-lpi_icp.lo \
 	libprotoident_udp_la-lpi_imesh.lo \
 	libprotoident_udp_la-lpi_ipmsg.lo \
 	libprotoident_udp_la-lpi_ipv6.lo \
@@ -97,6 +101,7 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_akamai.lo \
 	libprotoident_udp_la-lpi_lansync.lo \
 	libprotoident_udp_la-lpi_ldap_ad.lo \
 	libprotoident_udp_la-lpi_linkproof.lo \
+	libprotoident_udp_la-lpi_lol.lo \
 	libprotoident_udp_la-lpi_mdns.lo \
 	libprotoident_udp_la-lpi_moh.lo \
 	libprotoident_udp_la-lpi_mp2p.lo \
@@ -116,11 +121,13 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_akamai.lo \
 	libprotoident_udp_la-lpi_netbios.lo \
 	libprotoident_udp_la-lpi_netflow.lo \
 	libprotoident_udp_la-lpi_newerth.lo \
+	libprotoident_udp_la-lpi_noe.lo \
 	libprotoident_udp_la-lpi_nopayload.lo \
 	libprotoident_udp_la-lpi_norton.lo \
 	libprotoident_udp_la-lpi_ntp.lo \
 	libprotoident_udp_la-lpi_nwn.lo \
 	libprotoident_udp_la-lpi_opaserv.lo \
+	libprotoident_udp_la-lpi_openvpn.lo \
 	libprotoident_udp_la-lpi_orbit.lo \
 	libprotoident_udp_la-lpi_pando.lo \
 	libprotoident_udp_la-lpi_pplive.lo \
@@ -137,6 +144,7 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_akamai.lo \
 	libprotoident_udp_la-lpi_rtcp.lo \
 	libprotoident_udp_la-lpi_rtmfp.lo \
 	libprotoident_udp_la-lpi_rtp.lo \
+	libprotoident_udp_la-lpi_sanandreas_mp.lo \
 	libprotoident_udp_la-lpi_second_life.lo \
 	libprotoident_udp_la-lpi_serialnumberd.lo \
 	libprotoident_udp_la-lpi_sip.lo \
@@ -165,6 +173,7 @@ am_libprotoident_udp_la_OBJECTS = libprotoident_udp_la-lpi_akamai.lo \
 	libprotoident_udp_la-lpi_tvants.lo \
 	libprotoident_udp_la-lpi_unreal.lo \
 	libprotoident_udp_la-lpi_ventrilo.lo \
+	libprotoident_udp_la-lpi_viber.lo \
 	libprotoident_udp_la-lpi_vivox.lo \
 	libprotoident_udp_la-lpi_vxworks_exploit.lo \
 	libprotoident_udp_la-lpi_winmessage.lo \
@@ -340,6 +349,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_backweb.cc \
 	lpi_battlefield.cc \
 	lpi_bjnp.cc \
+	lpi_canon_mfnp.cc \
 	lpi_checkpoint_rdp.cc \
 	lpi_cirn.cc \
 	lpi_cisco_ipsec.cc \
@@ -353,6 +363,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_directconnect.cc \
 	lpi_dns.cc \
 	lpi_driveshare.cc \
+	lpi_dtls.cc \
 	lpi_emule.cc \
 	lpi_emule_weak.cc \
 	lpi_epson.cc \
@@ -362,6 +373,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_fasp.cc \
 	lpi_fortinet.cc \
 	lpi_freechal.cc \
+	lpi_funshion.cc \
 	lpi_gamespy.cc \
 	lpi_garena.cc \
 	lpi_gnutella.cc \
@@ -370,6 +382,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_gsm.cc \
 	lpi_halflife.cc \
 	lpi_hamachi.cc \
+	lpi_icp.cc \
 	lpi_imesh.cc \
 	lpi_ipmsg.cc \
 	lpi_ipv6.cc \
@@ -383,6 +396,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_lansync.cc \
 	lpi_ldap_ad.cc \
 	lpi_linkproof.cc \
+	lpi_lol.cc \
 	lpi_mdns.cc \
 	lpi_moh.cc \
 	lpi_mp2p.cc \
@@ -402,11 +416,13 @@ libprotoident_udp_la_SOURCES = \
 	lpi_netbios.cc \
 	lpi_netflow.cc \
 	lpi_newerth.cc \
+	lpi_noe.cc \
 	lpi_nopayload.cc \
 	lpi_norton.cc \
 	lpi_ntp.cc \
 	lpi_nwn.cc \
 	lpi_opaserv.cc \
+	lpi_openvpn.cc \
 	lpi_orbit.cc \
 	lpi_pando.cc \
 	lpi_pplive.cc \
@@ -423,6 +439,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_rtcp.cc \
 	lpi_rtmfp.cc \
 	lpi_rtp.cc \
+	lpi_sanandreas_mp.cc \
 	lpi_second_life.cc \
 	lpi_serialnumberd.cc \
 	lpi_sip.cc \
@@ -451,6 +468,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_tvants.cc \
 	lpi_unreal.cc \
 	lpi_ventrilo.cc \
+	lpi_viber.cc \
 	lpi_vivox.cc \
 	lpi_vxworks_exploit.cc \
 	lpi_winmessage.cc \
@@ -526,6 +544,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_backweb.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_battlefield.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_bjnp.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_canon_mfnp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_checkpoint_rdp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_cirn.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_cisco_ipsec.Plo@am__quote@
@@ -539,6 +558,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_directconnect.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_dns.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_driveshare.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_dtls.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_emule.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_emule_weak.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_epson.Plo@am__quote@
@@ -548,6 +568,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_fasp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_fortinet.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_freechal.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_funshion.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_gamespy.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_garena.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_gnutella.Plo@am__quote@
@@ -556,6 +577,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_gsm.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_halflife.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_hamachi.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_icp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_imesh.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_ipmsg.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_ipv6.Plo@am__quote@
@@ -569,6 +591,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_lansync.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_ldap_ad.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_linkproof.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_lol.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_mdns.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_moh.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_mp2p.Plo@am__quote@
@@ -588,11 +611,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_netbios.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_netflow.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_newerth.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_noe.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_nopayload.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_norton.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_ntp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_nwn.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_opaserv.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_openvpn.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_orbit.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_pando.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_pplive.Plo@am__quote@
@@ -609,6 +634,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_rtcp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_rtmfp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_rtp.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_sanandreas_mp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_second_life.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_serialnumberd.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_sip.Plo@am__quote@
@@ -637,6 +663,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_tvants.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_unreal.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_ventrilo.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_viber.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_vivox.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_vxworks_exploit.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_udp_la-lpi_winmessage.Plo@am__quote@
@@ -735,6 +762,14 @@ libprotoident_udp_la-lpi_bjnp.lo: lpi_bjnp.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_bjnp.cc' object='libprotoident_udp_la-lpi_bjnp.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_bjnp.lo `test -f 'lpi_bjnp.cc' || echo '$(srcdir)/'`lpi_bjnp.cc
+
+libprotoident_udp_la-lpi_canon_mfnp.lo: lpi_canon_mfnp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_canon_mfnp.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_canon_mfnp.Tpo -c -o libprotoident_udp_la-lpi_canon_mfnp.lo `test -f 'lpi_canon_mfnp.cc' || echo '$(srcdir)/'`lpi_canon_mfnp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_canon_mfnp.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_canon_mfnp.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_canon_mfnp.cc' object='libprotoident_udp_la-lpi_canon_mfnp.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_canon_mfnp.lo `test -f 'lpi_canon_mfnp.cc' || echo '$(srcdir)/'`lpi_canon_mfnp.cc
 
 libprotoident_udp_la-lpi_checkpoint_rdp.lo: lpi_checkpoint_rdp.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_checkpoint_rdp.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_checkpoint_rdp.Tpo -c -o libprotoident_udp_la-lpi_checkpoint_rdp.lo `test -f 'lpi_checkpoint_rdp.cc' || echo '$(srcdir)/'`lpi_checkpoint_rdp.cc
@@ -840,6 +875,14 @@ libprotoident_udp_la-lpi_driveshare.lo: lpi_driveshare.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_driveshare.lo `test -f 'lpi_driveshare.cc' || echo '$(srcdir)/'`lpi_driveshare.cc
 
+libprotoident_udp_la-lpi_dtls.lo: lpi_dtls.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_dtls.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_dtls.Tpo -c -o libprotoident_udp_la-lpi_dtls.lo `test -f 'lpi_dtls.cc' || echo '$(srcdir)/'`lpi_dtls.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_dtls.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_dtls.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_dtls.cc' object='libprotoident_udp_la-lpi_dtls.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_dtls.lo `test -f 'lpi_dtls.cc' || echo '$(srcdir)/'`lpi_dtls.cc
+
 libprotoident_udp_la-lpi_emule.lo: lpi_emule.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_emule.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_emule.Tpo -c -o libprotoident_udp_la-lpi_emule.lo `test -f 'lpi_emule.cc' || echo '$(srcdir)/'`lpi_emule.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_emule.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_emule.Plo
@@ -912,6 +955,14 @@ libprotoident_udp_la-lpi_freechal.lo: lpi_freechal.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_freechal.lo `test -f 'lpi_freechal.cc' || echo '$(srcdir)/'`lpi_freechal.cc
 
+libprotoident_udp_la-lpi_funshion.lo: lpi_funshion.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_funshion.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_funshion.Tpo -c -o libprotoident_udp_la-lpi_funshion.lo `test -f 'lpi_funshion.cc' || echo '$(srcdir)/'`lpi_funshion.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_funshion.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_funshion.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_funshion.cc' object='libprotoident_udp_la-lpi_funshion.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_funshion.lo `test -f 'lpi_funshion.cc' || echo '$(srcdir)/'`lpi_funshion.cc
+
 libprotoident_udp_la-lpi_gamespy.lo: lpi_gamespy.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_gamespy.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_gamespy.Tpo -c -o libprotoident_udp_la-lpi_gamespy.lo `test -f 'lpi_gamespy.cc' || echo '$(srcdir)/'`lpi_gamespy.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_gamespy.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_gamespy.Plo
@@ -975,6 +1026,14 @@ libprotoident_udp_la-lpi_hamachi.lo: lpi_hamachi.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_hamachi.cc' object='libprotoident_udp_la-lpi_hamachi.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_hamachi.lo `test -f 'lpi_hamachi.cc' || echo '$(srcdir)/'`lpi_hamachi.cc
+
+libprotoident_udp_la-lpi_icp.lo: lpi_icp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_icp.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_icp.Tpo -c -o libprotoident_udp_la-lpi_icp.lo `test -f 'lpi_icp.cc' || echo '$(srcdir)/'`lpi_icp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_icp.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_icp.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_icp.cc' object='libprotoident_udp_la-lpi_icp.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_icp.lo `test -f 'lpi_icp.cc' || echo '$(srcdir)/'`lpi_icp.cc
 
 libprotoident_udp_la-lpi_imesh.lo: lpi_imesh.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_imesh.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_imesh.Tpo -c -o libprotoident_udp_la-lpi_imesh.lo `test -f 'lpi_imesh.cc' || echo '$(srcdir)/'`lpi_imesh.cc
@@ -1079,6 +1138,14 @@ libprotoident_udp_la-lpi_linkproof.lo: lpi_linkproof.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_linkproof.cc' object='libprotoident_udp_la-lpi_linkproof.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_linkproof.lo `test -f 'lpi_linkproof.cc' || echo '$(srcdir)/'`lpi_linkproof.cc
+
+libprotoident_udp_la-lpi_lol.lo: lpi_lol.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_lol.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_lol.Tpo -c -o libprotoident_udp_la-lpi_lol.lo `test -f 'lpi_lol.cc' || echo '$(srcdir)/'`lpi_lol.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_lol.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_lol.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_lol.cc' object='libprotoident_udp_la-lpi_lol.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_lol.lo `test -f 'lpi_lol.cc' || echo '$(srcdir)/'`lpi_lol.cc
 
 libprotoident_udp_la-lpi_mdns.lo: lpi_mdns.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_mdns.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_mdns.Tpo -c -o libprotoident_udp_la-lpi_mdns.lo `test -f 'lpi_mdns.cc' || echo '$(srcdir)/'`lpi_mdns.cc
@@ -1232,6 +1299,14 @@ libprotoident_udp_la-lpi_newerth.lo: lpi_newerth.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_newerth.lo `test -f 'lpi_newerth.cc' || echo '$(srcdir)/'`lpi_newerth.cc
 
+libprotoident_udp_la-lpi_noe.lo: lpi_noe.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_noe.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_noe.Tpo -c -o libprotoident_udp_la-lpi_noe.lo `test -f 'lpi_noe.cc' || echo '$(srcdir)/'`lpi_noe.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_noe.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_noe.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_noe.cc' object='libprotoident_udp_la-lpi_noe.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_noe.lo `test -f 'lpi_noe.cc' || echo '$(srcdir)/'`lpi_noe.cc
+
 libprotoident_udp_la-lpi_nopayload.lo: lpi_nopayload.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_nopayload.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_nopayload.Tpo -c -o libprotoident_udp_la-lpi_nopayload.lo `test -f 'lpi_nopayload.cc' || echo '$(srcdir)/'`lpi_nopayload.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_nopayload.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_nopayload.Plo
@@ -1271,6 +1346,14 @@ libprotoident_udp_la-lpi_opaserv.lo: lpi_opaserv.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_opaserv.cc' object='libprotoident_udp_la-lpi_opaserv.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_opaserv.lo `test -f 'lpi_opaserv.cc' || echo '$(srcdir)/'`lpi_opaserv.cc
+
+libprotoident_udp_la-lpi_openvpn.lo: lpi_openvpn.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_openvpn.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_openvpn.Tpo -c -o libprotoident_udp_la-lpi_openvpn.lo `test -f 'lpi_openvpn.cc' || echo '$(srcdir)/'`lpi_openvpn.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_openvpn.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_openvpn.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_openvpn.cc' object='libprotoident_udp_la-lpi_openvpn.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_openvpn.lo `test -f 'lpi_openvpn.cc' || echo '$(srcdir)/'`lpi_openvpn.cc
 
 libprotoident_udp_la-lpi_orbit.lo: lpi_orbit.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_orbit.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_orbit.Tpo -c -o libprotoident_udp_la-lpi_orbit.lo `test -f 'lpi_orbit.cc' || echo '$(srcdir)/'`lpi_orbit.cc
@@ -1399,6 +1482,14 @@ libprotoident_udp_la-lpi_rtp.lo: lpi_rtp.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_rtp.cc' object='libprotoident_udp_la-lpi_rtp.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_rtp.lo `test -f 'lpi_rtp.cc' || echo '$(srcdir)/'`lpi_rtp.cc
+
+libprotoident_udp_la-lpi_sanandreas_mp.lo: lpi_sanandreas_mp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_sanandreas_mp.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_sanandreas_mp.Tpo -c -o libprotoident_udp_la-lpi_sanandreas_mp.lo `test -f 'lpi_sanandreas_mp.cc' || echo '$(srcdir)/'`lpi_sanandreas_mp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_sanandreas_mp.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_sanandreas_mp.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_sanandreas_mp.cc' object='libprotoident_udp_la-lpi_sanandreas_mp.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_sanandreas_mp.lo `test -f 'lpi_sanandreas_mp.cc' || echo '$(srcdir)/'`lpi_sanandreas_mp.cc
 
 libprotoident_udp_la-lpi_second_life.lo: lpi_second_life.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_second_life.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_second_life.Tpo -c -o libprotoident_udp_la-lpi_second_life.lo `test -f 'lpi_second_life.cc' || echo '$(srcdir)/'`lpi_second_life.cc
@@ -1623,6 +1714,14 @@ libprotoident_udp_la-lpi_ventrilo.lo: lpi_ventrilo.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_ventrilo.cc' object='libprotoident_udp_la-lpi_ventrilo.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_ventrilo.lo `test -f 'lpi_ventrilo.cc' || echo '$(srcdir)/'`lpi_ventrilo.cc
+
+libprotoident_udp_la-lpi_viber.lo: lpi_viber.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_viber.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_viber.Tpo -c -o libprotoident_udp_la-lpi_viber.lo `test -f 'lpi_viber.cc' || echo '$(srcdir)/'`lpi_viber.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_udp_la-lpi_viber.Tpo $(DEPDIR)/libprotoident_udp_la-lpi_viber.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_viber.cc' object='libprotoident_udp_la-lpi_viber.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_udp_la-lpi_viber.lo `test -f 'lpi_viber.cc' || echo '$(srcdir)/'`lpi_viber.cc
 
 libprotoident_udp_la-lpi_vivox.lo: lpi_vivox.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_udp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_udp_la-lpi_vivox.lo -MD -MP -MF $(DEPDIR)/libprotoident_udp_la-lpi_vivox.Tpo -c -o libprotoident_udp_la-lpi_vivox.lo `test -f 'lpi_vivox.cc' || echo '$(srcdir)/'`lpi_vivox.cc

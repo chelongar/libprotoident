@@ -26,6 +26,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_fring.cc \
 	lpi_ftpcontrol.cc \
 	lpi_ftpdata.cc \
+	lpi_funshion.cc \
 	lpi_gamespy.cc \
 	lpi_gnutella.cc \
 	lpi_goku.cc \
@@ -52,8 +53,10 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_jedi.cc \
 	lpi_kaseya.cc \
 	lpi_kaspersky.cc \
+	lpi_kik.cc \
 	lpi_ldap.cc \
 	lpi_message4u.cc \
+	lpi_minecraft.cc \
 	lpi_mitglieder.cc \
 	lpi_mms.cc \
 	lpi_mp2p.cc \
@@ -89,7 +92,8 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_postgresql.cc \
 	lpi_pptp.cc \
 	lpi_psn_store.cc \
-	lpi_razor.cc \
+	lpi_qvod.cc \
+        lpi_razor.cc \
 	lpi_rbls.cc \
 	lpi_rdp.cc \
 	lpi_rejection.cc \
@@ -122,6 +126,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_telnet_exploit.cc \
 	lpi_tip.cc \
 	lpi_tor.cc \
+	lpi_tpkt.cc \
 	lpi_trackmania.cc \
 	lpi_trojan_win32_generic_sb.cc \
 	lpi_trojan_zeroaccess.cc \
@@ -129,6 +134,8 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_warcraft3.cc \
 	lpi_web_junk.cc \
 	lpi_weblogic.cc \
+	lpi_wechat.cc \
+	lpi_whatsapp.cc \
 	lpi_whois.cc \
 	lpi_winmx.cc \
 	lpi_wow.cc \

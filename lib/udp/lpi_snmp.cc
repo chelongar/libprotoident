@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_snmp.cc 75 2011-04-07 04:57:39Z salcock $
+ * $Id: lpi_snmp.cc 155 2013-10-21 03:21:00Z salcock $
  */
 
 #include <string.h>

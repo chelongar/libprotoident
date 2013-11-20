@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_rtmp.cc 122 2012-03-02 03:49:27Z salcock $
+ * $Id: lpi_rtmp.cc 155 2013-10-21 03:21:00Z salcock $
  */
 
 #include <string.h>
@@ -101,7 +101,7 @@ static lpi_module_t lpi_rtmp = {
 	LPI_PROTO_RTMP,
 	LPI_CATEGORY_STREAMING,
 	"RTMP",
-	6,	/* Not a strong rule */
+	16,	/* Not a strong rule */
 	match_rtmp
 };
 

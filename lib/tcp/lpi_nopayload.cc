@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_nopayload.cc 66 2011-02-10 04:16:18Z salcock $
+ * $Id: lpi_nopayload.cc 155 2013-10-21 03:21:00Z salcock $
  */
 
 #include <string.h>
@@ -38,9 +38,9 @@
 
 bool match_no_payload(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	if (data->payload_len[0] != 0)
+	if (data->observed[0] != 0)
 		return false;
-	if (data->payload_len[1] != 0)
+	if (data->observed[1] != 0)
 		return false;
 
 	return true;

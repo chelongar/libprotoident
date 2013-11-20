@@ -72,6 +72,7 @@ am_libprotoident_tcp_la_OBJECTS = libprotoident_tcp_la-lpi_afp.lo \
 	libprotoident_tcp_la-lpi_fring.lo \
 	libprotoident_tcp_la-lpi_ftpcontrol.lo \
 	libprotoident_tcp_la-lpi_ftpdata.lo \
+	libprotoident_tcp_la-lpi_funshion.lo \
 	libprotoident_tcp_la-lpi_gamespy.lo \
 	libprotoident_tcp_la-lpi_gnutella.lo \
 	libprotoident_tcp_la-lpi_goku.lo \
@@ -97,8 +98,10 @@ am_libprotoident_tcp_la_OBJECTS = libprotoident_tcp_la-lpi_afp.lo \
 	libprotoident_tcp_la-lpi_jedi.lo \
 	libprotoident_tcp_la-lpi_kaseya.lo \
 	libprotoident_tcp_la-lpi_kaspersky.lo \
+	libprotoident_tcp_la-lpi_kik.lo \
 	libprotoident_tcp_la-lpi_ldap.lo \
 	libprotoident_tcp_la-lpi_message4u.lo \
+	libprotoident_tcp_la-lpi_minecraft.lo \
 	libprotoident_tcp_la-lpi_mitglieder.lo \
 	libprotoident_tcp_la-lpi_mms.lo \
 	libprotoident_tcp_la-lpi_mp2p.lo \
@@ -134,6 +137,7 @@ am_libprotoident_tcp_la_OBJECTS = libprotoident_tcp_la-lpi_afp.lo \
 	libprotoident_tcp_la-lpi_postgresql.lo \
 	libprotoident_tcp_la-lpi_pptp.lo \
 	libprotoident_tcp_la-lpi_psn_store.lo \
+	libprotoident_tcp_la-lpi_qvod.lo \
 	libprotoident_tcp_la-lpi_razor.lo \
 	libprotoident_tcp_la-lpi_rbls.lo \
 	libprotoident_tcp_la-lpi_rdp.lo \
@@ -167,6 +171,7 @@ am_libprotoident_tcp_la_OBJECTS = libprotoident_tcp_la-lpi_afp.lo \
 	libprotoident_tcp_la-lpi_telnet_exploit.lo \
 	libprotoident_tcp_la-lpi_tip.lo \
 	libprotoident_tcp_la-lpi_tor.lo \
+	libprotoident_tcp_la-lpi_tpkt.lo \
 	libprotoident_tcp_la-lpi_trackmania.lo \
 	libprotoident_tcp_la-lpi_trojan_win32_generic_sb.lo \
 	libprotoident_tcp_la-lpi_trojan_zeroaccess.lo \
@@ -174,6 +179,8 @@ am_libprotoident_tcp_la_OBJECTS = libprotoident_tcp_la-lpi_afp.lo \
 	libprotoident_tcp_la-lpi_warcraft3.lo \
 	libprotoident_tcp_la-lpi_web_junk.lo \
 	libprotoident_tcp_la-lpi_weblogic.lo \
+	libprotoident_tcp_la-lpi_wechat.lo \
+	libprotoident_tcp_la-lpi_whatsapp.lo \
 	libprotoident_tcp_la-lpi_whois.lo \
 	libprotoident_tcp_la-lpi_winmx.lo \
 	libprotoident_tcp_la-lpi_wow.lo \
@@ -371,6 +378,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_fring.cc \
 	lpi_ftpcontrol.cc \
 	lpi_ftpdata.cc \
+	lpi_funshion.cc \
 	lpi_gamespy.cc \
 	lpi_gnutella.cc \
 	lpi_goku.cc \
@@ -397,8 +405,10 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_jedi.cc \
 	lpi_kaseya.cc \
 	lpi_kaspersky.cc \
+	lpi_kik.cc \
 	lpi_ldap.cc \
 	lpi_message4u.cc \
+	lpi_minecraft.cc \
 	lpi_mitglieder.cc \
 	lpi_mms.cc \
 	lpi_mp2p.cc \
@@ -434,7 +444,8 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_postgresql.cc \
 	lpi_pptp.cc \
 	lpi_psn_store.cc \
-	lpi_razor.cc \
+	lpi_qvod.cc \
+        lpi_razor.cc \
 	lpi_rbls.cc \
 	lpi_rdp.cc \
 	lpi_rejection.cc \
@@ -467,6 +478,7 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_telnet_exploit.cc \
 	lpi_tip.cc \
 	lpi_tor.cc \
+	lpi_tpkt.cc \
 	lpi_trackmania.cc \
 	lpi_trojan_win32_generic_sb.cc \
 	lpi_trojan_zeroaccess.cc \
@@ -474,6 +486,8 @@ libprotoident_tcp_la_SOURCES = \
 	lpi_warcraft3.cc \
 	lpi_web_junk.cc \
 	lpi_weblogic.cc \
+	lpi_wechat.cc \
+	lpi_whatsapp.cc \
 	lpi_whois.cc \
 	lpi_winmx.cc \
 	lpi_wow.cc \
@@ -571,6 +585,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_fring.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_ftpcontrol.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_ftpdata.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_funshion.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_gamespy.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_gnutella.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_goku.Plo@am__quote@
@@ -597,8 +612,10 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_jedi.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_kaseya.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_kaspersky.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_kik.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_ldap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_message4u.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_minecraft.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_mitglieder.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_mms.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_mp2p.Plo@am__quote@
@@ -634,6 +651,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_postgresql.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_pptp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_psn_store.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_qvod.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_razor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_rbls.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_rdp.Plo@am__quote@
@@ -667,6 +685,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_telnet_exploit.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_tip.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_tor.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_tpkt.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_trackmania.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_trojan_win32_generic_sb.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_trojan_zeroaccess.Plo@am__quote@
@@ -674,6 +693,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_warcraft3.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_web_junk.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_weblogic.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_wechat.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_whatsapp.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_whois.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_winmx.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libprotoident_tcp_la-lpi_wow.Plo@am__quote@
@@ -921,6 +942,14 @@ libprotoident_tcp_la-lpi_ftpdata.lo: lpi_ftpdata.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_ftpdata.lo `test -f 'lpi_ftpdata.cc' || echo '$(srcdir)/'`lpi_ftpdata.cc
 
+libprotoident_tcp_la-lpi_funshion.lo: lpi_funshion.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_funshion.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_funshion.Tpo -c -o libprotoident_tcp_la-lpi_funshion.lo `test -f 'lpi_funshion.cc' || echo '$(srcdir)/'`lpi_funshion.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_funshion.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_funshion.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_funshion.cc' object='libprotoident_tcp_la-lpi_funshion.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_funshion.lo `test -f 'lpi_funshion.cc' || echo '$(srcdir)/'`lpi_funshion.cc
+
 libprotoident_tcp_la-lpi_gamespy.lo: lpi_gamespy.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_gamespy.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_gamespy.Tpo -c -o libprotoident_tcp_la-lpi_gamespy.lo `test -f 'lpi_gamespy.cc' || echo '$(srcdir)/'`lpi_gamespy.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_gamespy.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_gamespy.Plo
@@ -1129,6 +1158,14 @@ libprotoident_tcp_la-lpi_kaspersky.lo: lpi_kaspersky.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_kaspersky.lo `test -f 'lpi_kaspersky.cc' || echo '$(srcdir)/'`lpi_kaspersky.cc
 
+libprotoident_tcp_la-lpi_kik.lo: lpi_kik.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_kik.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_kik.Tpo -c -o libprotoident_tcp_la-lpi_kik.lo `test -f 'lpi_kik.cc' || echo '$(srcdir)/'`lpi_kik.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_kik.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_kik.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_kik.cc' object='libprotoident_tcp_la-lpi_kik.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_kik.lo `test -f 'lpi_kik.cc' || echo '$(srcdir)/'`lpi_kik.cc
+
 libprotoident_tcp_la-lpi_ldap.lo: lpi_ldap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_ldap.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_ldap.Tpo -c -o libprotoident_tcp_la-lpi_ldap.lo `test -f 'lpi_ldap.cc' || echo '$(srcdir)/'`lpi_ldap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_ldap.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_ldap.Plo
@@ -1144,6 +1181,14 @@ libprotoident_tcp_la-lpi_message4u.lo: lpi_message4u.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_message4u.cc' object='libprotoident_tcp_la-lpi_message4u.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_message4u.lo `test -f 'lpi_message4u.cc' || echo '$(srcdir)/'`lpi_message4u.cc
+
+libprotoident_tcp_la-lpi_minecraft.lo: lpi_minecraft.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_minecraft.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_minecraft.Tpo -c -o libprotoident_tcp_la-lpi_minecraft.lo `test -f 'lpi_minecraft.cc' || echo '$(srcdir)/'`lpi_minecraft.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_minecraft.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_minecraft.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_minecraft.cc' object='libprotoident_tcp_la-lpi_minecraft.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_minecraft.lo `test -f 'lpi_minecraft.cc' || echo '$(srcdir)/'`lpi_minecraft.cc
 
 libprotoident_tcp_la-lpi_mitglieder.lo: lpi_mitglieder.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_mitglieder.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_mitglieder.Tpo -c -o libprotoident_tcp_la-lpi_mitglieder.lo `test -f 'lpi_mitglieder.cc' || echo '$(srcdir)/'`lpi_mitglieder.cc
@@ -1425,6 +1470,14 @@ libprotoident_tcp_la-lpi_psn_store.lo: lpi_psn_store.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_psn_store.lo `test -f 'lpi_psn_store.cc' || echo '$(srcdir)/'`lpi_psn_store.cc
 
+libprotoident_tcp_la-lpi_qvod.lo: lpi_qvod.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_qvod.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_qvod.Tpo -c -o libprotoident_tcp_la-lpi_qvod.lo `test -f 'lpi_qvod.cc' || echo '$(srcdir)/'`lpi_qvod.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_qvod.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_qvod.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_qvod.cc' object='libprotoident_tcp_la-lpi_qvod.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_qvod.lo `test -f 'lpi_qvod.cc' || echo '$(srcdir)/'`lpi_qvod.cc
+
 libprotoident_tcp_la-lpi_razor.lo: lpi_razor.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_razor.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_razor.Tpo -c -o libprotoident_tcp_la-lpi_razor.lo `test -f 'lpi_razor.cc' || echo '$(srcdir)/'`lpi_razor.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_razor.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_razor.Plo
@@ -1689,6 +1742,14 @@ libprotoident_tcp_la-lpi_tor.lo: lpi_tor.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_tor.lo `test -f 'lpi_tor.cc' || echo '$(srcdir)/'`lpi_tor.cc
 
+libprotoident_tcp_la-lpi_tpkt.lo: lpi_tpkt.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_tpkt.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_tpkt.Tpo -c -o libprotoident_tcp_la-lpi_tpkt.lo `test -f 'lpi_tpkt.cc' || echo '$(srcdir)/'`lpi_tpkt.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_tpkt.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_tpkt.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_tpkt.cc' object='libprotoident_tcp_la-lpi_tpkt.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_tpkt.lo `test -f 'lpi_tpkt.cc' || echo '$(srcdir)/'`lpi_tpkt.cc
+
 libprotoident_tcp_la-lpi_trackmania.lo: lpi_trackmania.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_trackmania.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_trackmania.Tpo -c -o libprotoident_tcp_la-lpi_trackmania.lo `test -f 'lpi_trackmania.cc' || echo '$(srcdir)/'`lpi_trackmania.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_trackmania.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_trackmania.Plo
@@ -1744,6 +1805,22 @@ libprotoident_tcp_la-lpi_weblogic.lo: lpi_weblogic.cc
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_weblogic.cc' object='libprotoident_tcp_la-lpi_weblogic.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_weblogic.lo `test -f 'lpi_weblogic.cc' || echo '$(srcdir)/'`lpi_weblogic.cc
+
+libprotoident_tcp_la-lpi_wechat.lo: lpi_wechat.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_wechat.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_wechat.Tpo -c -o libprotoident_tcp_la-lpi_wechat.lo `test -f 'lpi_wechat.cc' || echo '$(srcdir)/'`lpi_wechat.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_wechat.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_wechat.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_wechat.cc' object='libprotoident_tcp_la-lpi_wechat.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_wechat.lo `test -f 'lpi_wechat.cc' || echo '$(srcdir)/'`lpi_wechat.cc
+
+libprotoident_tcp_la-lpi_whatsapp.lo: lpi_whatsapp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_whatsapp.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_whatsapp.Tpo -c -o libprotoident_tcp_la-lpi_whatsapp.lo `test -f 'lpi_whatsapp.cc' || echo '$(srcdir)/'`lpi_whatsapp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libprotoident_tcp_la-lpi_whatsapp.Tpo $(DEPDIR)/libprotoident_tcp_la-lpi_whatsapp.Plo
+@am__fastdepCXX_FALSE@	$(AM_V_CXX) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='lpi_whatsapp.cc' object='libprotoident_tcp_la-lpi_whatsapp.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o libprotoident_tcp_la-lpi_whatsapp.lo `test -f 'lpi_whatsapp.cc' || echo '$(srcdir)/'`lpi_whatsapp.cc
 
 libprotoident_tcp_la-lpi_whois.lo: lpi_whois.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libprotoident_tcp_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT libprotoident_tcp_la-lpi_whois.lo -MD -MP -MF $(DEPDIR)/libprotoident_tcp_la-lpi_whois.Tpo -c -o libprotoident_tcp_la-lpi_whois.lo `test -f 'lpi_whois.cc' || echo '$(srcdir)/'`lpi_whois.cc

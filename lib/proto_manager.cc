@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_manager.cc 133 2012-11-04 21:03:53Z salcock $
+ * $Id: proto_manager.cc 161 2013-11-05 01:24:54Z salcock $
  */
 
 #include "config.h"
@@ -100,6 +100,7 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_fring(mod_map);
 	register_ftpcontrol(mod_map);
 	register_ftpdata(mod_map);
+	register_funshion_tcp(mod_map);
 	register_gamespy_tcp(mod_map);
 	register_gnutella(mod_map);
 	register_goku(mod_map);
@@ -126,8 +127,10 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_jedi(mod_map);
 	register_kaseya(mod_map);
 	register_kaspersky(mod_map);
+	register_kik(mod_map);
 	register_ldap(mod_map);
 	register_message4u(mod_map);
+	register_minecraft(mod_map);
 	//register_mitglieder(mod_map);
 	register_mms(mod_map);
 	register_mp2p(mod_map);
@@ -163,7 +166,8 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_postgresql(mod_map);
 	register_pptp(mod_map);
 	register_psn_store(mod_map);
-	register_razor(mod_map);
+	register_qvod(mod_map);
+        register_razor(mod_map);
 	register_rbls(mod_map);
 	register_rdp(mod_map);
 	register_rejection(mod_map);
@@ -196,6 +200,7 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_telnet_exploit(mod_map);
 	register_tip(mod_map);
 	register_tor(mod_map);
+	register_tpkt_generic(mod_map);
 	register_trackmania(mod_map);
 	register_trojan_win32_generic_sb(mod_map);
 	register_trojan_zeroaccess(mod_map);
@@ -203,6 +208,8 @@ int register_tcp_protocols(LPIModuleMap *mod_map) {
 	register_warcraft3(mod_map);
 	register_web_junk(mod_map);
 	register_weblogic(mod_map);
+	register_wechat(mod_map);
+	register_whatsapp(mod_map);
 	register_whois(mod_map);
 	register_winmx(mod_map);
 	register_wow(mod_map);
@@ -230,6 +237,7 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_backweb(mod_map);
 	register_battlefield(mod_map);
 	register_bjnp(mod_map);
+	register_canon_mfnp(mod_map);
 	register_callofduty(mod_map);
 	register_checkpoint_rdp(mod_map);
 	register_cirn(mod_map);
@@ -243,14 +251,16 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_directconnect_udp(mod_map);
 	register_dns_udp(mod_map);
 	register_driveshare(mod_map);
+	register_dtls(mod_map);
 	register_emule_udp(mod_map);
-	register_emule_weak_udp(mod_map);
+	//register_emule_weak_udp(mod_map);
 	register_epson(mod_map);
 	//register_eso(mod_map);
 	register_esp_encap(mod_map);
 	register_eye_udp(mod_map);
 	register_fortinet(mod_map);
 	register_freechal(mod_map);
+	register_funshion_udp(mod_map);
 	register_gamespy(mod_map);
 	register_garena(mod_map);
 	register_gnutella_udp(mod_map);
@@ -259,6 +269,7 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_gsm(mod_map);
 	register_halflife(mod_map);
 	register_hamachi_udp(mod_map);
+	register_icp(mod_map);
 	register_imesh_udp(mod_map);
 	register_ipmsg(mod_map);
 	//register_ipv6_udp(mod_map);
@@ -272,6 +283,7 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_lansync_udp(mod_map);
 	register_ldap_ad(mod_map);
 	register_linkproof(mod_map);
+	register_lol(mod_map);
 	register_mdns(mod_map);
 	register_moh(mod_map);
 	register_mp2p_udp(mod_map);
@@ -291,10 +303,12 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_netbios_udp(mod_map);
 	register_netflow(mod_map);
 	register_newerth(mod_map);
+	register_noe(mod_map);
 	register_norton(mod_map);
 	register_ntp(mod_map);
 	register_nwn(mod_map);
 	register_opaserv(mod_map);
+	register_openvpn_udp(mod_map);
 	register_orbit_udp(mod_map);
 	register_pando_udp(mod_map);
 	register_pplive(mod_map);
@@ -311,6 +325,7 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_rtcp(mod_map);
 	register_rtmfp(mod_map);
 	register_rtp(mod_map);
+	register_sanandreas_mp(mod_map);
 	register_second_life_udp(mod_map);
 	register_serialnumberd(mod_map);
 	register_sip_udp(mod_map);
@@ -340,6 +355,7 @@ int register_udp_protocols(LPIModuleMap *mod_map) {
 	register_udp_no_payload(mod_map);
 	register_unreal(mod_map);
 	register_ventrilo(mod_map);
+	register_viber_udp(mod_map);
 	register_vivox(mod_map);
 	register_vxworks_exploit(mod_map);
 	register_winmessage(mod_map);

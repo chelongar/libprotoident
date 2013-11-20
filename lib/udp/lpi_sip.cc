@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_sip.cc 112 2012-02-03 03:41:03Z salcock $
+ * $Id: lpi_sip.cc 155 2013-10-21 03:21:00Z salcock $
  */
 
 #include <string.h>
@@ -54,9 +54,13 @@ static inline bool match_sip_udp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
                         data->payload_len[1] == 0))
                 return true;
 
+	if (match_str_both(data, "NOTI", "OPTI"))
+		return true;
 	if (match_str_both(data, "OPTI", "REGI"))
 		return true;
 	if (match_str_both(data, "NOTI", "REGI"))
+		return true;
+	if (match_str_both(data, "NOTI", "INVI"))
 		return true;
 	if (match_str_either(data, "REGI") && 
                         (data->payload_len[0] == 0 ||

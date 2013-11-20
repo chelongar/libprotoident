@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_zabbix.cc 112 2012-02-03 03:41:03Z salcock $
+ * $Id: lpi_zabbix.cc 155 2013-10-21 03:21:00Z salcock $
  */
 
 #include <string.h>
@@ -38,9 +38,27 @@
 
 static inline bool match_zabbix(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	if (!match_str_either(data, "ZBXD"))
-		return false;
-	return true;
+	if (match_str_either(data, "ZBXD"))
+		return true;
+
+        /* Everything below this line requires one of the ports to be the
+         * default zabbix port */
+        if (data->server_port != 10050 && data->client_port != 10050)
+                return false;
+
+        /* Zabbix Windows performance counters 
+         * TODO capture some genuine responses and match on those too */
+        if (MATCH(data->payload[0], 'p', 'e', 'r', 'f'))
+                return true;
+        if (MATCH(data->payload[1], 'p', 'e', 'r', 'f'))
+                return true;
+
+        if (MATCH(data->payload[0], 's', 'y', 's', 't'))
+                return true;
+        if (MATCH(data->payload[1], 's', 'y', 's', 't'))
+                return true;
+
+	return false;
 }
 
 static lpi_module_t lpi_zabbix = {

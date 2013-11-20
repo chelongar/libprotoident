@@ -8,6 +8,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_backweb.cc \
 	lpi_battlefield.cc \
 	lpi_bjnp.cc \
+	lpi_canon_mfnp.cc \
 	lpi_checkpoint_rdp.cc \
 	lpi_cirn.cc \
 	lpi_cisco_ipsec.cc \
@@ -21,6 +22,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_directconnect.cc \
 	lpi_dns.cc \
 	lpi_driveshare.cc \
+	lpi_dtls.cc \
 	lpi_emule.cc \
 	lpi_emule_weak.cc \
 	lpi_epson.cc \
@@ -30,6 +32,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_fasp.cc \
 	lpi_fortinet.cc \
 	lpi_freechal.cc \
+	lpi_funshion.cc \
 	lpi_gamespy.cc \
 	lpi_garena.cc \
 	lpi_gnutella.cc \
@@ -38,6 +41,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_gsm.cc \
 	lpi_halflife.cc \
 	lpi_hamachi.cc \
+	lpi_icp.cc \
 	lpi_imesh.cc \
 	lpi_ipmsg.cc \
 	lpi_ipv6.cc \
@@ -51,6 +55,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_lansync.cc \
 	lpi_ldap_ad.cc \
 	lpi_linkproof.cc \
+	lpi_lol.cc \
 	lpi_mdns.cc \
 	lpi_moh.cc \
 	lpi_mp2p.cc \
@@ -70,11 +75,13 @@ libprotoident_udp_la_SOURCES = \
 	lpi_netbios.cc \
 	lpi_netflow.cc \
 	lpi_newerth.cc \
+	lpi_noe.cc \
 	lpi_nopayload.cc \
 	lpi_norton.cc \
 	lpi_ntp.cc \
 	lpi_nwn.cc \
 	lpi_opaserv.cc \
+	lpi_openvpn.cc \
 	lpi_orbit.cc \
 	lpi_pando.cc \
 	lpi_pplive.cc \
@@ -91,6 +98,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_rtcp.cc \
 	lpi_rtmfp.cc \
 	lpi_rtp.cc \
+	lpi_sanandreas_mp.cc \
 	lpi_second_life.cc \
 	lpi_serialnumberd.cc \
 	lpi_sip.cc \
@@ -119,6 +127,7 @@ libprotoident_udp_la_SOURCES = \
 	lpi_tvants.cc \
 	lpi_unreal.cc \
 	lpi_ventrilo.cc \
+	lpi_viber.cc \
 	lpi_vivox.cc \
 	lpi_vxworks_exploit.cc \
 	lpi_winmessage.cc \

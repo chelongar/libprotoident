@@ -48,7 +48,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_lpi_live_OBJECTS = lpi_live.$(OBJEXT) tools_common.$(OBJEXT)
+am_lpi_live_OBJECTS = lpi_live.$(OBJEXT) live_common.$(OBJEXT) \
+	tools_common.$(OBJEXT)
 lpi_live_OBJECTS = $(am_lpi_live_OBJECTS)
 lpi_live_DEPENDENCIES =
 AM_V_lt = $(am__v_lt_$(V))
@@ -77,6 +78,22 @@ CXXLINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 AM_V_CXXLD = $(am__v_CXXLD_$(V))
 am__v_CXXLD_ = $(am__v_CXXLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CXXLD_0 = @echo "  CXXLD " $@;
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
+	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
+	$(AM_CFLAGS) $(CFLAGS)
+AM_V_CC = $(am__v_CC_$(V))
+am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
+am__v_CC_0 = @echo "  CC    " $@;
+CCLD = $(CC)
+LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
+	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+AM_V_CCLD = $(am__v_CCLD_$(V))
+am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
+am__v_CCLD_0 = @echo "  CCLD  " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
@@ -208,7 +225,9 @@ top_srcdir = @top_srcdir@
 AM_CFLAGS = -I"$(top_srcdir)/lib"
 AM_CXXFLAGS = -I"$(top_srcdir)/lib"
 AM_LDFLAGS = -L"$(top_srcdir)/lib/.libs"
-lpi_live_SOURCES = lpi_live.cc ../tools_common.cc
+
+#include_HEADERS=lpicp.h lpicp_export.h
+lpi_live_SOURCES = lpi_live.cc live_common.cc ../tools_common.cc live_common.h
 lpi_live_LDADD = @ADD_LIBS@ -lprotoident -lpacketdump
 all: all-am
 
@@ -297,6 +316,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/live_common.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/lpi_live.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tools_common.Po@am__quote@
 
@@ -546,6 +566,13 @@ uninstall-am: uninstall-binPROGRAMS
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
 	uninstall-binPROGRAMS
 
+
+#if BUILD_COLLECTOR
+#bin_PROGRAMS+=lpi_collector
+#lpi_collector_SOURCES=collector.cc live_common.cc ../tools_common.cc lpicp.cc \
+#	lpicp_export.cc 
+#lpi_collector_LDADD = @ADD_LIBS@ -lprotoident -lpacketdump -lwandevent
+#endif
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

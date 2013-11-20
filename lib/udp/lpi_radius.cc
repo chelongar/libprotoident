@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_radius.cc 111 2012-01-23 01:39:02Z salcock $
+ * $Id: lpi_radius.cc 155 2013-10-21 03:21:00Z salcock $
  */
 
 #include <string.h>
@@ -77,8 +77,8 @@ static inline bool match_radius_resp(uint32_t pload, uint32_t len) {
 
 static inline bool match_radius(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 
-	if (data->server_port != 1812 && data->client_port != 1812)
-		return false;
+	//if (data->server_port != 1812 && data->client_port != 1812)
+	//	return false;
 
 	/* Second byte is the ID field, which must match for both payloads */
 	if ((ntohl(data->payload[0]) & 0xff0000) != 
@@ -101,7 +101,7 @@ static lpi_module_t lpi_radius = {
 	LPI_PROTO_UDP_RADIUS,
 	LPI_CATEGORY_REMOTE,
 	"Radius",
-	4,
+	14,
 	match_radius
 };
 

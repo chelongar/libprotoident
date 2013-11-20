@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_pando.cc 128 2012-10-25 22:00:02Z salcock $
+ * $Id: lpi_pando.cc 155 2013-10-21 03:21:00Z salcock $
  */
 
 #include <string.h>
@@ -62,6 +62,12 @@ static inline bool match_pando_udp(lpi_data_t *data, lpi_module_t *mod UNUSED) {
                 return true;
         if (match_str_both(data, "UDPA", "UDPE"))
                 return true;
+	if (match_str_either(data, "UDPA")) {
+		if (data->payload_len[0] == 0)
+			return true;
+		if (data->payload_len[1] == 0)
+			return true;
+	}
 	
 
 	return false;

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_gnutella.cc 128 2012-10-25 22:00:02Z salcock $
+ * $Id: lpi_gnutella.cc 155 2013-10-21 03:21:00Z salcock $
  */
 
 #include <string.h>

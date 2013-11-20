@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_irc.cc 76 2011-04-08 04:45:36Z salcock $
+ * $Id: lpi_irc.cc 155 2013-10-21 03:21:00Z salcock $
  */
 
 #include <string.h>
@@ -42,10 +42,21 @@ static inline bool match_irc(lpi_data_t *data, lpi_module_t *mod UNUSED) {
 		return true;
 	if (match_str_either(data, "NICK"))
 		return true;
+	if (MATCHSTR(data->payload[0], "\x0aNIC"))
+		return true;
+	if (MATCHSTR(data->payload[1], "\x0aNIC"))
+		return true;
 	if (match_str_both(data, ":irc", "USER"))
 		return true;
 	if (match_str_both(data, ":loc", "MODE"))
 		return true;
+
+
+	/* Trying to match on broken IRC implementations :) */
+	if (data->server_port == 6667 || data->client_port == 6667) {
+		if (match_str_either(data, "ERRO"))
+			return true;
+	}
 
 	return false;
 }

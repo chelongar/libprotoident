@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_apple_push.cc 115 2012-02-21 22:51:45Z salcock $
+ * $Id: lpi_apple_push.cc 158 2013-10-30 21:56:05Z salcock $
  */
 
 #include <string.h>
@@ -47,6 +47,11 @@ static inline bool match_apple_push(lpi_data_t *data, lpi_module_t *mod UNUSED) 
 	if (data->server_port != 5223 && data->client_port != 5223)
 		return false;
 
+	/* If payload is only one-way, fall back to SSL to avoid risking
+	 * a false positive for other port 5223 SSL apps, e.g. Kik */
+	if (data->payload_len[0] == 0 || data->payload_len[1] == 0)
+		return false;
+
 	/* Too much size variation to write a good set of rules based on
 	 * payload sizes, just use this as the fallback option for all
 	 * SSL traffic on 5223 that doesn't match something else, e.g.
@@ -59,7 +64,7 @@ static lpi_module_t lpi_apple_push = {
 	LPI_PROTO_APPLE_PUSH,
 	LPI_CATEGORY_NOTIFICATION,
 	"ApplePush",
-	5, /* Should be a higher priority than regular SSL, but lower than
+	8, /* Should be a higher priority than regular SSL, but lower than
 	      anything else on port 5223  */
 	match_apple_push
 };

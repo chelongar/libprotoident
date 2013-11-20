@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: lpi_yahoo_webcam.cc 63 2011-02-04 00:59:33Z salcock $
+ * $Id: lpi_yahoo_webcam.cc 155 2013-10-21 03:21:00Z salcock $
  */
 
 #include <string.h>

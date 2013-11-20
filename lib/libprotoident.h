@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: libprotoident.h 133 2012-11-04 21:03:53Z salcock $
+ * $Id: libprotoident.h 161 2013-11-05 01:24:54Z salcock $
  */
 
 
@@ -103,6 +103,7 @@ typedef enum {
 	LPI_CATEGORY_BROADCAST,		/* Protocols usually broadcast to the
 					   local network */
 	LPI_CATEGORY_LOCATION,		/* Location-related services / GPS */
+	LPI_CATEGORY_CACHING,		/* Proxy cache protocols and similar */
 	LPI_CATEGORY_ICMP,		/* ICMP */
 	LPI_CATEGORY_MIXED,		/* Different protos in each direction */
 	LPI_CATEGORY_NOPAYLOAD,		/* No payload observed */
@@ -255,6 +256,13 @@ typedef enum {
 	LPI_PROTO_PALRINGO,
 	LPI_PROTO_CRYPTIC,		/* Games by Cryptic */
 	LPI_PROTO_SUPL,
+	LPI_PROTO_MINECRAFT,
+	LPI_PROTO_TPKT,
+        LPI_PROTO_QVOD,
+        LPI_PROTO_KIK,
+        LPI_PROTO_WHATSAPP,
+        LPI_PROTO_WECHAT,
+	LPI_PROTO_FUNSHION,
 
         /* UDP Protocols */
         LPI_PROTO_UDP,
@@ -374,6 +382,15 @@ typedef enum {
 	LPI_PROTO_UDP_MDNS,	/* Multicast DNS */
 	LPI_PROTO_UDP_FASP,
 	LPI_PROTO_UDP_ROBLOX,
+	LPI_PROTO_UDP_OPENVPN,
+	LPI_PROTO_UDP_NOE,	/* Alcatel's New Office Environment */
+	LPI_PROTO_UDP_VIBER,
+	LPI_PROTO_UDP_DTLS,
+	LPI_PROTO_UDP_ICP,
+	LPI_PROTO_UDP_LOL,	/* League of Legends */
+	LPI_PROTO_UDP_SANANDREAS,	/* San Andreas Multiplayer */
+	LPI_PROTO_UDP_MFNP,	/* Canon MFNP Printer protocol */
+	LPI_PROTO_UDP_FUNSHION, 
 
 	/* Patterns that we can match, but do not know the protocol */
 	LPI_PROTO_REJECTION,	/* All responses are 0x02 */
@@ -412,6 +429,7 @@ typedef enum {
  * should be ok. */
 typedef struct lpi {
 	uint32_t payload[2];
+	bool seen_syn[2];
 	uint32_t seqno[2];
 	uint32_t observed[2];
 	uint16_t server_port;

@@ -27,7 +27,7 @@
  * along with libprotoident; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: proto_common.cc 133 2012-11-04 21:03:53Z salcock $
+ * $Id: proto_common.cc 152 2013-04-07 21:36:20Z salcock $
  */
 
 #include <string.h>
@@ -231,6 +231,8 @@ bool match_file_header(uint32_t payload) {
         /* MP3 */
         if (MATCH(payload, 'I', 'D', '3', 0x03))
                 return true;
+	if (MATCHSTR(payload, "\xff\xfb\x90\xc0"))
+		return true;
 
         /* RPM */
         if (MATCH(payload, 0xed, 0xab, 0xee, 0xdb))
@@ -660,5 +662,22 @@ bool match_youku_payload(uint32_t pload, uint32_t len) {
         if (MATCH(pload, 0x4b, 0x55, 0x00, 0x04))
                 return true;
         return false;
+
+}
+
+bool match_tpkt(uint32_t payload, uint32_t len) {
+        uint32_t stated_len = 0;
+
+        /*
+         * TPKT header is 03 00 + 2 bytes of length (including the TPKT header)
+         */
+
+        if (!MATCH(payload, 0x03, 0x00, ANY, ANY))
+                return false;
+
+        stated_len = ntohl(payload) & 0xffff;
+        if (stated_len != len)
+                return false;
+        return true;
 
 }
